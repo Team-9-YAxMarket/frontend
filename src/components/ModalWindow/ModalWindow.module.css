@@ -1,0 +1,94 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 1184px;
+  background-color: white;
+  padding: 96px 24px 89px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.modalTitle {
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 68px;
+  color: #212121;
+  padding-bottom: 32px;
+}
+
+.modalInput {
+  width: 595px;
+  height: 100px;
+  border-radius: 24px;
+  border: 5px solid #dedede;
+  outline: none;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 46px;
+  color: #212121;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.modalInput:focus {
+  border: 5px solid #f5c400;
+}
+
+.modalInput::placeholder {
+  color: #b1b1b1;
+}
+
+.modalList {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 32px;
+  column-gap: 16px;
+  padding: 0 calc(91.5px - 24px) 87px;
+  flex-wrap: wrap;
+}
+
+.modalListButton {
+  padding: 15px 24px;
+  background-color: #f3f0e9;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  color: #212121;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+}
+
+.modalListButtonActive {
+  color: #fff;
+  background-color: #f29a00;
+}
+
+.modalCloseButton {
+  background: url(../../images/close-icon.svg) no-repeat center;
+  background-size: 26px 26px;
+  width: 72px;
+  height: 72px;
+  border: none;
+  background-color: #f3f0e9;
+  border-radius: 50%;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  cursor: pointer;
+}
