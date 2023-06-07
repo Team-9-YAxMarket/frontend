@@ -1,46 +1,24 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import Toster from './components/Toster/Toster';
-import PrimaryButton from './components/PrimaryButton/PrimaryButton';
-import ProgressBar from './components/ProgressBar/ProgressBar';
-import ModalWindow from './components/ModalWindow/ModalWindow';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer'
-import PageMainText from './components/PageMainText/PageMainText';
-import CellList from './components/CellList/СellList'
+import styles from './App.module.css';
+import { Routes, Route } from 'react-router-dom'
+import React, { useState } from 'react';
+import { HasProblemsPage } from './pages';
+
+
 function App() {
-  const [isStatusOk, setIsStatusOk] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  //const [isStatusOk, setIsStatusOk] = useState(true);
+  //const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const toggleModalWindow = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const cells = [
-    {
-      id: 1,
-      name: 'B-08'
-    },
-    {
-      id: 2,
-      name: 'B-09'
-    },
-    {
-      id: 3,
-      name: 'B-10'
-    }
-  ]
+  // const toggleModalWindow = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
 
   return (
-    <div className="App">
-      {/* <PrimaryButton title='Закончить упаковку' disabled={false}/> */}
-      {/* <Toster isStatusOk={isStatusOk}/> */}
-      {/* <ProgressBar totalItems={7} scannedItems={4}/> */}
-      {/* {isModalOpen && <ModalWindow onClose={toggleModalWindow}/>}
-      <Footer isBackButton={true} onKeyboardButtonClick={toggleModalWindow}/> */}
-      {/* <Header /> */}
-      {/* <PageMainText title='Сканируйте штрихкод принтера'/>
-      <CellList cells={cells}/> */}
+    <div className={styles.wrapper}>
+      <div className={styles.page}>
+        <Routes>
+          <Route path="/" element={<HasProblemsPage />} />
+        </Routes>
+      </div>
     </div>
   );
 }

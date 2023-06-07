@@ -1,7 +1,7 @@
 import styles from './ModalWindow.module.css';
 import { useState } from 'react';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import { itemsList } from '../utils/constants';
+import { itemsList } from '../../utils/constants';
 
 const ModalWindow = ({ title, onClose }) => {
   const selectPackage = 'Выберите упаковку';

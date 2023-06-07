@@ -1,6 +1,9 @@
 import styles from './PrimaryButton.module.css';
 
 const PrimaryButton = ({ type, title, disabled, variant, onClick }) => {
+
+  // variant = 'yellow' - желтая кнопка
+  
   let buttonClassName = styles.primaryButton;
 
   if (variant === 'yellow') {
