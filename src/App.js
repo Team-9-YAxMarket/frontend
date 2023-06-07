@@ -21,6 +21,7 @@ function App() {
       {/* <ProgressBar totalItems={7} scannedItems={4}/> */}
       {/* {isModalOpen && <ModalWindow onClose={toggleModalWindow}/>}
       <Footer isBackButton={true} onKeyboardButtonClick={toggleModalWindow}/> */}
+      <Header />
     </div>
   );
 }
