@@ -6,6 +6,8 @@ import ProgressBar from './components/ProgressBar/ProgressBar';
 import ModalWindow from './components/ModalWindow/ModalWindow';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer'
+import PageMainText from './components/PageMainText/PageMainText';
+import CellList from './components/CellList/СellList'
 function App() {
   const [isStatusOk, setIsStatusOk] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -14,6 +16,21 @@ function App() {
     setIsModalOpen(!isModalOpen);
   };
 
+  const cells = [
+    {
+      id: 1,
+      name: 'B-08'
+    },
+    {
+      id: 2,
+      name: 'B-09'
+    },
+    {
+      id: 3,
+      name: 'B-10'
+    }
+  ]
+
   return (
     <div className="App">
       {/* <PrimaryButton title='Закончить упаковку' disabled={false}/> */}
@@ -21,7 +38,9 @@ function App() {
       {/* <ProgressBar totalItems={7} scannedItems={4}/> */}
       {/* {isModalOpen && <ModalWindow onClose={toggleModalWindow}/>}
       <Footer isBackButton={true} onKeyboardButtonClick={toggleModalWindow}/> */}
-      <Header />
+      {/* <Header /> */}
+      {/* <PageMainText title='Сканируйте штрихкод принтера'/>
+      <CellList cells={cells}/> */}
     </div>
   );
 }
