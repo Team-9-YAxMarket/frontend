@@ -39,7 +39,7 @@ const ModalWindow = ({ title, onClose }) => {
           placeholder="Штрихкод"
           pattern="[^0-9\s]*"
         />
-        {selectPackage && (
+        {!title &&(
           <ul className={styles.modalList}>
             {itemsList.map((item) => (
               <li key={item.id}>

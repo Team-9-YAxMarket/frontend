@@ -1,0 +1,15 @@
+.goBackButton {
+    padding: 19px 109px;
+    color: #212121;
+    background-color: #FED42B;
+    border: none;
+    border-radius: 24px;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    cursor: pointer;
+}
+
+.goBackButton:hover {
+    background-color: #F5C400;
+}
