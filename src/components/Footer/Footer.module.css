@@ -6,6 +6,12 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.footerError {
+  background-color: #ffa200;
+  color: #fff;
+}
+
 .center {
   justify-content: center;
 }
@@ -21,6 +27,10 @@
   background: url(../../images/keyboard-icon.svg) no-repeat center;
 }
 
+.keyboardImageWhite {
+  background: url(../../images/keyboard-icon_white.svg) no-repeat center;
+}
+
 .keyboardButton {
   border: none;
   background-color: transparent;
@@ -28,4 +38,8 @@
   font-size: 28px;
   line-height: 31px;
   cursor: pointer;
+}
+
+.keyboardButtonWhite {
+  color: #fff;
 }

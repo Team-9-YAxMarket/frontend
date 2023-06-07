@@ -1,6 +1,6 @@
 import styles from './Header.module.css';
 import logo from '../../images/service_block-icon.png';
-import { setEfficiencyStatus } from '../utils/functions';
+import { setEfficiencyStatus } from '../../utils/functions';
 
 const Header = ({ userId = 'sof-natgemokee', userProgress = 51 }) => {
   const title = 'Упаковка';
