@@ -22,6 +22,11 @@ function ProductList() {
                     barcode='1234 5678 234 32'
                     totalCount={3}
                 />
+                <ProductItem
+                    title='Мягкая игрушка BelaiToys медведь Тони, 110 см, кофейный'
+                    barcode='1234 5678 234 32'
+                    totalCount={3}
+                />
             </ul>
         </div>
     );

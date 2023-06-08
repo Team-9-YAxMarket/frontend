@@ -1,5 +1,6 @@
 import styles from './Toster.module.css';
 
+
 const Toster = ({ isStatusOk }) => {
   return (
     <div

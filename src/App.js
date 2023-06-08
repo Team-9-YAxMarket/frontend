@@ -1,7 +1,8 @@
 import styles from './App.module.css';
 import { Routes, Route } from 'react-router-dom'
 import React, { useState } from 'react';
-import { HasProblemsPage } from './pages';
+import { HasProblemsPage, NotEnoughGoodsPage } from './pages';
+
 
 
 function App() {
@@ -16,8 +17,11 @@ function App() {
     <div className={styles.wrapper}>
       <div className={styles.page}>
         <Routes>
-          <Route path="/" element={<HasProblemsPage />} />
+          <Route path="/" element={<NotEnoughGoodsPage />} />
+          {/* <Route path="/hasproblems" element={<HasProblemsPage />} /> */}
+          {/* <Route path="/notenaughgoods" element={<NotEnoughGoodsPage />} /> */}
         </Routes>
+ 
       </div>
     </div>
   );
