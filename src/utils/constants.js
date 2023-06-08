@@ -74,3 +74,18 @@ export const hasAnotherProblemsList = [
     title: 'Позвать бригадира'
   },
 ]
+
+export const cells = [
+  {
+    id: 1,
+    name: 'B-09',
+  },
+  {
+    id: 2,
+    name: 'B-10',
+  },
+  {
+    id: 3,
+    name: 'B-11',
+  }
+];

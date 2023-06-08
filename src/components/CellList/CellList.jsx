@@ -1,7 +1,7 @@
 import styles from './CellList.module.css';
 import { useState } from 'react';
 
-const СellList = ({ cells }) => {
+const CellList = ({ cells }) => {
   const [activeCells, setActiveCells] = useState([]);
 
   const handleCellClick = (cellId) => {
@@ -28,4 +28,4 @@ const СellList = ({ cells }) => {
   );
 };
 
-export default СellList;
+export default CellList;
