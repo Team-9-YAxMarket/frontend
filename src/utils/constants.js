@@ -79,14 +79,17 @@ export const cells = [
   {
     id: 1,
     name: 'B-09',
+    isClicked: false,
   },
   {
     id: 2,
     name: 'B-10',
+    isClicked: false,
   },
   {
     id: 3,
     name: 'B-11',
+    isClicked: false,
   }
 ];
 

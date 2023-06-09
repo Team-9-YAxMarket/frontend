@@ -1,8 +1,14 @@
 import styles from './CellList.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const CellList = ({ cells }) => {
+const CellList = (props) => {
   const [activeCells, setActiveCells] = useState([]);
+
+  useEffect(() => {
+    if (activeCells.length === props.cells.length) {
+      props.onSetIsAllCellsClicked(true);
+    }
+  }, [activeCells]);
 
   const handleCellClick = (cellId) => {
     if (activeCells.includes(cellId)) {
@@ -11,9 +17,10 @@ const CellList = ({ cells }) => {
       setActiveCells([...activeCells, cellId]);
     }
   };
+
   return (
     <ul className={styles.cellList}>
-      {cells.map((cell) => (
+      {props.cells.map((cell) => (
         <li
           key={cell.id}
           className={`${styles.cellItem} ${

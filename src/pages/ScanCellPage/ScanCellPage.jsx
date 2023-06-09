@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './ScanCellPage.module.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -9,12 +9,23 @@ import BarcodeMismatchPopup from "../../components/BarcodeMismatchPopup/BarcodeM
 import { useNavigate } from 'react-router-dom'
 
 const ScanCellPage = () => {
+    const navigate = useNavigate();
+    const [isAllCellsClicked, setIsAllCellsClicked] = useState(false);
 
-    const navigate = useNavigate()
+    useEffect(() => {
+        handleListPageNavigate();
+    }, [isAllCellsClicked])
+
+    const handleListPageNavigate = () => {
+        if (isAllCellsClicked) {
+            navigate('/product-list');
+        }
+    };
 
     const handleProblemsClick = () => {
         navigate('/hasproblems')
-    }
+    };
+
     return (
         <div className={styles.pageWrapper}>
             <BarcodeMismatchPopup/>
@@ -29,6 +40,7 @@ const ScanCellPage = () => {
                 <h1 className={styles.title}>Сканируйте ячейку</h1>
                 <CellList
                     cells={cells}
+                    onSetIsAllCellsClicked={setIsAllCellsClicked}
                 />
             </div>
             
