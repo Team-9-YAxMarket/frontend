@@ -10,6 +10,8 @@
   color: #212121;
   cursor: pointer;
   background: #f3f0e9;
+  position: absolute;
+  top: 195px;
 }
 
 .primaryButton:active {
@@ -34,6 +36,8 @@
   color: #212121;
   cursor: pointer;
   background: #fed42b;
+  position: absolute;
+  top: 195px;
 }
 
 .primaryButtonYellow:active {

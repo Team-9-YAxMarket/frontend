@@ -1,6 +1,6 @@
 import styles from './PrimaryButton.module.css';
 
-const PrimaryButton = ({ type, title, disabled, variant, onClick }) => {
+const PrimaryButton = ({ type, title, disabled, variant, onClick, right, left }) => {
 
   // variant = 'yellow' - желтая кнопка
   
@@ -15,6 +15,7 @@ const PrimaryButton = ({ type, title, disabled, variant, onClick }) => {
       disabled={disabled}
       className={buttonClassName}
       onClick={onClick}
+      style={{right: right, left: left}}
     >
       {title}
     </button>
