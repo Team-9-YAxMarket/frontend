@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import styles from './IssueButtonList.module.css';
 import IssueButton from '../IssueButton/IssueButton';
 import { hasProblemsList, hasAnotherProblemsList } from '../../utils/constants';
+import { useNavigate } from 'react-router-dom';
 
-function IssueButtonList({ setIsForemanCall }) {
+function IssueButtonList({ setIsForemanCall, setPageTitle }) {
   const anotherIssue = 'Другая проблема'
   const callForeman = 'Позвать бригадира'
+  const noGoods = 'Нет товара'
+  const haveDefective = 'Товар бракованный'
   const [list, setList] = useState(hasProblemsList);
+ 
+
+  const navigate = useNavigate()
 
   // Отображаем другой список проблем, если упаковщик нажал 'Другая проблема'
   // Масштабируем функцию под другие сценарии
@@ -16,6 +22,15 @@ function IssueButtonList({ setIsForemanCall }) {
     }
     if(itemTitle === callForeman) {
         setIsForemanCall(true)
+        setList(hasProblemsList)
+      }
+      if( itemTitle === noGoods) {
+        setPageTitle('Выберите отсутствующий товар')
+        navigate('/notenaughgoods')
+      }
+      if(itemTitle === haveDefective) {
+        navigate('/notenaughgoods')
+        setPageTitle('Сканируйте бракованный товар')
       }
   };
   return (

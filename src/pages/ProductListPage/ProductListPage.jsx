@@ -37,7 +37,7 @@ const ProductListPage = () => {
                 variant='yellow'
                 right='24px'
             />
-            <Footer isErrorCase={false} isBackButton={false} isKeyboard={true}/>
+            <Footer isErrorCase={false} isBackButton={true} isKeyboard={true}/>
         </div>
     );
 }

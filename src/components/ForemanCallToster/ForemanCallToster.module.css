@@ -9,7 +9,8 @@
     width: 1096px;
     padding: 31px 0;
     position: absolute;
-    top: 43px
+    top: 43px;
+    z-index: 5;
   }
   
   .foremanTosterText {

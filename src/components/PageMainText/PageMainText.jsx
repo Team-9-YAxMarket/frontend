@@ -1,6 +1,6 @@
 import styles from './PageMainText.module.css'
 
-const PageMainText = ({ title, style }) => {
+const PageMainText = ({ title }) => {
   return (
     <h2 className={styles.headText}>
       {title}

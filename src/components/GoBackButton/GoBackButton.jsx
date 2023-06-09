@@ -1,12 +1,12 @@
 import styles from './GoBackButton.module.css';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const GoBackButton = ({ isErrorCase }) => {
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  //   const handleClick = () => {
-  //     navigate(-1);
-  //   };
+    const handleClick = () => {
+      navigate(-1);
+    };
 
   return (
     <button
@@ -14,7 +14,7 @@ const GoBackButton = ({ isErrorCase }) => {
         isErrorCase ? styles.goBackButtonError : ''
       }`}
       type="button"
-      onClick={() => {}}
+      onClick={handleClick}
     >
       Назад
     </button>

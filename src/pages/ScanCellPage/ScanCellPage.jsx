@@ -6,14 +6,22 @@ import CellList from '../../components/CellList/CellList';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import { cells } from '../../utils/constants';
 import BarcodeMismatchPopup from "../../components/BarcodeMismatchPopup/BarcodeMismatchPopup";
+import { useNavigate } from 'react-router-dom'
 
 const ScanCellPage = () => {
+
+    const navigate = useNavigate()
+
+    const handleProblemsClick = () => {
+        navigate('/hasproblems')
+    }
     return (
         <div className={styles.pageWrapper}>
             <BarcodeMismatchPopup/>
             <Header />
             <PrimaryButton
                 title='Есть проблема'
+                onClick={handleProblemsClick}
                 disabled={false}
                 left='24px'
             />
@@ -23,12 +31,14 @@ const ScanCellPage = () => {
                     cells={cells}
                 />
             </div>
+            
             <PrimaryButton
                 title='Взять другое задание'
                 disabled={false}
                 variant='yellow'
                 right='24px'
             />
+           
             <Footer isErrorCase={false} isBackButton={false} isKeyboard={true}/>
         </div>
     );
