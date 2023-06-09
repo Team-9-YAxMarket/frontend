@@ -3,8 +3,14 @@ import Header from '../../components/Header/Header';
 
 import PageMainText from '../../components/PageMainText/PageMainText';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
+import { useNavigate } from 'react-router-dom';
 
 const FinishSession = ({ isStatusOk }) => {
+    const navigate = useNavigate()
+
+    const handleEndSession = () => {
+        navigate('/')
+    }
   return (
     <>
       <Header />
@@ -15,7 +21,7 @@ const FinishSession = ({ isStatusOk }) => {
               <div className={styles.putBoxOnImage}></div>
               <PageMainText title="Поставьте коробку на конвейер" />
               <p className={styles.subtext}>Отличная работа!</p>
-              <PrimaryButton variant='yellow' title='Готово' right='24px'/>
+              <PrimaryButton variant='yellow' title='Готово' right='24px' onClick={handleEndSession}/>
            </>
           ) : (
               <>
@@ -24,7 +30,7 @@ const FinishSession = ({ isStatusOk }) => {
               <p className={styles.subtext}>
                 После этого появится другое задание
               </p>
-              <PrimaryButton variant='yellow' title='Готово' right='24px'/>
+              <PrimaryButton variant='yellow' title='Готово' right='24px' onClick={handleEndSession}/>
             </>
           )}
           </div>

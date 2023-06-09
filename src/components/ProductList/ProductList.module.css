@@ -1,5 +1,5 @@
 .list {
-    margin: 20px 0 0;
+    margin: 20px auto 200px;
     padding: 0;
     width: 1184px;
     border-radius: 24px;
@@ -10,7 +10,9 @@
 }
 
 .listContainer {
+    margin: 56px auto 0;
     position: relative;
+    width: 1184px;
 }
 
 .package {

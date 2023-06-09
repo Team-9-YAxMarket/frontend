@@ -4,8 +4,8 @@ import styles from './BarcodeMismatchCheckboxItem.module.css';
 function BarcodeMismatchCheckboxItem(props) {
     return (
         <label className={`${styles.checkboxItem} ${props.isCheckedProduct === props.option ? styles.checked : ''}`}>
-            <img className={styles.image} src='/images/product_image.jpg' alt='Мягкая игрушка BelaiToys медведь Тони, 110 см, кофейный'/>
-            <h2 className={styles.title}>Мягкая игрушка BelaiToys медведь Тони, 110 см, кофейный</h2>
+            <img className={styles.image} src={props.img} alt={props.title}/>
+            <h2 className={styles.title}>{props.title}</h2>
             <input
                 className={styles.input}
                 type='checkbox'

@@ -5,7 +5,7 @@ import IssueButtonList from '../../components/IssueButtonList/IssueButtonList'
 import ForemanCallToster from '../../components/ForemanCallToster/ForemanCallToster'
 import Footer from '../../components/Footer/Footer'
 
-const HasProblemsPage = () => {
+const HasProblemsPage = ({ setPageTitle }) => {
 
   const [isForemanCall, setIsForemanCall] = useState(false)
 
@@ -13,7 +13,7 @@ const HasProblemsPage = () => {
     <div className={styles.pageWrapper}>
       <Header />
       <ForemanCallToster isForemanCall={isForemanCall} />
-      <IssueButtonList setIsForemanCall={setIsForemanCall}/>
+      <IssueButtonList setIsForemanCall={setIsForemanCall} setPageTitle={setPageTitle}/>
       <Footer isErrorCase={true} isBackButton={true}/>
     </div>
   )

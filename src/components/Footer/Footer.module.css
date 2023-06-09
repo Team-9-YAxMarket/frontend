@@ -6,6 +6,12 @@
   align-items: center;
  justify-content: space-between;
   width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: #ffffff;
 }
 
 .footerError {
