@@ -2,6 +2,7 @@ import styles from './App.module.css';
 import { Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 import { HasProblemsPage, NotEnoughGoodsPage, FinishSession } from './pages';
+import ScanCellPage from "./pages/ScanCellPage/ScanCellPage";
 
 function App() {
   const [isStatusOk, setIsStatusOk] = useState(true);

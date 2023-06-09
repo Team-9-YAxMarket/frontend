@@ -4,20 +4,23 @@ import BarcodeMismatchCheckbox from '../BarcodeMismatchCheckbox/BarcodeMismatchC
 import PrimaryButton from '../PrimaryButton/PrimaryButton';
 
 const BarcodeMismatchPopup = (props) => {
-    // const isOpen = props.isOpen ? 'popup_opened' : '';
+    const isOpen = props.isOpen ? 'popup_opened' : '';
 
     return (
-        <div className={styles.popup}>
+        <div onMouseDown={(e) => {
+            if (e.target === e.currentTarget) {
+                props.onClose()
+            }
+        }} className={`${styles.popup} ${isOpen}`}>
             <div className={styles.popupContainer}>
-                <button className={styles.closeButton}></button>
-                <div className={styles.checkboxWrapper}>
-                    <h1 className={styles.title}>Какой товар вы отсканировали?</h1>
-                    <BarcodeMismatchCheckbox />
-                </div>
+                <button onMouseDown={props.onClose} className={styles.closeButton}></button>
+                <h1 className={styles.title}>Какой товар вы отсканировали?</h1>
+                <BarcodeMismatchCheckbox />
                 <PrimaryButton
                     title='Выбрать'
                     disabled={false}
                     variant='yellow'
+                    right='24px'
                 />
             </div>
         </div>
