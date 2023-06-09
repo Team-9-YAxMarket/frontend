@@ -7,12 +7,19 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import ProductList from '../../components/ProductList/ProductList';
 import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeMismatchPopup';
 
-const ProductListPage = () => {
+const ProductListPage = ({ products }) => {
     const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(false);
+    const [scannedItems, setScannedItems] = useState(0);
+    const totalItems = products.reduce((total, product) => total + product.count, 0);
+   
 
     function closePopup() {
         setIsBarcodeMismatchPopupOpen(false);
     }
+
+    const handleProductItemClick = () => {
+        setScannedItems(scannedItems + 1);
+    };
 
     return (
         <div className={styles.pageWrapper}>
@@ -28,8 +35,8 @@ const ProductListPage = () => {
             />
             <div className={styles.listWrapper}>
                 <h1 className={styles.title}>Сканируйте товары B-09 и упаковку</h1>
-                <ProgressBar />
-                <ProductList />
+                <ProgressBar totalItems={totalItems} scannedItems={scannedItems}/>
+                <ProductList products={products} onItemClick={handleProductItemClick}/>
             </div>
             <PrimaryButton
                 title='Закончить упаковку'

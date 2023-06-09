@@ -25,12 +25,11 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.page}>
-        {isModalOpen && <ModalWindow onClose={toggleModalWindow} />}
+        {/* {isModalOpen && <ModalWindow onClose={toggleModalWindow} />} */}
         <Routes>
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
           <Route path="/scancell" element={<ScanCellPage />} />
-          <Route path="/product-list" element={<ProductListPage />}/>
           <Route
             path="/hasproblems"
             element={<HasProblemsPage setPageTitle={setPageTitle} />}

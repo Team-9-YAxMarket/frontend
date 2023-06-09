@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from './ProductList.module.css';
 import ProductItem from '../ProductItem/ProductItem';
-import { products } from '../../utils/constants';
 
-function ProductList() {
+
+function ProductList({ products, onItemClick }) {
+
+   
+  
     return (
         <div className={styles.listContainer}>
             <span className={styles.package}>Коробка YMC</span>
@@ -17,6 +20,7 @@ function ProductList() {
                             img={product.img}
                             barcode={product.barcode}
                             tags={product.tags}
+                            onItemClick={onItemClick}
                         />
                     })
                 }
