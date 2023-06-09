@@ -1,0 +1,43 @@
+.popup {
+    /*visibility: hidden;*/
+    /*opacity: 0;*/
+    transition: visibility .5s, opacity .5s ease-out;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.popupContainer {
+    width: 100vw;
+    height: 96vh;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 20px 20px 0 0;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.closeButton {
+
+}
+
+.title {
+    text-align: center;
+}
+
+.checkboxWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
