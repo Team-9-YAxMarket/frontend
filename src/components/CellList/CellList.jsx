@@ -1,7 +1,9 @@
 import styles from './CellList.module.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CellList = ({ cells }) => {
+  const navigate = useNavigate()
   const [activeCells, setActiveCells] = useState([]);
 
   const handleCellClick = (cellId) => {
@@ -9,6 +11,9 @@ const CellList = ({ cells }) => {
       setActiveCells(activeCells.filter((id) => id !== cellId));
     } else {
       setActiveCells([...activeCells, cellId]);
+    }
+    if (activeCells.length + 1 === cells.length) {
+      navigate('/scanproducts');
     }
   };
   return (
