@@ -9,6 +9,7 @@ function ProductItem(props) {
             return;
         }
         setSelectedCount(selectedCount + 1);
+        props.onItemClick()
     };
 
     const calculateProgress = () => {

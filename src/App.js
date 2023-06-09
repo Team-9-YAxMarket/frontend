@@ -12,6 +12,7 @@ import {
   ScanPrinterBarcodePage,
   ScanCellPage,
 } from './pages';
+import { products } from './utils/constants';
 
 function App() {
   const [isStatusOk, setIsStatusOk] = useState(true);
@@ -25,11 +26,12 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.page}>
-        {isModalOpen && <ModalWindow onClose={toggleModalWindow} />}
+        {/* {isModalOpen && <ModalWindow onClose={toggleModalWindow} />} */}
         <Routes>
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
           <Route path="/scancell" element={<ScanCellPage />} />
+          <Route path="/scanproducts" element={<ProductListPage products={products}/>} />
           <Route
             path="/hasproblems"
             element={<HasProblemsPage setPageTitle={setPageTitle} />}
