@@ -18,7 +18,7 @@ const ScanCellPage = () => {
 
     const handleListPageNavigate = () => {
         if (isAllCellsClicked) {
-            navigate('/product-list');
+            navigate('/productlist');
         }
     };
 

@@ -12,6 +12,7 @@ import {
   ScanPrinterBarcodePage,
   ScanCellPage,
 } from './pages';
+import { products } from './utils/constants';
 
 function App() {
   const [isStatusOk, setIsStatusOk] = useState(true);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
           <Route path="/scancell" element={<ScanCellPage />} />
+          <Route path="/productlist" element={<ProductListPage products={products} />} />
           <Route
             path="/hasproblems"
             element={<HasProblemsPage setPageTitle={setPageTitle} />}
