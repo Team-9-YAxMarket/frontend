@@ -2,11 +2,7 @@ import React from 'react';
 import styles from './ProductList.module.css';
 import ProductItem from '../ProductItem/ProductItem';
 
-
 function ProductList({ products, onItemClick }) {
-
-   
-  
     return (
         <div className={styles.listContainer}>
             <span className={styles.package}>Коробка YMC</span>

@@ -1,10 +1,14 @@
 import styles from './CellList.module.css';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-const CellList = ({ cells }) => {
-  const navigate = useNavigate()
+const CellList = (props) => {
   const [activeCells, setActiveCells] = useState([]);
+
+  useEffect(() => {
+    if (activeCells.length === props.cells.length) {
+      props.onSetIsAllCellsClicked(true);
+    }
+  }, [activeCells]);
 
   const handleCellClick = (cellId) => {
     if (activeCells.includes(cellId)) {
@@ -12,13 +16,11 @@ const CellList = ({ cells }) => {
     } else {
       setActiveCells([...activeCells, cellId]);
     }
-    if (activeCells.length + 1 === cells.length) {
-      navigate('/scanproducts');
-    }
   };
+
   return (
     <ul className={styles.cellList}>
-      {cells.map((cell) => (
+      {props.cells.map((cell) => (
         <li
           key={cell.id}
           className={`${styles.cellItem} ${

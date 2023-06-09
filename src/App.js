@@ -31,7 +31,7 @@ function App() {
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
           <Route path="/scancell" element={<ScanCellPage />} />
-          <Route path="/scanproducts" element={<ProductListPage products={products}/>} />
+          <Route path="/productlist" element={<ProductListPage products={products} />} />
           <Route
             path="/hasproblems"
             element={<HasProblemsPage setPageTitle={setPageTitle} />}
