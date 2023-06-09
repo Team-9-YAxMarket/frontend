@@ -22,7 +22,7 @@ const ProductListPage = () => {
                 disabled={false}
                 variant='yellow'
             />
-            <Footer isErrorCase={false} isBackButton={false} isKeyboard={true}/>
+            <Footer isErrorCase={false} isBackButton={true} isKeyboard={true}/>
         </div>
     );
 }

@@ -3,8 +3,8 @@
   box-shadow: 0px 5px 46px rgba(0, 0, 0, 0.12), 0px 7px 15px rgba(0, 0, 0, 0.12);
   padding: 20px 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+ justify-content: space-between;
   width: 100%;
 }
 
@@ -13,13 +13,17 @@
   color: #fff;
 }
 
-.center {
-  justify-content: center;
+.empty {
+  width: 300px;
 }
+
 
 .keyboardButtonContainer {
   display: flex;
+  align-items: center;
   gap: 18px;
+ width: 100%;
+ justify-content: center;
 }
 
 .keyboardImage {

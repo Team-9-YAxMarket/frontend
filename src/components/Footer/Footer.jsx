@@ -10,7 +10,7 @@ const Footer = ({
 }) => {
   return (
     <footer
-      className={`${styles.footer} ${!isBackButton ? styles.center : ''} ${
+      className={`${styles.footer} ${
         isErrorCase ? styles.footerError : ''
       }`}
     >
@@ -36,7 +36,8 @@ const Footer = ({
           </>
         )}
       </div>
-      <div />
+
+      {isBackButton && <div className={styles.empty} />}
     </footer>
   );
 };
