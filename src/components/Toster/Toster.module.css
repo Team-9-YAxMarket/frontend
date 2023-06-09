@@ -1,7 +1,6 @@
 .toster {
   width: 1096px;
   height: 104px;
-  padding: 18px 317px;
   color: #fff;
   font-weight: 700;
   font-size: 48px;
@@ -9,6 +8,7 @@
   border-radius: 40px;
   display: flex;
   align-items: center;
+  align-self: center;
   justify-content: center;
 }
 

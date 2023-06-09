@@ -15,14 +15,14 @@ function ProductItem(props) {
         return `${(selectedCount * 100) / props.count}%`;
     };
 
-    const productBackgroundStyle= {
-        background: `linear-gradient(to right, #EAF7EA ${calculateProgress()}, #ffffff ${calculateProgress()})`,
-    };
+  const productBackgroundStyle = {
+    background: `linear-gradient(to right, #EAF7EA ${calculateProgress()}, #ffffff ${calculateProgress()})`,
+  };
 
-    const counterBackgroundStyle= {
-        background: '#2AAD2E',
-        color: '#ffffff',
-    };
+  const counterBackgroundStyle = {
+    background: '#2AAD2E',
+    color: '#ffffff',
+  };
 
     return (
         <li className={styles.productItem} style={productBackgroundStyle} onClick={handleProductItemClick}>
