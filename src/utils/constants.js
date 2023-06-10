@@ -100,7 +100,7 @@ export const products = [
     count: 1,
     img: 'https://m.media-amazon.com/images/I/619+LSV4iZL._AC_UF1000,1000_QL80_.jpg',
     barcode: '1234 5678 234 32',
-    pack: 'Коробка YMA',
+    pack: 'Коробка MYF',
     tags: null,
   },
   {
@@ -129,7 +129,34 @@ export const products = [
     count: 3,
     img: 'https://static.mvideo.ru/media/Promotions/Promo_Page/2021/July/obzor-yandex-stantsii-lajt/obzor-yandex-stantsii-lajt-top1-m.png',
     barcode: '1234 5678 234 32',
-    pack: 'Коробка YMA',
+    pack: 'Коробка YMF',
+    tags: [
+      {
+        id: 1,
+        type: 'Пузырчатая плёнка',
+        backgroundColor: '#E0EEFF',
+      },
+      {
+        id: 2,
+        type: 'Непрозрачный пакет',
+        backgroundColor: '#E6E6E6',
+      },
+      {
+        id: 3,
+        type: 'Нужно сканировать IMEI',
+        backgroundColor: '#FFECCC',
+        icon: '/images/IMEI_icon.svg',
+        iconAlt: 'Иконка IMEI',
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: 'Умная колонка Яндекс Станция Лайт, ультрафиолет',
+    count: 3,
+    img: 'https://static.mvideo.ru/media/Promotions/Promo_Page/2021/July/obzor-yandex-stantsii-lajt/obzor-yandex-stantsii-lajt-top1-m.png',
+    barcode: '1234 5678 234 32',
+    pack: 'Коробка MYA',
     tags: [
       {
         id: 1,

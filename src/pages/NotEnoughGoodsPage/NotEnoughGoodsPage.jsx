@@ -6,7 +6,7 @@ import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import Footer from '../../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 
-const NotEnoughGoodsPage = ({ pageTitle }) => {
+const NotEnoughGoodsPage = ({ pageTitle, products }) => {
   const navigate = useNavigate();
   const defective = pageTitle.includes('брак');
 
@@ -37,7 +37,7 @@ const NotEnoughGoodsPage = ({ pageTitle }) => {
       <div className={styles.pageWrapper}>
         <div className={styles.listContainer}>
           <PageMainText title={pageTitle} />
-          <ProductList />
+          <ProductList products={products}/>
         </div>
       </div>
 
