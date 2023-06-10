@@ -1,15 +1,37 @@
 import styles from './ForemanCallToster.module.css';
+import { useState, useEffect } from 'react'
 import { motion as m } from 'framer-motion';
+import { tosterVariants } from '../../utils/motion';
 import PageMainText from '../PageMainText/PageMainText';
 
 const ForemanCallToster = ({ isForemanCall }) => {
   const foremanCall = 'Бригадир скоро подойдет';
   const foremanTosterTest = 'Подождите немного';
+  const [showToster, setShowToster] = useState(false);
+  console.log(showToster)
+
+
+  useEffect(() => {
+    if (isForemanCall) {
+      setShowToster(true);
+
+      const timer = setTimeout(() => {
+        setShowToster(false);
+      }, 3000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [isForemanCall]);
+
   return (
-    isForemanCall && (
+    showToster && (
       <m.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: isForemanCall ? 1 : 0, y: 0 }}
+        variants={tosterVariants}
+        initial='hidden'
+        animate={showToster ? 'visible' : 'exit'}
+        exit='exit'
         transition={{ duration: 0.3 }}
         className={styles.foremanToster}
       >
