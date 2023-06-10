@@ -153,7 +153,7 @@ export const products = [
   {
     id: 4,
     title: 'Умная колонка Яндекс Станция Лайт, ультрафиолет',
-    count: 3,
+    count: 1,
     img: 'https://static.mvideo.ru/media/Promotions/Promo_Page/2021/July/obzor-yandex-stantsii-lajt/obzor-yandex-stantsii-lajt-top1-m.png',
     barcode: '1234 5678 234 32',
     pack: 'Коробка MYA',
