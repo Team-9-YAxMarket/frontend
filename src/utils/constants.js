@@ -108,7 +108,7 @@ export const products = [
     title: 'Мягкая игрушка BelaiToys медведь Тони, 110 см, кофейный',
     count: 2,
     img: 'https://static.detmir.st/media_pim/756/808/4808756/450/0.jpg?1675176003977',
-    barcode: '1234 5678 234 32',
+    barcode: ['1234 5678 234 32', '1234 5678 234 32'],
     pack: 'Коробка YMA',
     tags: [
       {
@@ -128,7 +128,7 @@ export const products = [
     title: 'Умная колонка Яндекс Станция Лайт, ультрафиолет',
     count: 3,
     img: 'https://static.mvideo.ru/media/Promotions/Promo_Page/2021/July/obzor-yandex-stantsii-lajt/obzor-yandex-stantsii-lajt-top1-m.png',
-    barcode: '1234 5678 234 32',
+    barcode: ['1234 5678 234 32', '1234 5678 234 32', '1234 5678 234 32'],
     pack: 'Коробка YMF',
     tags: [
       {
@@ -153,7 +153,7 @@ export const products = [
   {
     id: 4,
     title: 'Умная колонка Яндекс Станция Лайт, ультрафиолет',
-    count: 3,
+    count: 1,
     img: 'https://static.mvideo.ru/media/Promotions/Promo_Page/2021/July/obzor-yandex-stantsii-lajt/obzor-yandex-stantsii-lajt-top1-m.png',
     barcode: '1234 5678 234 32',
     pack: 'Коробка MYA',
