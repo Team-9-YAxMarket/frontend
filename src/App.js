@@ -38,7 +38,7 @@ function App() {
           />
           <Route
             path="/notenaughgoods"
-            element={<NotEnoughGoodsPage pageTitle={pageTitle} />}
+            element={<NotEnoughGoodsPage pageTitle={pageTitle} products={products}/>}
           />
           <Route path="/finishsession" element={<FinishSession isStatusOk={false}/>} />
           <Route path="/putgoodsinbox" element={<PutGoodsInBox />} />

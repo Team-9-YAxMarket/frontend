@@ -10,6 +10,9 @@
   align-items: center;
   align-self: center;
   justify-content: center;
+  position: absolute;
+  top: 45px;
+  z-index: 5;
 }
 
 .error {

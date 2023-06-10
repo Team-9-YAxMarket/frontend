@@ -1,12 +1,17 @@
 import React from 'react';
 import styles from './ProductList.module.css';
 import ProductItem from '../ProductItem/ProductItem';
+import { useLocation } from 'react-router-dom'
+
 
 function ProductList({ products, onItemClick }) {
+    const location = useLocation()
+    const noBorderLocation = location.pathname === '/notenaughgoods'
+
     return (
-        <div className={styles.listContainer}>
-            <span className={styles.package}>Коробка YMC</span>
-            <ul className={styles.list}>
+        <div className={`${styles.listContainer}`}>
+            {!noBorderLocation && <span className={styles.package}>Коробка YMC</span>}
+            <ul className={styles.list} style={ noBorderLocation ? { border: 'none' } : null}>
                 {
                     products.map((product) => {
                         return <ProductItem

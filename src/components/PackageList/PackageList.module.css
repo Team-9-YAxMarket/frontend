@@ -1,0 +1,33 @@
+.packageListWrapper {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+  border-top: 1px solid #E8E8E8;
+  border-bottom: 1px solid #E8E8E8;
+
+}
+
+.packageText {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+}
+
+.packageList {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style-type: none;
+}
+
+.packageItem {
+    padding: 12px 24px;
+    border-radius: 100px;
+    color: #FFF;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+}
+
