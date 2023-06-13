@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ProductItem.module.css';
+import ProductExpandedListItem from '../ProductExpandedListItem/ProductExpandedListItem';
 
 function ProductItem(props) {
     const [selectedCount, setSelectedCount] = useState(0);
@@ -10,7 +11,7 @@ function ProductItem(props) {
             return;
         }
         setSelectedCount(selectedCount + 1);
-        props.onItemClick()
+        props.onItemClick();
     };
 
     const calculateProgress = () => {
@@ -75,14 +76,14 @@ function ProductItem(props) {
                 {isExpanded && (
                     <ul className={styles.expandedList}>
                         {props.barcode.map((item) => (
-                            <li
+                            <ProductExpandedListItem
                                 key={item.index}
-                                className={styles.expandedListItem}
-                            >
-                                <h2 className={styles.title}>{props.title}</h2>
-                                <span className={styles.counter}>1 шт.</span>
-                                <p className={styles.expandedListBarcode}>{item}</p>
-                            </li>
+                                title={props.title}
+                                item={item}
+                                selectedCount={selectedCount}
+                                onSetSelectedCount={setSelectedCount}
+                                onItemClick={props.onItemClick}
+                            />
                         ))}
                     </ul>
                 )}
