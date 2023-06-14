@@ -4,13 +4,14 @@ import ProductExpandedListItem from '../ProductExpandedListItem/ProductExpandedL
 
 function ProductItem(props) {
     const [selectedCount, setSelectedCount] = useState(0);
+    const [selectedItems, setSelectedItems] = useState([]); // Массив для хранения состояния выбора
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleProductItemClick = () => {
         if (selectedCount === props.count) {
             return;
         }
-        setSelectedCount(selectedCount + 1);
+        setSelectedCount((prev) => prev + 1);
         props.onItemClick();
     };
 
@@ -30,6 +31,18 @@ function ProductItem(props) {
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded);
     };
+
+    const handleExpandedItemClick = (index) => {
+        if(selectedCount === props.count) {
+            return
+        }
+        if (!selectedItems.includes(index)) {
+          setSelectedItems([...selectedItems, index]);
+          setSelectedCount((prev) => prev + 1);
+          props.onItemClick();
+        }
+      };
+    
 
     return (
         <li className={styles.productListItem}>
@@ -78,11 +91,12 @@ function ProductItem(props) {
             {[...Array(props.count)].map((_, index) => (
               <ProductExpandedListItem
                 key={index}
+                index={index}
                 item={props.barcode}
                 title={props.title}
-                onSetSelectedCount={setSelectedCount}
+                selectedItems={selectedItems}
                 selectedCount={selectedCount}
-                onItemClick={props.onItemClick}
+                onItemClick={handleExpandedItemClick}
               />
             ))}
           </ul>

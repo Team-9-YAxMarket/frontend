@@ -9,13 +9,13 @@ export const trueGoods = {
       "recommended_carton": [
         {
           "carton_id": "carton_id_1",
-          "carton_type": "ABC",
+          "carton_type": "ymc",
           "barcode": "000123456789",
           "box_id": "box_id_1"
         },
         {
           "carton_id": "carton_id_2",
-          "carton_type": "DEF",
+          "carton_type": "ymf",
           "barcode": "000987654321",
           "box_id": "box_id_2"
         }
