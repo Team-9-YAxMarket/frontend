@@ -49,7 +49,7 @@ function ProductItem(props) {
                                         style={{ backgroundColor: tag.backgroundColor }}
                                     >
                                         {tag.icon && <img className={styles.tagIcon} src={tag.icon} alt={tag.iconAlt}/>}
-                                        {tag.type}
+                                        {tag}
                                     </li>
                                 ))}
                             </ul>
@@ -73,20 +73,20 @@ function ProductItem(props) {
                     )}
                     {props.count === 1 && <p className={styles.barcode}>{props.barcode}</p>}
                 </div>
-                {isExpanded && (
-                    <ul className={styles.expandedList}>
-                        {props.barcode.map((item) => (
-                            <ProductExpandedListItem
-                                key={item.index}
-                                title={props.title}
-                                item={item}
-                                selectedCount={selectedCount}
-                                onSetSelectedCount={setSelectedCount}
-                                onItemClick={props.onItemClick}
-                            />
-                        ))}
-                    </ul>
-                )}
+                {props.count > 1 && isExpanded && (
+          <ul className={styles.expandedList}>
+            {[...Array(props.count)].map((_, index) => (
+              <ProductExpandedListItem
+                key={index}
+                item={props.barcode}
+                title={props.title}
+                onSetSelectedCount={setSelectedCount}
+                selectedCount={selectedCount}
+                onItemClick={props.onItemClick}
+              />
+            ))}
+          </ul>
+        )}
             </div>
         </li>
     );

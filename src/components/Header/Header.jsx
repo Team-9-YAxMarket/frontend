@@ -3,7 +3,7 @@ import logo from '../../images/service_block-icon.png';
 import { setEfficiencyStatus } from '../../utils/functions';
 import { Link } from 'react-router-dom';
 
-const Header = ({ userId = 'sof-natgemokee', userProgress = 51 }) => {
+const Header = ({ userId, userProgress = 51 }) => {
   const title = 'Упаковка';
   const workerProgressStyle = setEfficiencyStatus(userProgress);
 
