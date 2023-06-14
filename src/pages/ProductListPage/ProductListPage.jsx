@@ -14,9 +14,9 @@ const ProductListPage = ({ products }) => {
     const navigate = useNavigate();
     const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(false);
     const [scannedItems, setScannedItems] = useState(0);
-    const totalItems = products.reduce((total, product) => total + product.count, 0);
-    const packList = products.map(product => product.pack)
-    console.log(packList)
+    const totalItems = products.items.reduce((total, product) => total + product.count, 0);
+    //const packList = products.order.items.map(product => product.pack)
+   // console.log(packList)
     const finishGoodsScan = totalItems === scannedItems
  
 
@@ -54,7 +54,7 @@ const ProductListPage = ({ products }) => {
                 <h1 className={styles.title}>Сканируйте товары B-09 и упаковку</h1>
                 <ProgressBar totalItems={totalItems} scannedItems={scannedItems}/>
                 <ProductList products={products} onItemClick={handleProductItemClick}/>
-            <PackageList list={packList}/>
+            {/* <PackageList list={packList}/> */}
             </div>
             <PrimaryButton
                 title='Закончить упаковку'

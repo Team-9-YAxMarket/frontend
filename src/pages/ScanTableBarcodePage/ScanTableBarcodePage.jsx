@@ -13,7 +13,7 @@ const ScanTableBarcodePage = () => {
 
     return (
         <div className={styles.pageWrapper}>
-            <Header />
+            
             <h1 className={styles.title} onClick={handleScanClick}>Сканируйте штрихкод стола</h1>
             <Footer isErrorCase={false} isBackButton={false} isKeyboard={true}/>
         </div>
