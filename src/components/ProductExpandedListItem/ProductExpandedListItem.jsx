@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './ProductExpandedListItem.module.css';
 
 function ProductExpandedListItem(props) {
+
     const [isSelected, setIsSelected] = useState(false);
+
+    useEffect(() => {
+    setIsSelected(props.selectedItems.includes(props.index))
+    },[props.selectedItems, props.index])
+    
 
     const handleExpandedListItemClick = () => {
         if (isSelected) {
             return;
         }
-        setIsSelected(true);
-        props.onSetSelectedCount(props.selectedCount + 1);
-        props.onItemClick();
+        props.onItemClick(props.index);
     };
 
     const listItemBackgroundStyle = {
@@ -24,7 +28,6 @@ function ProductExpandedListItem(props) {
 
     return (
         <li
-            key={props.key}
             className={styles.expandedListItem}
             style={isSelected ? listItemBackgroundStyle : null}
         >

@@ -10,7 +10,7 @@ import PackageList from '../../components/PackageList/PackageList';
 import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeMismatchPopup';
 import { useNavigate } from 'react-router-dom';
 
-const ProductListPage = ({ products }) => {
+const ProductListPage = ({ products, recommendedCarton }) => {
     const navigate = useNavigate();
     const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(false);
     const [scannedItems, setScannedItems] = useState(0);
@@ -43,7 +43,7 @@ const ProductListPage = ({ products }) => {
                 onClose={closePopup}
             />
             <Header />
-            <Toster isStatusOk={finishGoodsScan}/>
+            {/* <Toster isStatusOk={finishGoodsScan}/> */}
             <PrimaryButton
                 title='Есть проблема'
                 disabled={false}
@@ -53,7 +53,7 @@ const ProductListPage = ({ products }) => {
             <div className={styles.listWrapper}>
                 <h1 className={styles.title}>Сканируйте товары B-09 и упаковку</h1>
                 <ProgressBar totalItems={totalItems} scannedItems={scannedItems}/>
-                <ProductList products={products} onItemClick={handleProductItemClick}/>
+                <ProductList products={products} recommendedCarton={recommendedCarton} onItemClick={handleProductItemClick}/>
             {/* <PackageList list={packList}/> */}
             </div>
             <PrimaryButton

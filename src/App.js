@@ -1,7 +1,7 @@
 import styles from './App.module.css';
 import { Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
-import ModalWindow from './components/ModalWindow/ModalWindow';
+//import ModalWindow from './components/ModalWindow/ModalWindow';
 import Header from './components/Header/Header';
 import {
   HasProblemsPage,
@@ -25,7 +25,8 @@ function App() {
 
   const userId = products.user.id
   const goods = products.order
-  console.log(goods)
+  const recommendedCarton = products.order.recommended_carton
+
 
   const toggleModalWindow = () => {
     setIsModalOpen(!isModalOpen);
@@ -40,7 +41,7 @@ function App() {
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
           <Route path="/scancell" element={<ScanCellPage />} />
-          <Route path="/productlist" element={<ProductListPage products={goods} />} />
+          <Route path="/productlist" element={<ProductListPage products={goods} recommendedCarton={recommendedCarton}/>} />
           <Route
             path="/hasproblems"
             element={<HasProblemsPage setPageTitle={setPageTitle} />}
