@@ -7,10 +7,12 @@ import { useNavigate } from 'react-router-dom';
 function IssueButtonList({ setIsForemanCall, setPageTitle }) {
   const anotherIssue = 'Другая проблема'
   const callForeman = 'Позвать бригадира'
+  const brokenMonitor = 'Сломан монитор'
+  const brokenScanner = 'Сломан сканер'
+  const brokenPrinter = 'Сломан принтер'
   const noGoods = 'Нет товара'
   const haveDefective = 'Товар бракованный'
   const [list, setList] = useState(hasProblemsList);
- 
 
   const navigate = useNavigate()
 
@@ -20,18 +22,20 @@ function IssueButtonList({ setIsForemanCall, setPageTitle }) {
     if (itemTitle === anotherIssue) {
       setList(hasAnotherProblemsList);
     }
-    if(itemTitle === callForeman) {
+    if (itemTitle === callForeman) {
         setIsForemanCall(true)
-        setList(hasProblemsList)
       }
-      if( itemTitle === noGoods) {
-        setPageTitle('Выберите отсутствующий товар')
-        navigate('/notenoughgoods')
-      }
-      if(itemTitle === haveDefective) {
-        navigate('/notenoughgoods')
-        setPageTitle('Сканируйте бракованный товар')
-      }
+    if (itemTitle === brokenMonitor || itemTitle === brokenScanner || itemTitle === brokenPrinter) {
+      setIsForemanCall(true)
+    }
+    if (itemTitle === noGoods) {
+      setPageTitle('Выберите отсутствующий товар')
+      navigate('/notenoughgoods')
+    }
+    if (itemTitle === haveDefective) {
+      navigate('/notenoughgoods')
+      setPageTitle('Сканируйте бракованный товар')
+    }
   };
   return (
     <ul className={styles.buttonList}>

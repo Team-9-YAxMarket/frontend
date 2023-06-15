@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './BarcodeMismatchCheckbox.module.css';
 import BarcodeMismatchCheckboxItem from '../BarcodeMismatchCheckboxItem/BarcodeMismatchCheckboxItem';
-import { products } from '../../utils/constants';
 
-function BarcodeMismatchCheckbox() {
-    const [isCheckedProduct, setCheckedProduct] = useState('');
-
+function BarcodeMismatchCheckbox({ products, isCheckedProduct, setIsCheckedProduct }) {
     const handleCheckboxChange = (product) => {
-        setCheckedProduct(product);
+        setIsCheckedProduct(product);
     };
 
     return (
         <div className={styles.checkbox}>
             {
-                products.map((product) => {
+                products.items.map((product) => {
                     return <BarcodeMismatchCheckboxItem
                         key={product.id}
-                        title={product.title}
+                        title={product.sku}
                         img={product.img}
                         isCheckedProduct={isCheckedProduct}
                         onChange={() => handleCheckboxChange(product.id)}

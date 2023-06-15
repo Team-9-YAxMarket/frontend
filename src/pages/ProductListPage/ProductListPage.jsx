@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ProductListPage = ({ products, recommendedCarton }) => {
     const navigate = useNavigate();
-    const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(false);
+    const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(true);
     const [scannedItems, setScannedItems] = useState(0);
     const totalItems = products.items.reduce((total, product) => total + product.count, 0);
     //const packList = products.order.items.map(product => product.pack)
@@ -41,6 +41,7 @@ const ProductListPage = ({ products, recommendedCarton }) => {
             <BarcodeMismatchPopup
                 isOpen={isBarcodeMismatchPopupOpen}
                 onClose={closePopup}
+                products={products}
             />
             <Header />
             {/* <Toster isStatusOk={finishGoodsScan}/> */}

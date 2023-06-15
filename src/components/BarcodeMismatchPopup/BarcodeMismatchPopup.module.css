@@ -12,7 +12,7 @@
     flex-direction: row;
     align-items: flex-end;
     justify-content: center;
-    z-index: 10;
+    z-index: 100;
 }
 
 .popup_opened {
@@ -45,8 +45,8 @@
     background-color: #F3F0E9;
     background-position: center;
     border-style: none;
-    position: absolute;
-    top: 24px;
+    position: fixed;
+    top: 70px;
     right: 24px;
 }
 
