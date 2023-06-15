@@ -1,5 +1,4 @@
 import styles from './ScanTableBarcodePage.module.css';
-import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 
