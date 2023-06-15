@@ -4,7 +4,7 @@ import ProductItem from '../ProductItem/ProductItem';
 import { useLocation } from 'react-router-dom';
 import { getBackgroundColor } from '../../utils/functions';
 
-function ProductList({ products, recommendedCarton, onItemClick }) {
+function ProductList({ products, recommendedCarton, onItemClick, onPackageClick }) {
   
   const location = useLocation();
   const noBorderLocation = location.pathname === '/notenaughgoods';
@@ -21,6 +21,7 @@ function ProductList({ products, recommendedCarton, onItemClick }) {
   const defaultItems = products.items.filter((item) => !item.box_id);
   const unsortedListStyle = defaultItems.length > 0 ? { border: '4px solid gray' } : {};
 
+
   return (
     <div className={`${styles.listContainer}`}>
       {recommendedCarton.map((carton) => {
@@ -34,12 +35,13 @@ function ProductList({ products, recommendedCarton, onItemClick }) {
             <span
               className={styles.package}
               style={{ backgroundColor: `${getBackgroundColor(carton.carton_type)}`}}
+              onClick={onPackageClick}
             >
               {carton.carton_type.toUpperCase()}
             </span>
             {cartonItems.length > 0 && (
               <ul className={styles.list} style={sortedListStyle}>
-                {cartonItems.map((item) => (
+                {cartonItems.map((item, index) => (
                   <ProductItem
                     key={item.id}
                     title={item.sku}
@@ -58,7 +60,7 @@ function ProductList({ products, recommendedCarton, onItemClick }) {
 
       {defaultItems.length > 0 && (
         <div className={styles.listWrapper}>
-          <span className={styles.package} style={{ backgroundColor: '#676764' }}>
+          <span className={styles.package} style={{ backgroundColor: '#676764' }} onClick={onPackageClick}>
             Упаковка на выбор
           </span>
           <ul className={styles.list} style={unsortedListStyle}>
