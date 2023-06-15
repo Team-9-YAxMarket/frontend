@@ -17,20 +17,32 @@ const ProductListPage = ({ products, recommendedCarton }) => {
   const [showToster, setShowToster] = useState(false);
   const [scannedItems, setScannedItems] = useState(0);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
+  const [tosterMessage, setTosterMessage] = useState('')
   const totalItems = products.items.reduce(
     (total, product) => total + product.count,
     0
   );
-  const packList = products.items.map((product) => product.box_id);
-  console.log('packlist', packList);
+  console.log('rec',recommendedCarton[0].carton_type)
+const spanPack = recommendedCarton[0].carton_type
+  console.log(showToster)
   
 
   const onPackageClick = () => {
-    setShowToster(true);
-    setTimeout(() => {
-      setShowToster(false);
-    }, 1000);
-    setIsPackageSelected(true);
+    if (scannedItems === totalItems) {
+      setIsPackageSelected(true);
+      setTosterMessage('Упаковка добавлена');
+      setShowToster(true);
+      setTimeout(() => {
+        setShowToster(false);
+      }, 1000);
+    } else {
+      setIsPackageSelected(false);
+      setTosterMessage('Сканируйте все товары');
+      setShowToster(true);
+      setTimeout(() => {
+        setShowToster(false);
+      }, 1000);
+    }
   };
 
   function closePopup() {
@@ -45,8 +57,15 @@ const ProductListPage = ({ products, recommendedCarton }) => {
     if (isPackageSelected) {
       navigate('/finishsession');
     } else {
-        setShowToster(true);
-        setIsPackageSelected(false)
+      if (scannedItems === totalItems) {
+        setTosterMessage('Сканируйте упаковку');
+      } else {
+        setTosterMessage('Сканируйте все товары');
+      }
+      setShowToster(true);
+      setTimeout(() => {
+        setShowToster(false);
+      }, 1000);
     }
   };
 
@@ -62,7 +81,7 @@ const ProductListPage = ({ products, recommendedCarton }) => {
         onClose={closePopup}
       />
       <Header />
-      {showToster && <Toster isStatusOk={isPackageSelected} />}
+      {showToster && <Toster isStatusOk={isPackageSelected} message={tosterMessage}/>}
       <PrimaryButton
         title="Есть проблема"
         disabled={false}
@@ -78,11 +97,11 @@ const ProductListPage = ({ products, recommendedCarton }) => {
           onItemClick={handleProductItemClick}
           onPackageClick={onPackageClick}
         />
-        {/* <PackageList list={packList}/> */}
+        {isPackageSelected && <PackageList spanPack={spanPack}/>}
       </div>
       <PrimaryButton
         title="Закончить упаковку"
-        variant="yellow"
+        variant={isPackageSelected ? "yellow" : ""}
         right="24px"
         onClick={handleFinishPackingButtonClick}
       />
