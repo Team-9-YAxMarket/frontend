@@ -40,7 +40,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
-          <Route path="/scancell" element={<ScanCellPage />} />
+          <Route path="/scancell" element={<ScanCellPage products={goods}/>} />
           <Route path="/productlist" element={<ProductListPage products={goods} recommendedCarton={recommendedCarton}/>} />
           <Route
             path="/hasproblems"
