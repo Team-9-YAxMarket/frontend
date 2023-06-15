@@ -2,12 +2,12 @@ import styles from './NotEnoughGoodsPage.module.css';
 import { useState } from 'react';
 import Header from '../../components/Header/Header';
 import PageMainText from '../../components/PageMainText/PageMainText';
-import ProductList from '../../components/ProductList/ProductList';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import Footer from '../../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import ProblemProductList from '../../components/ProblemProductList/ProblemProductList';
 
-const NotEnoughGoodsPage = ({ pageTitle, products }) => {
+const NotEnoughGoodsPage = ({ pageTitle, products, recommendedCarton, onItemClick }) => {
   const [scannedItems, setScannedItems] = useState(0);
   const navigate = useNavigate();
   const defective = pageTitle.includes('брак');
@@ -34,24 +34,21 @@ const NotEnoughGoodsPage = ({ pageTitle, products }) => {
   }
 
   return (
-    <>
+    <div className={styles.pageWrapper}>
       <Header />
-      <PrimaryButton
-        variant="yellow"
-        title={dynamicButtonText()}
-        right="24px"
-        onClick={handleEndSession}
-        disabled={disabledButton}
-      />
-      <div className={styles.pageWrapper}>
-        <div className={styles.listContainer}>
-          <PageMainText title={pageTitle} />
-          <ProductList products={products} onItemClick={handleItemScan}/>
-        </div>
+      <div className={styles.listWrapper}>
+        <PageMainText title={pageTitle} />
+        <ProblemProductList products={products} onItemClick={handleItemScan}/>
       </div>
-
+      <PrimaryButton
+          variant="yellow"
+          title={dynamicButtonText()}
+          right="24px"
+          onClick={handleEndSession}
+          disabled={disabledButton}
+      />
       <Footer isErrorCase={true} isBackButton={true} />
-    </>
+    </div>
   );
 };
 

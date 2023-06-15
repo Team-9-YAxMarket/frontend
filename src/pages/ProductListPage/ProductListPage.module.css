@@ -9,6 +9,7 @@
 }
 
 .listWrapper {
+    padding-bottom: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,7 +19,6 @@
     left: 50%;
     transform: translate(-50%, 0);
     overflow: scroll;
-    overflow: hidden
 }
 
 .title {

@@ -47,7 +47,7 @@ function App() {
             element={<HasProblemsPage setPageTitle={setPageTitle} />}
           />
           <Route
-            path="/notenaughgoods"
+            path="/notenoughgoods"
             element={<NotEnoughGoodsPage pageTitle={pageTitle} products={goods}/>}
           />
           <Route path="/finishsession" element={<FinishSession isStatusOk={false}/>} />

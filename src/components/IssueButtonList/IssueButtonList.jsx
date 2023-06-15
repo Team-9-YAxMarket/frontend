@@ -26,10 +26,10 @@ function IssueButtonList({ setIsForemanCall, setPageTitle }) {
       }
       if( itemTitle === noGoods) {
         setPageTitle('Выберите отсутствующий товар')
-        navigate('/notenaughgoods')
+        navigate('/notenoughgoods')
       }
       if(itemTitle === haveDefective) {
-        navigate('/notenaughgoods')
+        navigate('/notenoughgoods')
         setPageTitle('Сканируйте бракованный товар')
       }
   };
