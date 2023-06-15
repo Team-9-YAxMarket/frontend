@@ -12,7 +12,7 @@
   justify-content: center;
   position: absolute;
   top: 45px;
-  z-index: 5;
+  z-index: 10;
 }
 
 .error {

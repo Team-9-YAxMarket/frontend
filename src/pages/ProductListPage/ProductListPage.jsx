@@ -57,6 +57,7 @@ const ProductListPage = ({ products, recommendedCarton }) => {
   return (
     <div className={styles.pageWrapper}>
       <BarcodeMismatchPopup
+        products={products}
         isOpen={isBarcodeMismatchPopupOpen}
         onClose={closePopup}
       />
