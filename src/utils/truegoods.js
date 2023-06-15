@@ -7,12 +7,12 @@ export const trueGoods = {
     "order": {
       "order_id": "unique_order_011",
       "recommended_carton": [
-        {
-          "carton_id": "carton_id_1",
-          "carton_type": "ymc",
-          "barcode": "000123456789",
-          "box_id": "box_id_1"
-        },
+        // {
+        //   "carton_id": "carton_id_1",
+        //   "carton_type": "ymc",
+        //   "barcode": "000123456789",
+        //   "box_id": "box_id_1"
+        // },
         {
           "carton_id": "carton_id_2",
           "carton_type": "ymf",
@@ -21,24 +21,24 @@ export const trueGoods = {
         }
       ],
       "items": [
-        {
-          "id": "unique_sku_1_id",
-          "sku": "Батарейка Ortega Cell CR2032, в упаковке 2 шт.",
-          "barcode": "89898989",
-          "img": "https://m.media-amazon.com/images/I/619+LSV4iZL._AC_UF1000,1000_QL80_.jpg",
-          "count": 1,
-          "prompt": [],
-          "box_id": "box_id_1"
-        },
-        {
-          "id": "unique_sku_2_id",
-          "sku": "Мягкая игрушка BelaiToys медведь Тони, 110 см, кофейный",
-          "barcode": "2121212121",
-          "img": "https://static.detmir.st/media_pim/756/808/4808756/450/0.jpg?1675176003977",
-          "count": 2,
-          "prompt": ["Пузырчатая пленка", "Непрозрачный пакет"],
-          "box_id": "box_id_1"
-        },
+        // {
+        //   "id": "unique_sku_1_id",
+        //   "sku": "Батарейка Ortega Cell CR2032, в упаковке 2 шт.",
+        //   "barcode": "89898989",
+        //   "img": "https://m.media-amazon.com/images/I/619+LSV4iZL._AC_UF1000,1000_QL80_.jpg",
+        //   "count": 1,
+        //   "prompt": [],
+        //   "box_id": "box_id_1"
+        // },
+        // {
+        //   "id": "unique_sku_2_id",
+        //   "sku": "Мягкая игрушка BelaiToys медведь Тони, 110 см, кофейный",
+        //   "barcode": "2121212121",
+        //   "img": "https://static.detmir.st/media_pim/756/808/4808756/450/0.jpg?1675176003977",
+        //   "count": 2,
+        //   "prompt": ["Пузырчатая пленка", "Непрозрачный пакет"],
+        //   "box_id": "box_id_1"
+        // },
         {
           "id": "unique_sku_3_id",
           "sku": "Умная колонка Яндекс Станция Лайт, ультрафиолет",

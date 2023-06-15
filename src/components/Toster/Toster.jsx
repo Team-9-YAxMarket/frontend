@@ -3,15 +3,15 @@ import styles from './Toster.module.css';
 import { motion as m } from 'framer-motion';
 import { tosterVariants } from '../../utils/motion';
 
-const Toster = ({ isStatusOk }) => {
+const Toster = ({ isStatusOk, message }) => {
   const tosterClass = isStatusOk ? styles.correct : styles.error;
-  const message = isStatusOk ? 'Упаковка добавлена' : 'Упаковка не считалась';
+  
 
   return (
     <m.div
       variants={tosterVariants}
       initial='hidden'
-      animate={isStatusOk ? 'visible' : 'exit'}
+      animate='visible'
       exit='exit'
       className={`${styles.toster} ${tosterClass}`}
     >

@@ -1,6 +1,6 @@
 import styles from './PackageList.module.css'
 
-const PackageList = ({ list }) => {
+const PackageList = ({ spanPack }) => {
 
     const getBackgroundColor = (pack) => {
         pack = pack.toLowerCase();
@@ -32,9 +32,7 @@ const PackageList = ({ list }) => {
     <div className={styles.packageListWrapper}>
       <p className={styles.packageText}>Выбрано:</p>
       <ul className={styles.packageList}>
-        {list.map((pack, index) => (
-            <li key={index} className={styles.packageItem} style={{backgroundColor: getBackgroundColor(pack)}}>{pack}</li>
-        ))}
+            <li  className={styles.packageItem} style={{backgroundColor: getBackgroundColor(spanPack)}}>{spanPack.toUpperCase()}</li>
       </ul>
     </div>
   )
