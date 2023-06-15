@@ -8,7 +8,7 @@ import { cells } from '../../utils/constants';
 import BarcodeMismatchPopup from "../../components/BarcodeMismatchPopup/BarcodeMismatchPopup";
 import { useNavigate } from 'react-router-dom'
 
-const ScanCellPage = () => {
+const ScanCellPage = ({ products }) => {
     const navigate = useNavigate();
     const [isAllCellsClicked, setIsAllCellsClicked] = useState(false);
 
@@ -28,7 +28,7 @@ const ScanCellPage = () => {
 
     return (
         <div className={styles.pageWrapper}>
-            <BarcodeMismatchPopup/>
+            <BarcodeMismatchPopup products={products}/>
             <Header />
             <PrimaryButton
                 title='Есть проблема'
