@@ -8,11 +8,13 @@ function ProductItem(props) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleProductItemClick = () => {
-        if (selectedCount === props.count) {
-            return;
+        if (props.count === 1) {
+            if (selectedCount === props.count) {
+                return;
+            }
+            setSelectedCount((prev) => prev + 1);
+            props.onItemClick();
         }
-        setSelectedCount((prev) => prev + 1);
-        props.onItemClick();
     };
 
     const calculateProgress = () => {
@@ -27,6 +29,41 @@ function ProductItem(props) {
         background: '#2AAD2E',
         color: '#ffffff',
     };
+
+    const backgroundStyleByTag = (tag) => {
+        const bgStyleMap = {
+            'Нужно сканировать IMEI': '#FFECCC',
+            'Нужно сканировать марку': '#FFECCC',
+            'Упаковать отдельно в NONPACK': '#FFD9DB',
+            'Непрозрачный пакет': '#E6E6E6',
+        };
+
+        const iconMap = {
+            'Нужно сканировать IMEI': '/images/IMEI_icon.svg',
+            'Нужно сканировать марку': '/images/mark_scan_icon.svg',
+        }
+
+        let bgStyle = '#E0EEFF';
+        if (bgStyleMap.hasOwnProperty(tag)) {
+            bgStyle = bgStyleMap[tag];
+        }
+
+        let icon = null;
+        if (iconMap.hasOwnProperty(tag)) {
+            icon = iconMap[tag];
+        }
+
+        return {
+            bgColor: bgStyle,
+            icon
+        };
+    };
+
+    const tagIcon = (tag) => {
+        if (tag === 'Нужно сканировать IMEI') {
+            tag.icon = '../../public/images/IMEI'
+        }
+    }
 
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded);
@@ -55,16 +92,19 @@ function ProductItem(props) {
                             ? null
                             :
                             <ul className={styles.tagContainer}>
-                                {props.tags.map((tag) => (
-                                    <li
+                                {props.tags.map((tag) => {
+                                    const style = backgroundStyleByTag(tag);
+                                    console.log(style);
+
+                                    return <li
                                         key={tag.id}
                                         className={styles.tag}
-                                        style={{ backgroundColor: tag.backgroundColor }}
+                                        style={{backgroundColor: style.bgColor}}
                                     >
-                                        {tag.icon && <img className={styles.tagIcon} src={tag.icon} alt={tag.iconAlt}/>}
+                                        {style.icon && <img className={styles.tagIcon} src={style.icon} alt={tag}/>}
                                         {tag}
                                     </li>
-                                ))}
+                                })}
                             </ul>
                         }
                     </div>
