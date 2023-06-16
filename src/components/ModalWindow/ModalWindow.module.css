@@ -93,3 +93,17 @@
   top: 24px;
   cursor: pointer;
 }
+
+.modalFieldset {
+  border: none;
+  position: relative;
+}
+
+.errorText {
+  position: absolute;
+  bottom: 20px;
+  left: 75px;
+  color: red;
+  font-size: 20px;
+  margin-bottom: 10px;
+}

@@ -18,17 +18,15 @@ import { trueGoods } from './utils/truegoods';
 
 function App() {
   const [isSuccessSession, setIsSuccessSession] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
-  const [products, setProducts] = useState(trueGoods)
-  console.log(isSuccessSession)
+  const [products, setProducts] = useState(trueGoods);
+  console.log('упаковка которую выбрал упаковщик', selectedPackage)
 
-  console.log(products)
-
-  const userId = products.user.id
-  const goods = products.order
-  const recommendedCarton = products.order.recommended_carton
-
+  const userId = products.user.id;
+  const goods = products.order;
+  const recommendedCarton = products.order.recommended_carton;
 
   const toggleModalWindow = () => {
     setIsModalOpen(!isModalOpen);
@@ -37,22 +35,43 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.page}>
-        {isModalOpen && <ModalWindow onClose={toggleModalWindow} />}
-        <Header userId={userId}/>
+        {isModalOpen && (
+          <ModalWindow
+            onClose={toggleModalWindow}
+            selectedPackage={selectedPackage}
+            setSelectedPackage={setSelectedPackage}
+          />
+        )}
+        <Header userId={userId} />
         <Routes>
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
-          <Route path="/scancell" element={<ScanCellPage products={goods}/>} />
-          <Route path="/productlist" element={<ProductListPage products={goods} recommendedCarton={recommendedCarton} setIsSuccessSession={setIsSuccessSession}/>} />
+          <Route path="/scancell" element={<ScanCellPage products={goods} />} />
+          <Route
+            path="/productlist"
+            element={
+              <ProductListPage
+                products={goods}
+                recommendedCarton={recommendedCarton}
+                setIsSuccessSession={setIsSuccessSession}
+                isModalOpen={toggleModalWindow}
+              />
+            }
+          />
           <Route
             path="/hasproblems"
             element={<HasProblemsPage setPageTitle={setPageTitle} />}
           />
           <Route
             path="/notenoughgoods"
-            element={<NotEnoughGoodsPage pageTitle={pageTitle} products={goods}/>}
+            element={
+              <NotEnoughGoodsPage pageTitle={pageTitle} products={goods} />
+            }
           />
-          <Route path="/finishsession" element={<FinishSession isSuccessSession={isSuccessSession}/>} />
+          <Route
+            path="/finishsession"
+            element={<FinishSession isSuccessSession={isSuccessSession} />}
+          />
           <Route path="/putgoodsinbox" element={<PutGoodsInBox />} />
         </Routes>
       </div>

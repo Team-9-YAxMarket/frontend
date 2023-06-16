@@ -10,7 +10,7 @@ import PackageList from '../../components/PackageList/PackageList';
 import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeMismatchPopup';
 import { useNavigate } from 'react-router-dom';
 
-const ProductListPage = ({ products, recommendedCarton, setIsSuccessSession }) => {
+const ProductListPage = ({ products, recommendedCarton, setIsSuccessSession, isModalOpen }) => {
   const navigate = useNavigate();
   const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] =
     useState(false);
@@ -107,7 +107,7 @@ const spanPack = recommendedCarton[0].carton_type
         right="24px"
         onClick={handleFinishPackingButtonClick}
       />
-      <Footer isErrorCase={false} isBackButton={true} isKeyboard={true} />
+      <Footer isErrorCase={false} isBackButton={true} isKeyboard={true} isModalOpen={isModalOpen} />
     </div>
   );
 };
