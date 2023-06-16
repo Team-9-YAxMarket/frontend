@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 //import ModalWindow from './components/ModalWindow/ModalWindow';
 import Header from './components/Header/Header';
+import ModalWindow from './components/ModalWindow/ModalWindow';
 import {
   HasProblemsPage,
   NotEnoughGoodsPage,
@@ -36,7 +37,7 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.page}>
-        {/* {isModalOpen && <ModalWindow onClose={toggleModalWindow} />} */}
+        {isModalOpen && <ModalWindow onClose={toggleModalWindow} />}
         <Header userId={userId}/>
         <Routes>
           <Route path="/" element={<ScanTableBarcodePage />} />

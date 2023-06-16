@@ -2,42 +2,52 @@ export const itemsList = [
   {
     id: 1,
     name: 'Коробка YMA',
+    barcode: '000987654321'
   },
   {
     id: 2,
     name: 'Только одна коробка YMA',
+    barcode: '000987654322'
   },
   {
     id: 3,
     name: 'YMF',
+    barcode: '000987654323'
   },
   {
     id: 4,
     name: 'MYF',
+    barcode: '000987654324'
   },
   {
     id: 5,
     name: 'YMC',
+    barcode: '000987654325'
   },
   {
     id: 6,
     name: 'Пакет MYA',
+    barcode: '000987654326'
   },
   {
     id: 7,
     name: 'MYB',
+    barcode: '000987654327'
   },
   {
     id: 8,
     name: 'MYC',
+    barcode: '000987654328'
   },
   {
     id: 9,
     name: 'MYD',
+    barcode: '000987654329'
   },
   {
     id: 10,
     name: 'MYE',
+    barcode: '000987654330'
   },
 ];
 
