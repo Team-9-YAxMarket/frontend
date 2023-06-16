@@ -7,6 +7,8 @@ const Header = ({ userId, userProgress = 51 }) => {
   const title = 'Упаковка';
   const workerProgressStyle = setEfficiencyStatus(userProgress);
 
+  
+
   return (
     <header className={styles.header}>
       <button className={styles.burgerMenuIcon} onClick={() => {}} />

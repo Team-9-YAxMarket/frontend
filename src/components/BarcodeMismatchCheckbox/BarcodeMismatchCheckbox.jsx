@@ -7,8 +7,6 @@ function BarcodeMismatchCheckbox({ products, isCheckedProduct, setIsCheckedProdu
         setIsCheckedProduct(product);
     };
 
-    console.log(products)
-
     return (
         <div className={styles.checkbox}>
             {

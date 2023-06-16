@@ -8,7 +8,6 @@ const ForemanCallToster = ({ isForemanCall }) => {
   const foremanCall = 'Бригадир скоро подойдет';
   const foremanTosterTest = 'Подождите немного';
   const [showToster, setShowToster] = useState(false);
-  console.log(showToster)
 
 
   useEffect(() => {
