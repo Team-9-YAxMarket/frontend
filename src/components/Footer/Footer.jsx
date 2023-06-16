@@ -6,6 +6,7 @@ const Footer = ({
   isBackButton,
   isKeyboard,
   isErrorCase,
+  isModalOpen,
   onKeyboardButtonClick,
 }) => {
   return (
@@ -27,6 +28,8 @@ const Footer = ({
               }`}
             />
             <button
+              type='button'
+              onClick={isModalOpen}
               className={`${styles.keyboardButton} ${
                 isErrorCase ? styles.keyboardButtonWhite : ''
               }`}
