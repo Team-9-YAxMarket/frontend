@@ -16,10 +16,11 @@ import {
 import { trueGoods } from './utils/truegoods';
 
 function App() {
-  const [isStatusOk, setIsStatusOk] = useState(true);
+  const [isSuccessSession, setIsSuccessSession] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
   const [products, setProducts] = useState(trueGoods)
+  console.log(isSuccessSession)
 
   console.log(products)
 
@@ -41,7 +42,7 @@ function App() {
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
           <Route path="/scancell" element={<ScanCellPage products={goods}/>} />
-          <Route path="/productlist" element={<ProductListPage products={goods} recommendedCarton={recommendedCarton}/>} />
+          <Route path="/productlist" element={<ProductListPage products={goods} recommendedCarton={recommendedCarton} setIsSuccessSession={setIsSuccessSession}/>} />
           <Route
             path="/hasproblems"
             element={<HasProblemsPage setPageTitle={setPageTitle} />}
@@ -50,7 +51,7 @@ function App() {
             path="/notenoughgoods"
             element={<NotEnoughGoodsPage pageTitle={pageTitle} products={goods}/>}
           />
-          <Route path="/finishsession" element={<FinishSession isStatusOk={false}/>} />
+          <Route path="/finishsession" element={<FinishSession isSuccessSession={isSuccessSession}/>} />
           <Route path="/putgoodsinbox" element={<PutGoodsInBox />} />
         </Routes>
       </div>
