@@ -4,14 +4,12 @@ import ProductItem from '../ProductItem/ProductItem';
 import { useLocation } from 'react-router-dom';
 import { getBackgroundColor } from '../../utils/functions';
 
-function ProductList({ products, recommendedCarton, onItemClick, onPackageClick }) {
-  
+function ProductList({ products, onItemClick, onPackageClick }) {
+
   const location = useLocation();
   const noBorderLocation = location.pathname === '/notenaughgoods';
-  console.log('products on List', products);
-  console.log('recommendedCarton', recommendedCarton);
-
-  const cartonColors = recommendedCarton.reduce((colors, carton) => {
+  const cartons = products.recommended_carton
+  const cartonColors = cartons.reduce((colors, carton) => {
     if (!colors[carton.box_id]) {
       colors[carton.box_id] = getBackgroundColor(carton.carton_type);
     }
@@ -24,7 +22,7 @@ function ProductList({ products, recommendedCarton, onItemClick, onPackageClick 
 
   return (
     <div className={`${styles.listContainer}`}>
-      {recommendedCarton.map((carton) => {
+      {cartons.map((carton) => {
         const boxId = carton.box_id;
         const cartonItems = products.items.filter((item) => item.box_id === boxId);
 
@@ -41,7 +39,7 @@ function ProductList({ products, recommendedCarton, onItemClick, onPackageClick 
             </span>
             {cartonItems.length > 0 && (
               <ul className={styles.list} style={sortedListStyle}>
-                {cartonItems.map((item, index) => (
+                {cartonItems.map((item) => (
                   <ProductItem
                     key={item.id}
                     title={item.sku}

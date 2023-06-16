@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import styles from './ProductListPage.module.css';
-import Header from '../../components/Header/Header';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
@@ -8,30 +8,39 @@ import ProductList from '../../components/ProductList/ProductList';
 import Toster from '../../components/Toster/Toster';
 import PackageList from '../../components/PackageList/PackageList';
 import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeMismatchPopup';
-import { useNavigate } from 'react-router-dom';
 
-const ProductListPage = ({ products, recommendedCarton, setIsSuccessSession, isModalOpen }) => {
+const ProductListPage = ({
+  products,
+  setIsSuccessSession,
+  isModalOpen,
+  setSelectedPackage,
+}) => {
   const navigate = useNavigate();
   const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] =
     useState(false);
   const [showToster, setShowToster] = useState(false);
   const [scannedItems, setScannedItems] = useState(0);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
-  const [tosterMessage, setTosterMessage] = useState('')
+  const [tosterMessage, setTosterMessage] = useState('');
+
+  // Общее количество товаров
   const totalItems = products.items.reduce(
     (total, product) => total + product.count,
     0
   );
-  console.log('rec',recommendedCarton[0].carton_type)
-const spanPack = recommendedCarton[0].carton_type
-  console.log(showToster)
-  
+  // Рекомендованая упаковка
+  const selectedPack = products.recommended_carton[0];
+ 
+  // Строка с типом упаковки для отображения названия
+  const spanPack = selectedPack.carton_type;
+
 
   const onPackageClick = () => {
     if (scannedItems === totalItems) {
       setIsPackageSelected(true);
+      setSelectedPackage(selectedPack);
       setTosterMessage('Упаковка добавлена');
-      setIsSuccessSession(true)
+      setIsSuccessSession(true);
       setShowToster(true);
       setTimeout(() => {
         setShowToster(false);
@@ -56,7 +65,7 @@ const spanPack = recommendedCarton[0].carton_type
 
   const handleFinishPackingButtonClick = () => {
     if (isPackageSelected) {
-      setIsSuccessSession(true)
+      setIsSuccessSession(true);
       navigate('/finishsession');
     } else {
       if (scannedItems === totalItems) {
@@ -82,8 +91,9 @@ const spanPack = recommendedCarton[0].carton_type
         isOpen={isBarcodeMismatchPopupOpen}
         onClose={closePopup}
       />
-      <Header />
-      {showToster && <Toster isStatusOk={isPackageSelected} message={tosterMessage}/>}
+      {showToster && (
+        <Toster isStatusOk={isPackageSelected} message={tosterMessage} />
+      )}
       <PrimaryButton
         title="Есть проблема"
         disabled={false}
@@ -95,19 +105,23 @@ const spanPack = recommendedCarton[0].carton_type
         <ProgressBar totalItems={totalItems} scannedItems={scannedItems} />
         <ProductList
           products={products}
-          recommendedCarton={recommendedCarton}
           onItemClick={handleProductItemClick}
           onPackageClick={onPackageClick}
         />
-        {isPackageSelected && <PackageList spanPack={spanPack}/>}
+        {isPackageSelected && <PackageList spanPack={spanPack} />}
       </div>
       <PrimaryButton
         title="Закончить упаковку"
-        variant={isPackageSelected ? "yellow" : ""}
+        variant={isPackageSelected ? 'yellow' : ''}
         right="24px"
         onClick={handleFinishPackingButtonClick}
       />
-      <Footer isErrorCase={false} isBackButton={true} isKeyboard={true} isModalOpen={isModalOpen} />
+      <Footer
+        isErrorCase={false}
+        isBackButton={true}
+        isKeyboard={true}
+        isModalOpen={isModalOpen}
+      />
     </div>
   );
 };

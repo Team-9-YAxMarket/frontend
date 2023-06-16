@@ -1,18 +1,16 @@
 import styles from './NotEnoughGoodsPage.module.css';
 import { useState } from 'react';
-import Header from '../../components/Header/Header';
 import PageMainText from '../../components/PageMainText/PageMainText';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import Footer from '../../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import ProblemProductList from '../../components/ProblemProductList/ProblemProductList';
 
-const NotEnoughGoodsPage = ({ pageTitle, products, recommendedCarton, onItemClick }) => {
+const NotEnoughGoodsPage = ({ pageTitle, products }) => {
   const [scannedItems, setScannedItems] = useState(0);
   const navigate = useNavigate();
   const defective = pageTitle.includes('брак');
   const disabledButton = scannedItems === 0
-  console.log(products)
 
   const dynamicButtonText = () => {
     if (defective) {
@@ -35,7 +33,6 @@ const NotEnoughGoodsPage = ({ pageTitle, products, recommendedCarton, onItemClic
 
   return (
     <div className={styles.pageWrapper}>
-      <Header />
       <div className={styles.listWrapper}>
         <PageMainText title={pageTitle} />
         <ProblemProductList products={products} onItemClick={handleItemScan}/>

@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     padding: 0 24px;
+    
 }
 
 .listWrapper {
@@ -18,5 +19,5 @@
     top: 168px;
     left: 50%;
     transform: translate(-50%, 0);
-    overflow: scroll;
+    overflow-x: hidden;
 }

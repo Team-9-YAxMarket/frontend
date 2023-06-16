@@ -92,12 +92,12 @@ function ProductItem(props) {
                             ? null
                             :
                             <ul className={styles.tagContainer}>
-                                {props.tags.map((tag) => {
+                                {props.tags.map((tag, index) => {
                                     const style = backgroundStyleByTag(tag);
-                                    console.log(style);
+                                    
 
                                     return <li
-                                        key={tag.id}
+                                        key={index}
                                         className={styles.tag}
                                         style={{backgroundColor: style.bgColor}}
                                     >

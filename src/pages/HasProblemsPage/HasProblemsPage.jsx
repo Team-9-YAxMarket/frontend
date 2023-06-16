@@ -1,6 +1,5 @@
 import styles from './HasProblemsPage.module.css'
 import { useState } from 'react'
-import Header from "../../components/Header/Header"
 import IssueButtonList from '../../components/IssueButtonList/IssueButtonList'
 import ForemanCallToster from '../../components/ForemanCallToster/ForemanCallToster'
 import Footer from '../../components/Footer/Footer'
@@ -11,7 +10,6 @@ const HasProblemsPage = ({ setPageTitle }) => {
 
   return (
     <div className={styles.pageWrapper}>
-      <Header />
       <ForemanCallToster isForemanCall={isForemanCall} />
       <IssueButtonList setIsForemanCall={setIsForemanCall} setPageTitle={setPageTitle}/>
       <Footer isErrorCase={true} isBackButton={true}/>

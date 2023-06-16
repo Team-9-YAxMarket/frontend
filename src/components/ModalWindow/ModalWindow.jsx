@@ -28,13 +28,13 @@ const ModalWindow = ({ title, onClose, selectedPackage, setSelectedPackage }) =>
   };
 
   const handleClick = (itemId) => {
-    const selectedItem = itemsList.find((item) => item.id === itemId);
+    const selectedItem = itemsList.find((item) => item.carton_id === itemId);
     setValue(selectedItem.barcode);
     setSelectedItemId(itemId)
   };
 
   const handleSelectPackage = () => {
-    const selectedItem = itemsList.find((item) => item.id === selectedItemId);
+    const selectedItem = itemsList.find((item) => item.carton_id === selectedItemId);
     setSelectedPackage(selectedItem);
   };
 
@@ -72,15 +72,15 @@ const ModalWindow = ({ title, onClose, selectedPackage, setSelectedPackage }) =>
         {!title &&(
           <ul className={styles.modalList}>
             {itemsList.map((item) => (
-              <li key={item.id}>
+              <li key={item.carton_id}>
                 <button
                   type="button"
                   className={`${styles.modalListButton} ${
-                    selectedItemId === item.id
+                    selectedItemId === item.carton_id
                       ? styles.modalListButtonActive
                       : ''
                   }`}
-                  onClick={() => handleClick(item.id)}
+                  onClick={() => handleClick(item.carton_id)}
                 >
                   {item.name}
                 </button>
