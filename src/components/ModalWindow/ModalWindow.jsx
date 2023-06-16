@@ -9,13 +9,16 @@ const ModalWindow = ({ title, onClose }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
 
   const handleChange = (e) => {
-    const inputValue = e.target.value;
-    const filteredValue = inputValue.replace(/[^0-9\s]/g, ''); // Оставить только цифры и пробелы
-    setValue(filteredValue);
+  const inputValue = e.target.value;
+  const filteredValue = inputValue.replace(/[^0-9\s]/g, ''); // Оставить только цифры и пробелы
+  setValue(filteredValue);
+  setSelectedItemId(null); // Сбросить выбранный идентификатор элемента
   };
 
   const handleClick = (itemId) => {
-    setSelectedItemId(itemId);
+    const selectedItem = itemsList.find((item) => item.id === itemId);
+    setValue(selectedItem.barcode);
+    setSelectedItemId(itemId)
   };
 
   const handleClose = () => {

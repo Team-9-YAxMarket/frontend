@@ -10,7 +10,7 @@ import PackageList from '../../components/PackageList/PackageList';
 import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeMismatchPopup';
 import { useNavigate } from 'react-router-dom';
 
-const ProductListPage = ({ products, recommendedCarton }) => {
+const ProductListPage = ({ products, recommendedCarton, setIsSuccessSession }) => {
   const navigate = useNavigate();
   const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] =
     useState(false);
@@ -31,6 +31,7 @@ const spanPack = recommendedCarton[0].carton_type
     if (scannedItems === totalItems) {
       setIsPackageSelected(true);
       setTosterMessage('Упаковка добавлена');
+      setIsSuccessSession(true)
       setShowToster(true);
       setTimeout(() => {
         setShowToster(false);
@@ -55,6 +56,7 @@ const spanPack = recommendedCarton[0].carton_type
 
   const handleFinishPackingButtonClick = () => {
     if (isPackageSelected) {
+      setIsSuccessSession(true)
       navigate('/finishsession');
     } else {
       if (scannedItems === totalItems) {
