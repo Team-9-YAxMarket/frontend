@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './ProductItem.module.css';
 import ProductExpandedListItem from '../ProductExpandedListItem/ProductExpandedListItem';
 
@@ -6,6 +6,12 @@ function ProductItem(props) {
     const [selectedCount, setSelectedCount] = useState(0);
     const [selectedItems, setSelectedItems] = useState([]); // Массив для хранения состояния выбора
     const [isExpanded, setIsExpanded] = useState(false);
+
+    useEffect(() => {
+        if (props.selectedCount) {
+            setSelectedCount(props.selectedCount);
+        }
+    }, [props.selectedCount])
 
     const handleProductItemClick = () => {
         if (props.count === 1) {
@@ -58,12 +64,6 @@ function ProductItem(props) {
             icon
         };
     };
-
-    const tagIcon = (tag) => {
-        if (tag === 'Нужно сканировать IMEI') {
-            tag.icon = '../../public/images/IMEI'
-        }
-    }
 
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded);
@@ -124,7 +124,7 @@ function ProductItem(props) {
                             </button>
                         </div>
                     )}
-                    {props.count === 1 && <p className={styles.barcode}>{props.barcode}</p>}
+                    {props.count === 1 && <p className={styles.barcode} onClick={() => {return props.onBarcodeClick(props.id)}}>{props.barcode}</p>}
                 </div>
                 {props.count > 1 && isExpanded && (
           <ul className={styles.expandedList}>
@@ -137,6 +137,7 @@ function ProductItem(props) {
                 selectedItems={selectedItems}
                 selectedCount={selectedCount}
                 onItemClick={handleExpandedItemClick}
+                onBarcodeClick={props.onBarcodeClick}
               />
             ))}
           </ul>
