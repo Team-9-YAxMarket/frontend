@@ -43,10 +43,10 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
             {cartonItems.length > 0 && (
               <ul className={styles.list} style={sortedListStyle}>
                 {cartonItems.map((item) => {
-                  let selectedCount = 0;
-                  if (selectedItemsCounts.hasOwnProperty(item.id)) {
-                    selectedCount = selectedItemsCounts[item.id];
-                  }
+                  // let selectedCount = 0;
+                  // if (selectedItemsCounts.hasOwnProperty(item.id)) {
+                  //   selectedCount = selectedItemsCounts[item.id];
+                  // }
 
                   return <ProductItem
                       key={item.id}
@@ -56,7 +56,7 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
                       img={item.img}
                       barcode={item.barcode}
                       tags={item.prompt}
-                      selectedCount={selectedCount}
+                      //selectedCount={selectedCount}
                       onItemClick={() => onItemClick(item.id)}
                       onBarcodeClick={onBarcodeClick}
                   />
@@ -74,10 +74,10 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
           </span>
           <ul className={styles.list} style={unsortedListStyle}>
             {defaultItems.map((item) => {
-              let selectedCount = 0;
-              if (selectedItemsCounts.hasOwnProperty(item.id)) {
-                selectedCount = selectedItemsCounts[item.id];
-              }
+              // let selectedCount = 0;
+              // if (selectedItemsCounts.hasOwnProperty(item.id)) {
+              //   selectedCount = selectedItemsCounts[item.id];
+              // }
 
               return <ProductItem
                   key={item.id}
@@ -88,7 +88,7 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
                   tags={item.prompt}
                   onItemClick={() => onItemClick(item.id)}
                   onBarcodeClick={onBarcodeClick}
-                  selectedCount={selectedCount}
+                  //selectedCount={selectedCount}
               />
             })}
           </ul>

@@ -68,14 +68,10 @@ const ProductListPage = ({
     setIsBarcodeMismatchPopupOpen(false);
   }
 
-  const handleProductItemClick = () => {
+  const handleProductItemClick = (productId) => {
+     updateProductStatus(productId, 'scanned')
     setScannedItems(scannedItems + 1);
-    if (m.hasOwnProperty(itemId)) {
-      m[itemId]++;
-      setSelectedItemsCounts(m)
-    } else {
-      m[itemId] = 1;
-    }
+    
   };
 
   const handleFinishPackingButtonClick = () => {
