@@ -1,5 +1,6 @@
 import styles from './ProductListPage.module.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
@@ -10,35 +11,34 @@ import PackageList from '../../components/PackageList/PackageList';
 import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeMismatchPopup';
 
 const ProductListPage = ({
-  products,
+  selectedPackage,
   setIsSuccessSession,
   isModalOpen,
+  showToster,
+  setShowToster,
   setSelectedPackage,
 }) => {
+  const { sessionData, updateProductStatus } = useContext(AppContext);
   const navigate = useNavigate();
-  const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] =
-    useState(false);
-  const [showToster, setShowToster] = useState(false);
+  const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(false);
   const [scannedItems, setScannedItems] = useState(0);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
   const [tosterMessage, setTosterMessage] = useState('');
 
+
+  const { order } = sessionData
   // Общее количество товаров
-  const totalItems = products.items.reduce(
-    (total, product) => total + product.count,
+  const totalItems = order.items.reduce(
+    (total, item) => total + item.count,
     0
   );
-  // Рекомендованая упаковка
-  const selectedPack = products.recommended_carton[0];
+  const isAllScanned = scannedItems === totalItems
+  
  
-  // Строка с типом упаковки для отображения названия
-  const spanPack = selectedPack.carton_type;
-
-
-  const onPackageClick = () => {
-    if (scannedItems === totalItems) {
+  const onPackageClick = (carton) => {
+    if (isAllScanned) {
       setIsPackageSelected(true);
-      setSelectedPackage(selectedPack);
+      setSelectedPackage([...selectedPackage, carton]);
       setTosterMessage('Упаковка добавлена');
       setIsSuccessSession(true);
       setShowToster(true);
@@ -55,11 +55,17 @@ const ProductListPage = ({
     }
   };
 
+  const handleDeleteClick = (cartonId) => {
+    setSelectedPackage((prevSelectedPackage) => 
+    prevSelectedPackage.filter((carton) => carton.carton_id !== cartonId))
+  }
+
   function closePopup() {
     setIsBarcodeMismatchPopupOpen(false);
   }
 
-  const handleProductItemClick = () => {
+  const handleProductItemClick = (productId) => {
+    updateProductStatus(productId, 'scanned')
     setScannedItems(scannedItems + 1);
   };
 
@@ -87,7 +93,7 @@ const ProductListPage = ({
   return (
     <div className={styles.pageWrapper}>
       <BarcodeMismatchPopup
-        products={products}
+        products={order}
         isOpen={isBarcodeMismatchPopupOpen}
         onClose={closePopup}
       />
@@ -104,15 +110,16 @@ const ProductListPage = ({
         <h1 className={styles.title}>Сканируйте товары B-09 и упаковку</h1>
         <ProgressBar totalItems={totalItems} scannedItems={scannedItems} />
         <ProductList
-          products={products}
+          products={order}
           onItemClick={handleProductItemClick}
           onPackageClick={onPackageClick}
+          setSelectedPackage={setSelectedPackage}
         />
-        {isPackageSelected && <PackageList spanPack={spanPack} />}
+        {selectedPackage.length > 0 && <PackageList cartonList={selectedPackage} onDelete={handleDeleteClick}/>}
       </div>
       <PrimaryButton
         title="Закончить упаковку"
-        variant={isPackageSelected ? 'yellow' : ''}
+        variant={selectedPackage.length > 0 ? 'yellow' : ''}
         right="24px"
         onClick={handleFinishPackingButtonClick}
       />
@@ -121,6 +128,7 @@ const ProductListPage = ({
         isBackButton={true}
         isKeyboard={true}
         isModalOpen={isModalOpen}
+        isAllScanned={isAllScanned}
       />
     </div>
   );

@@ -1,10 +1,12 @@
 import React from 'react';
+
 import styles from './ProductList.module.css';
 import ProductItem from '../ProductItem/ProductItem';
 import { useLocation } from 'react-router-dom';
 import { getBackgroundColor } from '../../utils/functions';
 
 function ProductList({ products, onItemClick, onPackageClick }) {
+
 
   const location = useLocation();
   const noBorderLocation = location.pathname === '/notenaughgoods';
@@ -16,15 +18,16 @@ function ProductList({ products, onItemClick, onPackageClick }) {
     return colors;
   }, {});
 
-  const defaultItems = products.items.filter((item) => !item.box_id);
+  const defaultItems = products.items.filter((item) => item.box_id === null);
+  console.log('Товары без рекомендованной упаковки', defaultItems)
   const unsortedListStyle = defaultItems.length > 0 ? { border: '4px solid gray' } : {};
-
 
   return (
     <div className={`${styles.listContainer}`}>
       {cartons.map((carton) => {
         const boxId = carton.box_id;
         const cartonItems = products.items.filter((item) => item.box_id === boxId);
+        console.log('Товары с рекомендованной упаковкой', cartonItems)
 
         const sortedListStyle = noBorderLocation ? { border: 'none' } : { border: `4px solid ${cartonColors[boxId]}` };
 
@@ -33,7 +36,7 @@ function ProductList({ products, onItemClick, onPackageClick }) {
             <span
               className={styles.package}
               style={{ backgroundColor: `${getBackgroundColor(carton.carton_type)}`}}
-              onClick={onPackageClick}
+              onClick={() => onPackageClick(carton)}
             >
               {carton.carton_type.toUpperCase()}
             </span>
@@ -47,7 +50,7 @@ function ProductList({ products, onItemClick, onPackageClick }) {
                     img={item.img}
                     barcode={item.barcode}
                     tags={item.prompt}
-                    onItemClick={onItemClick}
+                    onItemClick={() => onItemClick(item.id)}
                   />
                 ))}
               </ul>
@@ -70,7 +73,7 @@ function ProductList({ products, onItemClick, onPackageClick }) {
                 img={item.img}
                 barcode={item.barcode}
                 tags={item.prompt}
-                onItemClick={onItemClick}
+                onItemClick={() => onItemClick(item.id)}
               />
             ))}
           </ul>

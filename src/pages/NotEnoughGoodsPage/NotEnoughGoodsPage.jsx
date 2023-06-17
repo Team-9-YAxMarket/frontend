@@ -1,5 +1,6 @@
 import styles from './NotEnoughGoodsPage.module.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AppContext } from '../../App';
 import PageMainText from '../../components/PageMainText/PageMainText';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import Footer from '../../components/Footer/Footer';
@@ -7,10 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import ProblemProductList from '../../components/ProblemProductList/ProblemProductList';
 
 const NotEnoughGoodsPage = ({ pageTitle, products }) => {
+  const { updateProductStatus } = useContext(AppContext);
   const [scannedItems, setScannedItems] = useState(0);
   const navigate = useNavigate();
   const defective = pageTitle.includes('брак');
   const disabledButton = scannedItems === 0
+
 
   const dynamicButtonText = () => {
     if (defective) {
@@ -27,8 +30,9 @@ const NotEnoughGoodsPage = ({ pageTitle, products }) => {
     }
   };
 
-  const handleItemScan = () => {
+  const handleItemScan = (productId) => {
     setScannedItems((prev) => prev + 1)
+    updateProductStatus(productId, defective ? 'fault' : 'absent')
   }
 
   return (

@@ -29,5 +29,17 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10.5px;
+}
+
+.figure {
+    background: url(../../images/cross_white.svg) no-repeat center;
+    background-size: 15px 15px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer; 
 }
 

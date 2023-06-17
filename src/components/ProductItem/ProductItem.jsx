@@ -9,9 +9,6 @@ function ProductItem(props) {
 
     const handleProductItemClick = () => {
         if (props.count === 1) {
-            if (selectedCount === props.count) {
-                return;
-            }
             setSelectedCount((prev) => prev + 1);
             props.onItemClick();
         }
@@ -70,15 +67,12 @@ function ProductItem(props) {
     };
 
     const handleExpandedItemClick = (index) => {
-        if(selectedCount === props.count) {
-            return
-        }
         if (!selectedItems.includes(index)) {
           setSelectedItems([...selectedItems, index]);
           setSelectedCount((prev) => prev + 1);
           props.onItemClick();
         }
-      };
+    };
     
 
     return (

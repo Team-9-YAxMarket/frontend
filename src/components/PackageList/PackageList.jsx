@@ -1,41 +1,27 @@
-import styles from './PackageList.module.css'
+import styles from './PackageList.module.css';
+import { getBackgroundColor } from '../../utils/functions';
 
-const PackageList = ({ spanPack }) => {
-
-    const getBackgroundColor = (pack) => {
-        pack = pack.toLowerCase();
-      
-        if (pack.includes('yma')) {
-          return '#FF3C3C';
-        } else if (pack.includes('ymf')) {
-          return '#F29528';
-        } else if (pack.includes('myf')) {
-          return '#A75FC9';
-        } else if (pack.includes('ymc')) {
-          return '#336D57';
-        } else if (pack.includes('mya')) {
-          return '#F55B89';
-        } else if (pack.includes('myb')) {
-          return '#A3353A';
-        } else if (pack.includes('myc')) {
-          return '#54B7D6';
-        } else if (pack.includes('myd')) {
-          return '#ECC62E';
-        } else if (pack.includes('mye')) {
-          return '#7B6D35';
-        } else {
-          return '#000000'; // Default color if pack value doesn't match any case
-        }
-      };
-
+const PackageList = ({ cartonList, onDelete }) => {
   return (
     <div className={styles.packageListWrapper}>
       <p className={styles.packageText}>Выбрано:</p>
       <ul className={styles.packageList}>
-            <li  className={styles.packageItem} style={{backgroundColor: getBackgroundColor(spanPack)}}>{spanPack.toUpperCase()}</li>
+        {cartonList.map((carton) => (
+          <li
+            key={carton.carton_id}
+            className={styles.packageItem}
+            style={{ backgroundColor: getBackgroundColor(carton.carton_type) }}
+          >
+            <p>{carton.carton_type.toUpperCase()}</p>
+            <figure
+              className={styles.figure}
+              onClick={() => onDelete(carton.carton_id)}
+            ></figure>
+          </li>
+        ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default PackageList
+export default PackageList;

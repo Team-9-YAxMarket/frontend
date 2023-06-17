@@ -13,7 +13,7 @@ function ProblemProductList({ products, onItemClick }) {
                     img={item.img}
                     barcode={item.barcode}
                     tags={item.prompt}
-                    onItemClick={onItemClick}
+                    onItemClick={() => onItemClick(item.id)}
                 />
             ))}
         </ul>
