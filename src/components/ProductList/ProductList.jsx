@@ -4,7 +4,7 @@ import ProductItem from '../ProductItem/ProductItem';
 import { useLocation } from 'react-router-dom';
 import { getBackgroundColor } from '../../utils/functions';
 
-function ProductList({ products, onItemClick, onPackageClick }) {
+function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, selectedItemsCounts }) {
 
   const location = useLocation();
   const noBorderLocation = location.pathname === '/notenaughgoods';
@@ -39,17 +39,25 @@ function ProductList({ products, onItemClick, onPackageClick }) {
             </span>
             {cartonItems.length > 0 && (
               <ul className={styles.list} style={sortedListStyle}>
-                {cartonItems.map((item) => (
-                  <ProductItem
-                    key={item.id}
-                    title={item.sku}
-                    count={item.count}
-                    img={item.img}
-                    barcode={item.barcode}
-                    tags={item.prompt}
-                    onItemClick={onItemClick}
+                {cartonItems.map((item) => {
+                  let selectedCount = 0;
+                  if (selectedItemsCounts.hasOwnProperty(item.id)) {
+                    selectedCount = selectedItemsCounts[item.id];
+                  }
+
+                  return <ProductItem
+                      key={item.id}
+                      id={item.id}
+                      title={item.sku}
+                      count={item.count}
+                      img={item.img}
+                      barcode={item.barcode}
+                      tags={item.prompt}
+                      selectedCount={selectedCount}
+                      onItemClick={onItemClick}
+                      onBarcodeClick={onBarcodeClick}
                   />
-                ))}
+                })}
               </ul>
             )}
           </div>
@@ -62,17 +70,24 @@ function ProductList({ products, onItemClick, onPackageClick }) {
             Упаковка на выбор
           </span>
           <ul className={styles.list} style={unsortedListStyle}>
-            {defaultItems.map((item) => (
-              <ProductItem
-                key={item.id}
-                title={item.sku}
-                count={item.count}
-                img={item.img}
-                barcode={item.barcode}
-                tags={item.prompt}
-                onItemClick={onItemClick}
+            {defaultItems.map((item) => {
+              let selectedCount = 0;
+              if (selectedItemsCounts.hasOwnProperty(item.id)) {
+                selectedCount = selectedItemsCounts[item.id];
+              }
+
+              return <ProductItem
+                  key={item.id}
+                  title={item.sku}
+                  count={item.count}
+                  img={item.img}
+                  barcode={item.barcode}
+                  tags={item.prompt}
+                  onItemClick={onItemClick}
+                  onBarcodeClick={onBarcodeClick}
+                  selectedCount={selectedCount}
               />
-            ))}
+            })}
           </ul>
         </div>
       )}

@@ -8,6 +8,7 @@ import ProductList from '../../components/ProductList/ProductList';
 import Toster from '../../components/Toster/Toster';
 import PackageList from '../../components/PackageList/PackageList';
 import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeMismatchPopup';
+import BarcodeModalWindow from '../../components/BarcodeModalWindow/BarcodeModalWindow';
 
 const ProductListPage = ({
   products,
@@ -22,6 +23,9 @@ const ProductListPage = ({
   const [scannedItems, setScannedItems] = useState(0);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
   const [tosterMessage, setTosterMessage] = useState('');
+  const [isBarcodeModalOpen, setIsBarcodeModalOpen] = useState(false);
+  const [barcodeItemId, setBarcodeItemId] = useState(false);
+  const [selectedItemsCounts, setSelectedItemsCounts] = useState({});
 
   // Общее количество товаров
   const totalItems = products.items.reduce(
@@ -59,8 +63,15 @@ const ProductListPage = ({
     setIsBarcodeMismatchPopupOpen(false);
   }
 
-  const handleProductItemClick = () => {
+  const handleProductItemClick = (itemId) => {
+    const m = selectedItemsCounts;
     setScannedItems(scannedItems + 1);
+    if (m.hasOwnProperty(itemId)) {
+      m[itemId]++;
+      setSelectedItemsCounts(m)
+    } else {
+      m[itemId] = 1;
+    }
   };
 
   const handleFinishPackingButtonClick = () => {
@@ -84,8 +95,24 @@ const ProductListPage = ({
     navigate('/hasproblems');
   };
 
+  const handleProductItemBarcodeClick = (itemId) => {
+    setIsBarcodeModalOpen(true);
+    setBarcodeItemId(itemId);
+  };
+
+  const toggleBarcodeModalWindow = () => {
+    setIsBarcodeModalOpen(!isBarcodeModalOpen);
+  };
+
   return (
     <div className={styles.pageWrapper}>
+      {isBarcodeModalOpen && (
+          <BarcodeModalWindow
+              onClose={toggleBarcodeModalWindow}
+              onSubmit={handleProductItemClick}
+              itemId={barcodeItemId}
+          />
+      )}
       <BarcodeMismatchPopup
         products={products}
         isOpen={isBarcodeMismatchPopupOpen}
@@ -107,6 +134,8 @@ const ProductListPage = ({
           products={products}
           onItemClick={handleProductItemClick}
           onPackageClick={onPackageClick}
+          onBarcodeClick={handleProductItemBarcodeClick}
+          selectedItemsCounts={selectedItemsCounts}
         />
         {isPackageSelected && <PackageList spanPack={spanPack} />}
       </div>
