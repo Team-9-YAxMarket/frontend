@@ -8,6 +8,7 @@ const Footer = ({
   isErrorCase,
   isModalOpen,
   onKeyboardButtonClick,
+  isAllScanned
 }) => {
   return (
     <footer
@@ -20,13 +21,14 @@ const Footer = ({
         className={styles.keyboardButtonContainer}
         onClick={onKeyboardButtonClick}
       >
-        {isKeyboard && (
+        {isKeyboard && isAllScanned && (
           <>
             <figure
               className={`${styles.keyboardImage} ${
                 isErrorCase ? styles.keyboardImageWhite : ''
               }`}
             />
+          
             <button
               type='button'
               onClick={isModalOpen}

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import { itemsList } from '../../utils/constants';
 
-const ModalWindow = ({ title, onClose, selectedPackage, setSelectedPackage }) => {
+const ModalWindow = ({ title, onClose, setSelectedPackage, selectedPackage }) => {
   const selectPackage = 'Выберите упаковку';
   const [value, setValue] = useState('');
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -20,25 +20,28 @@ const ModalWindow = ({ title, onClose, selectedPackage, setSelectedPackage }) =>
     const selectedItem = itemsList.find((item) => item.barcode === inputValue);
     if (selectedItem) {
       setSelectedItemId(selectedItem.id);
-      setIsInvalidBarcode(false)
+      setIsInvalidBarcode(false);
     } else {
       setSelectedItemId(null);
-      setIsInvalidBarcode(true)
+      setIsInvalidBarcode(true);
     }
   };
 
   const handleClick = (itemId) => {
+    setSelectedItemId(itemId);
     const selectedItem = itemsList.find((item) => item.carton_id === itemId);
     setValue(selectedItem.barcode);
-    setSelectedItemId(itemId)
   };
 
   const handleSelectPackage = () => {
     const selectedItem = itemsList.find((item) => item.carton_id === selectedItemId);
-    setSelectedPackage(selectedItem);
+    if (selectedItem && !selectedPackage.find((item) => item.carton_id === selectedItemId)) {
+      setSelectedPackage((prevSelectedPackages) => [...prevSelectedPackages, selectedItem]);
+    }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     handleSelectPackage();
     onClose();
   };
@@ -52,43 +55,42 @@ const ModalWindow = ({ title, onClose, selectedPackage, setSelectedPackage }) =>
       onClose();
     }
   };
+
   return (
     <div className={styles.overlay} onClick={handleOverlayClose}>
       <form className={styles.modal} onSubmit={handleSubmit}>
         <h3 className={styles.modalTitle}>{title || selectPackage}</h3>
         <fieldset className={styles.modalFieldset}>
-        <input
-          type="text"
-          value={value}
-          onChange={handleChange}
-          className={styles.modalInput}
-          placeholder="Штрихкод"
+          <input
+            type="text"
+            value={value}
+            onChange={handleChange}
+            className={styles.modalInput}
+            placeholder="Штрихкод"
           />
           {isInvalidBarcode && (
             <p className={styles.errorText}>Штрихкод не соответствует ни одной упаковке</p>
           )}
         </fieldset>
-        
-        {!title &&(
+
+        {!title && (
           <ul className={styles.modalList}>
             {itemsList.map((item) => (
               <li key={item.carton_id}>
                 <button
                   type="button"
                   className={`${styles.modalListButton} ${
-                    selectedItemId === item.carton_id
-                      ? styles.modalListButtonActive
-                      : ''
+                    item.carton_id === selectedItemId ? styles.modalListButtonActive : ''
                   }`}
                   onClick={() => handleClick(item.carton_id)}
                 >
-                  {item.name}
+                  {item.carton_type}
                 </button>
               </li>
             ))}
           </ul>
         )}
-        <SubmitButton onClick={handleSubmit}/>
+        <SubmitButton onClick={handleSubmit} />
         <button
           type="button"
           className={styles.modalCloseButton}

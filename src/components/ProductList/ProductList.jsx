@@ -1,10 +1,12 @@
 import React from 'react';
+
 import styles from './ProductList.module.css';
 import ProductItem from '../ProductItem/ProductItem';
 import { useLocation } from 'react-router-dom';
 import { getBackgroundColor } from '../../utils/functions';
 
 function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, selectedItemsCounts }) {
+
 
   const location = useLocation();
   const noBorderLocation = location.pathname === '/notenaughgoods';
@@ -16,15 +18,16 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
     return colors;
   }, {});
 
-  const defaultItems = products.items.filter((item) => !item.box_id);
+  const defaultItems = products.items.filter((item) => item.box_id === null);
+  console.log('Товары без рекомендованной упаковки', defaultItems)
   const unsortedListStyle = defaultItems.length > 0 ? { border: '4px solid gray' } : {};
-
 
   return (
     <div className={`${styles.listContainer}`}>
       {cartons.map((carton) => {
         const boxId = carton.box_id;
         const cartonItems = products.items.filter((item) => item.box_id === boxId);
+        console.log('Товары с рекомендованной упаковкой', cartonItems)
 
         const sortedListStyle = noBorderLocation ? { border: 'none' } : { border: `4px solid ${cartonColors[boxId]}` };
 
@@ -33,17 +36,17 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
             <span
               className={styles.package}
               style={{ backgroundColor: `${getBackgroundColor(carton.carton_type)}`}}
-              onClick={onPackageClick}
+              onClick={() => onPackageClick(carton)}
             >
               {carton.carton_type.toUpperCase()}
             </span>
             {cartonItems.length > 0 && (
               <ul className={styles.list} style={sortedListStyle}>
                 {cartonItems.map((item) => {
-                  let selectedCount = 0;
-                  if (selectedItemsCounts.hasOwnProperty(item.id)) {
-                    selectedCount = selectedItemsCounts[item.id];
-                  }
+                  // let selectedCount = 0;
+                  // if (selectedItemsCounts.hasOwnProperty(item.id)) {
+                  //   selectedCount = selectedItemsCounts[item.id];
+                  // }
 
                   return <ProductItem
                       key={item.id}
@@ -53,8 +56,8 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
                       img={item.img}
                       barcode={item.barcode}
                       tags={item.prompt}
-                      selectedCount={selectedCount}
-                      onItemClick={onItemClick}
+                      //selectedCount={selectedCount}
+                      onItemClick={() => onItemClick(item.id)}
                       onBarcodeClick={onBarcodeClick}
                   />
                 })}
@@ -71,10 +74,10 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
           </span>
           <ul className={styles.list} style={unsortedListStyle}>
             {defaultItems.map((item) => {
-              let selectedCount = 0;
-              if (selectedItemsCounts.hasOwnProperty(item.id)) {
-                selectedCount = selectedItemsCounts[item.id];
-              }
+              // let selectedCount = 0;
+              // if (selectedItemsCounts.hasOwnProperty(item.id)) {
+              //   selectedCount = selectedItemsCounts[item.id];
+              // }
 
               return <ProductItem
                   key={item.id}
@@ -83,9 +86,9 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
                   img={item.img}
                   barcode={item.barcode}
                   tags={item.prompt}
-                  onItemClick={onItemClick}
+                  onItemClick={() => onItemClick(item.id)}
                   onBarcodeClick={onBarcodeClick}
-                  selectedCount={selectedCount}
+                  //selectedCount={selectedCount}
               />
             })}
           </ul>
