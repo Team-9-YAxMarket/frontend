@@ -9,6 +9,7 @@ import ProductList from '../../components/ProductList/ProductList';
 import Toster from '../../components/Toster/Toster';
 import PackageList from '../../components/PackageList/PackageList';
 import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeMismatchPopup';
+import BarcodeModalWindow from '../../components/BarcodeModalWindow/BarcodeModalWindow';
 
 const ProductListPage = ({
   selectedPackage,
@@ -24,6 +25,9 @@ const ProductListPage = ({
   const [scannedItems, setScannedItems] = useState(0);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
   const [tosterMessage, setTosterMessage] = useState('');
+  const [isBarcodeModalOpen, setIsBarcodeModalOpen] = useState(false);
+  const [barcodeItemId, setBarcodeItemId] = useState(false);
+  const [selectedItemsCounts, setSelectedItemsCounts] = useState({});
 
 
   const { order } = sessionData
@@ -64,9 +68,14 @@ const ProductListPage = ({
     setIsBarcodeMismatchPopupOpen(false);
   }
 
-  const handleProductItemClick = (productId) => {
-    updateProductStatus(productId, 'scanned')
+  const handleProductItemClick = () => {
     setScannedItems(scannedItems + 1);
+    if (m.hasOwnProperty(itemId)) {
+      m[itemId]++;
+      setSelectedItemsCounts(m)
+    } else {
+      m[itemId] = 1;
+    }
   };
 
   const handleFinishPackingButtonClick = () => {
@@ -90,8 +99,24 @@ const ProductListPage = ({
     navigate('/hasproblems');
   };
 
+  const handleProductItemBarcodeClick = (itemId) => {
+    setIsBarcodeModalOpen(true);
+    setBarcodeItemId(itemId);
+  };
+
+  const toggleBarcodeModalWindow = () => {
+    setIsBarcodeModalOpen(!isBarcodeModalOpen);
+  };
+
   return (
     <div className={styles.pageWrapper}>
+      {isBarcodeModalOpen && (
+          <BarcodeModalWindow
+              onClose={toggleBarcodeModalWindow}
+              onSubmit={handleProductItemClick}
+              itemId={barcodeItemId}
+          />
+      )}
       <BarcodeMismatchPopup
         products={order}
         isOpen={isBarcodeMismatchPopupOpen}
@@ -113,7 +138,6 @@ const ProductListPage = ({
           products={order}
           onItemClick={handleProductItemClick}
           onPackageClick={onPackageClick}
-          setSelectedPackage={setSelectedPackage}
         />
         {selectedPackage.length > 0 && <PackageList cartonList={selectedPackage} onDelete={handleDeleteClick}/>}
       </div>
