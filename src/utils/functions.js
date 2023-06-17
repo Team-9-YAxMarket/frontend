@@ -14,6 +14,7 @@ export const setEfficiencyStatus = (userProgress) => {
 
   export const getBackgroundColor = (pack) => {
     
+     pack = pack.toLowerCase()
   
     if (pack.includes('yma')) {
       return '#FF3C3C';

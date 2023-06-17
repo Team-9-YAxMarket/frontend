@@ -1,52 +1,52 @@
 export const itemsList = [
   {
-    carton_id: 1,
-    name: 'Коробка YMA',
+    carton_id: 'uuid1',
+    carton_type: 'YMA',
     barcode: '000987654321'
   },
   {
-    carton_id: 2,
-    name: 'Только одна коробка YMA',
+    carton_id: 'uuid2',
+    carton_type: 'Только одна коробка YMA',
     barcode: '000987654322'
   },
   {
-    carton_id: 3,
-    name: 'YMF',
+    carton_id: 'uuid3',
+    carton_type: 'YMF',
     barcode: '000987654323'
   },
   {
-    carton_id: 4,
-    name: 'MYF',
+    carton_id: 'uuid4',
+    carton_type: 'MYF',
     barcode: '000987654324'
   },
   {
-    carton_id: 5,
-    name: 'YMC',
+    carton_id: 'uuid5',
+    carton_type: 'YMC',
     barcode: '000987654325'
   },
   {
-    carton_id: 6,
-    name: 'Пакет MYA',
+    carton_id: 'uuid6',
+    carton_type: 'MYA',
     barcode: '000987654326'
   },
   {
-    carton_id: 7,
-    name: 'MYB',
+    carton_id: 'uuid7',
+    carton_type: 'MYB',
     barcode: '000987654327'
   },
   {
-    carton_id: 8,
-    name: 'MYC',
+    carton_id: 'uuid8',
+    carton_type: 'MYC',
     barcode: '000987654328'
   },
   {
-    carton_id: 9,
-    name: 'MYD',
+    carton_id: 'uuid9',
+    carton_type: 'MYD',
     barcode: '000987654329'
   },
   {
-    carton_id: 10,
-    name: 'MYE',
+    carton_id: 'uuid10',
+    carton_type: 'MYE',
     barcode: '000987654330'
   },
 ];

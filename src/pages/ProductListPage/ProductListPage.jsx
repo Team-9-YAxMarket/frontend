@@ -1,5 +1,6 @@
 import styles from './ProductListPage.module.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
@@ -11,15 +12,16 @@ import BarcodeMismatchPopup from '../../components/BarcodeMismatchPopup/BarcodeM
 import BarcodeModalWindow from '../../components/BarcodeModalWindow/BarcodeModalWindow';
 
 const ProductListPage = ({
-  products,
+  selectedPackage,
   setIsSuccessSession,
   isModalOpen,
+  showToster,
+  setShowToster,
   setSelectedPackage,
 }) => {
+  const { sessionData, updateProductStatus } = useContext(AppContext);
   const navigate = useNavigate();
-  const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] =
-    useState(false);
-  const [showToster, setShowToster] = useState(false);
+  const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(false);
   const [scannedItems, setScannedItems] = useState(0);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
   const [tosterMessage, setTosterMessage] = useState('');
@@ -27,22 +29,20 @@ const ProductListPage = ({
   const [barcodeItemId, setBarcodeItemId] = useState(false);
   const [selectedItemsCounts, setSelectedItemsCounts] = useState({});
 
+
+  const { order } = sessionData
   // Общее количество товаров
-  const totalItems = products.items.reduce(
-    (total, product) => total + product.count,
+  const totalItems = order.items.reduce(
+    (total, item) => total + item.count,
     0
   );
-  // Рекомендованая упаковка
-  const selectedPack = products.recommended_carton[0];
+  const isAllScanned = scannedItems === totalItems
+  
  
-  // Строка с типом упаковки для отображения названия
-  const spanPack = selectedPack.carton_type;
-
-
-  const onPackageClick = () => {
-    if (scannedItems === totalItems) {
+  const onPackageClick = (carton) => {
+    if (isAllScanned) {
       setIsPackageSelected(true);
-      setSelectedPackage(selectedPack);
+      setSelectedPackage([...selectedPackage, carton]);
       setTosterMessage('Упаковка добавлена');
       setIsSuccessSession(true);
       setShowToster(true);
@@ -59,19 +59,19 @@ const ProductListPage = ({
     }
   };
 
+  const handleDeleteClick = (cartonId) => {
+    setSelectedPackage((prevSelectedPackage) => 
+    prevSelectedPackage.filter((carton) => carton.carton_id !== cartonId))
+  }
+
   function closePopup() {
     setIsBarcodeMismatchPopupOpen(false);
   }
 
-  const handleProductItemClick = (itemId) => {
-    const m = selectedItemsCounts;
+  const handleProductItemClick = (productId) => {
+     updateProductStatus(productId, 'scanned')
     setScannedItems(scannedItems + 1);
-    if (m.hasOwnProperty(itemId)) {
-      m[itemId]++;
-      setSelectedItemsCounts(m)
-    } else {
-      m[itemId] = 1;
-    }
+    
   };
 
   const handleFinishPackingButtonClick = () => {
@@ -114,7 +114,7 @@ const ProductListPage = ({
           />
       )}
       <BarcodeMismatchPopup
-        products={products}
+        products={order}
         isOpen={isBarcodeMismatchPopupOpen}
         onClose={closePopup}
       />
@@ -131,17 +131,15 @@ const ProductListPage = ({
         <h1 className={styles.title}>Сканируйте товары B-09 и упаковку</h1>
         <ProgressBar totalItems={totalItems} scannedItems={scannedItems} />
         <ProductList
-          products={products}
+          products={order}
           onItemClick={handleProductItemClick}
           onPackageClick={onPackageClick}
-          onBarcodeClick={handleProductItemBarcodeClick}
-          selectedItemsCounts={selectedItemsCounts}
         />
-        {isPackageSelected && <PackageList spanPack={spanPack} />}
+        {selectedPackage.length > 0 && <PackageList cartonList={selectedPackage} onDelete={handleDeleteClick}/>}
       </div>
       <PrimaryButton
         title="Закончить упаковку"
-        variant={isPackageSelected ? 'yellow' : ''}
+        variant={selectedPackage.length > 0 ? 'yellow' : ''}
         right="24px"
         onClick={handleFinishPackingButtonClick}
       />
@@ -150,6 +148,7 @@ const ProductListPage = ({
         isBackButton={true}
         isKeyboard={true}
         isModalOpen={isModalOpen}
+        isAllScanned={isAllScanned}
       />
     </div>
   );

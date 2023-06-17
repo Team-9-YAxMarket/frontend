@@ -19,24 +19,90 @@ export const AppContext = createContext()
 
 function App() {
   const [isSuccessSession, setIsSuccessSession] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [selectedPackage, setSelectedPackage] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showToster, setShowToster] = useState(false);
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
   const [sessionData, setSessionData] = useState({
-    userId: trueGoods.user.id,
+    userId: trueGoods.user_id,
     order: trueGoods.order,
   });
   console.log('sessionData',sessionData)
   console.log('Упаковщик выбрал упаковку:', selectedPackage)
+
+  const cartonIds = selectedPackage.map((item) => item.carton_id);
+  console.log('Массив упаковок для бека:', cartonIds)
+
+  const fetchDataFromServer = (endpoint) => {
+   
+    fetch(endpoint)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Данные успешно получены:', data)
+        setSessionData(data);
+      })
+      .catch((error) => {
+        console.log('Ошибка получения данных с сервера', error)
+      });
+  };
 
   // Функция обновления данных
   const updateSessionData = (updatedData) => {
     setSessionData(updatedData)
   }
 
-  const sendDataToServer = () => {
-    // Тут Будет логика отправки данных на сервер
-  }
+  const updateProductStatus = (productId, status) => {
+    const updatedItems = sessionData.order.items.map((item) => {
+      if (item.id === productId) {
+        const isAllItemsScanned = item.count === (item.scannedCount || 0) + 1;
+        if (isAllItemsScanned) {
+          // added — когда товар только создался
+          // scanned — когда товар успешно отсканирован
+          // fault — когда товар бракованный
+          // absent — когда товар отсутствует
+          item.status = status;
+        }
+        item.scannedCount = (item.scannedCount || 0) + 1;
+      }
+      return item;
+    });
+    const updatedOrder = {
+      ...sessionData.order,
+      items: updatedItems,
+    };
+    setSessionData({
+      ...sessionData,
+      order: updatedOrder,
+    });
+  };
+  
+
+  const sendDataToServer = (endpoint) => {
+    const cartonIds = selectedPackage.map((item) => item.carton_id);
+
+    const updatedSessionData = {
+      ...sessionData,
+      order: {
+        ...sessionData.order,
+        recommended_carton: cartonIds,
+      },
+    };
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedSessionData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Данные успешно отправлены', data)
+      })
+      .catch((error) => {
+        console.log('Ошибка выполнения запроса', error)
+      });
+  };
 
   // Загрузка данных из localStorage при запуске приложения
   useEffect(() => {
@@ -53,11 +119,27 @@ function App() {
   }, []);
 
   // Обновление данных в localStorage при изменении sessionData
+  // создание глубокой копии обьекта без ссылки, чтобы хранить в сторадж
+  // всегда актуальную sessionData
   useEffect(() => {
     if (sessionData) {
-      localStorage.setItem('sessionData', JSON.stringify(sessionData));
+      const sessionDataCopy = JSON.parse(JSON.stringify(sessionData));
+      localStorage.setItem('sessionData', JSON.stringify(sessionDataCopy))
     }
   }, [sessionData]);
+
+  useEffect(() => {
+    if (selectedPackage) {
+      const updatedOrder = {
+        ...sessionData.order,
+        selected_carton: selectedPackage,
+      };
+      setSessionData({
+        ...sessionData,
+        order: updatedOrder,
+      });
+    }
+  }, [selectedPackage]);
 
 
   const toggleModalWindow = () => {
@@ -67,15 +149,16 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.page}>
-        <AppContext.Provider value={{ sessionData, updateSessionData, sendDataToServer }}>
+        <AppContext.Provider value={{ sessionData, updateProductStatus, updateSessionData, sendDataToServer }}>
         {isModalOpen && (
           <ModalWindow
             onClose={toggleModalWindow}
             selectedPackage={selectedPackage}
             setSelectedPackage={setSelectedPackage}
+            setShowToster={setShowToster}
           />
         )}
-        <Header userId={sessionData.userId} />
+        <Header />
         <Routes>
           <Route path="/" element={<ScanTableBarcodePage />} />
           <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
@@ -84,10 +167,12 @@ function App() {
             path="/productlist"
             element={
               <ProductListPage
-                products={sessionData.order}
+                selectedPackage={selectedPackage}
                 setSelectedPackage={setSelectedPackage}
                 setIsSuccessSession={setIsSuccessSession}
                 isModalOpen={toggleModalWindow}
+                showToster={showToster}
+                setShowToster={setShowToster}
               />
             }
           />

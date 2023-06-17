@@ -1,9 +1,7 @@
 export const trueGoods = {
 
     "session_id": "session_id",
-    "user": {
-      "id": "ssd-12gfcpt"
-    },
+    "user_id": "ssd-12gfcpt",
     "order": {
       "order_id": "unique_order_011",
       "recommended_carton": [
@@ -20,7 +18,7 @@ export const trueGoods = {
           "sku": "Умная колонка Яндекс Станция Лайт, ультрафиолет",
           "barcode": "2134433212",
           "img": "https://static.mvideo.ru/media/Promotions/Promo_Page/2021/July/obzor-yandex-stantsii-lajt/obzor-yandex-stantsii-lajt-top1-m.png",
-          "count": 3,
+          "count": 1,
           "prompt": ["Пузырчатая пленка", "Непрозрачный пакет", "Нужно сканировать IMEI"],
           "box_id": "box_id_2"
         },
@@ -47,7 +45,7 @@ export const trueGoods = {
           "sku": "Тарелка. Императорский фарфоровый завод. Форма 'Стандартная - 2', рисунок 'Скарлетт 2'. Костяной фарфор . 270 мм.",
           "barcode": "01221212124",
           "img": "https://fissman.ru/upload/resize_cache/webp/upload/iblock/1f7/azd2ffb6amk19it16ozmr3vldco8fdqu/FarforovayatarelkaTOLEDO21sm.webp",
-          "count": 4,
+          "count": 1,
           "prompt": ["Пузырчатая пленка", "Стретч-пленка"],
           "box_id": null
         }
