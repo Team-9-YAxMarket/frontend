@@ -41,16 +41,21 @@ function App() {
 
   const fetchDataFromServer = (endpoint) => {
     fetch(endpoint)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Ошибка получения данных с сервера');
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log('Данные успешно получены:', data);
         setSessionData(data);
       })
       .catch((error) => {
-        console.log('Ошибка получения данных с сервера', error);
+        console.log(error);
+        // Обработка ошибки получения данных с сервера
       });
   };
-
   // Функция обновления данных
   const updateSessionData = (updatedData) => {
     setSessionData(updatedData);
@@ -81,38 +86,43 @@ function App() {
     });
   };
 
-  const sendDataToServer = (endpoint) => {
-    const cartonIds = selectedPackage.map((item) => item.carton_id);
-
-    const updatedItems = sessionData.order.items.map((item) => ({
-      id: item.id,
-      status: item.status,
-    }));
-    console.log(updatedItems);
-
-    const updatedSessionData = {
-      ...sessionData,
-      order: {
-        items: updatedItems,
-        recommended_carton: cartonIds,
-      },
-    };
-
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedSessionData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Данные успешно отправлены', data);
-      })
-      .catch((error) => {
-        console.log('Ошибка выполнения запроса', error);
-      });
+  
+const sendDataToServer = (endpoint) => {
+  const cartonIds = selectedPackage.map((item) => item.carton_id);
+  const updatedItems = sessionData.order.items.map((item) => ({
+    id: item.id,
+    status: item.status,
+  }));
+  console.log(updatedItems);
+  const updatedSessionData = {
+    ...sessionData,
+    order: {
+      items: updatedItems,
+      recommended_carton: cartonIds,
+    },
   };
+
+  fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedSessionData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Ошибка выполнения запроса');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('Данные успешно отправлены', data);
+    })
+    .catch((error) => {
+      console.log(error);
+      // Обработка ошибки выполнения запроса
+    });
+};
 
   // Загрузка данных из localStorage при запуске приложения
   useEffect(() => {
