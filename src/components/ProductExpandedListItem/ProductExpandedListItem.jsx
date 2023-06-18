@@ -33,7 +33,7 @@ function ProductExpandedListItem(props) {
         >
             <h2 className={styles.title} onClick={handleExpandedListItemClick}>{props.title}</h2>
             <span className={styles.counter} style={isSelected ? counterBackgroundStyle : null}>1 шт.</span>
-            <p className={styles.expandedListBarcode} onClick={props.onBarcodeClick}>{props.item}</p>
+            <p className={styles.expandedListBarcode} onClick={() => props.onBarcodeClick(props.id)}>{props.item}</p>
         </li>
     );
 }

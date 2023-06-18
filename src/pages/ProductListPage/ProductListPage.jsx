@@ -67,17 +67,28 @@ const ProductListPage = ({
   }
 
   const handleProductItemClick = (productId) => {
-    const m = { ...selectedItemsCounts };
-    if (m.hasOwnProperty(productId)) {
-      m[productId]++;
-    } else {
-      m[productId] = 1;
-    }
+    const m = selectedItemsCounts;
+    updateProductStatus(productId, 'scanned');
+     if (m.hasOwnProperty(productId)) {
+       m[productId]++;
+     } else {
+       m[productId] = 1;
+     }
     setScannedItems(scannedItems + 1);
     updateProductStatus(productId, 'scanned');
     setSelectedItemsCounts(m);
   };
-  console.log(selectedItemsCounts);
+
+  const handleBarcodeScan = (productId) => {
+    const m = selectedItemsCounts;
+    if (!m.hasOwnProperty(productId)) {
+      m[productId] = 1;
+      setScannedItems(scannedItems + 1);
+      updateProductStatus(productId, 'scanned');
+      setSelectedItemsCounts(m);
+    }
+  };
+  //console.log(Object.values(selectedItemsCounts))
 
   const handleFinishPackingButtonClick = () => {
     if (isPackageSelected) {
@@ -112,11 +123,11 @@ const ProductListPage = ({
   return (
     <div className={styles.pageWrapper}>
       {isBarcodeModalOpen && (
-        <BarcodeModalWindow
-          onClose={toggleBarcodeModalWindow}
-          onSubmit={handleProductItemClick}
-          itemId={barcodeItemId}
-        />
+          <BarcodeModalWindow
+              onClose={toggleBarcodeModalWindow}
+              onSubmit={handleBarcodeScan}
+              itemId={barcodeItemId}
+          />
       )}
       <BarcodeMismatchPopup
         products={order}
