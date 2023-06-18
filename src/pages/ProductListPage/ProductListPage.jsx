@@ -21,23 +21,21 @@ const ProductListPage = ({
   setShowToster,
   setSelectedPackage,
   setIsPackageSelected,
-  isPackageSelected
+  isPackageSelected,
 }) => {
   const { sessionData, updateProductStatus } = useContext(AppContext);
   const navigate = useNavigate();
-  const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(false);
+  const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] =
+    useState(false);
   const [scannedItems, setScannedItems] = useState(0);
   const [isBarcodeModalOpen, setIsBarcodeModalOpen] = useState(false);
   const [barcodeItemId, setBarcodeItemId] = useState(false);
   const [selectedItemsCounts, setSelectedItemsCounts] = useState({});
-  const { order } = sessionData
+  const { order } = sessionData;
   // Общее количество товаров
-  const totalItems = order.items.reduce(
-    (total, item) => total + item.count,
-    0
-  );
-  const isAllScanned = scannedItems === totalItems
- 
+  const totalItems = order.items.reduce((total, item) => total + item.count, 0);
+  const isAllScanned = scannedItems === totalItems;
+
   const onPackageClick = (carton) => {
     if (isAllScanned) {
       setIsPackageSelected(true);
@@ -59,9 +57,10 @@ const ProductListPage = ({
   };
 
   const handleDeleteClick = (cartonId) => {
-    setSelectedPackage((prevSelectedPackage) => 
-    prevSelectedPackage.filter((carton) => carton.carton_id !== cartonId))
-  }
+    setSelectedPackage((prevSelectedPackage) =>
+      prevSelectedPackage.filter((carton) => carton.carton_id !== cartonId)
+    );
+  };
 
   function closePopup() {
     setIsBarcodeMismatchPopupOpen(false);
@@ -76,6 +75,7 @@ const ProductListPage = ({
        m[productId] = 1;
      }
     setScannedItems(scannedItems + 1);
+    updateProductStatus(productId, 'scanned');
     setSelectedItemsCounts(m);
   };
 
@@ -153,7 +153,12 @@ const ProductListPage = ({
           onBarcodeClick={handleProductItemBarcodeClick}
           selectedItemsCounts={selectedItemsCounts}
         />
-        {selectedPackage.length > 0 && <PackageList cartonList={selectedPackage} onDelete={handleDeleteClick}/>}
+        {selectedPackage.length > 0 && (
+          <PackageList
+            cartonList={selectedPackage}
+            onDelete={handleDeleteClick}
+          />
+        )}
       </div>
       <PrimaryButton
         title="Закончить упаковку"
