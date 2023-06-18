@@ -75,15 +75,23 @@ function App() {
       order: updatedOrder,
     });
   };
+
+  
   
 
   const sendDataToServer = (endpoint) => {
     const cartonIds = selectedPackage.map((item) => item.carton_id);
+   
+    const updatedItems = sessionData.order.items.map((item) => ({
+      id: item.id,
+      status: item.status,
+    }));
+    console.log(updatedItems)
 
     const updatedSessionData = {
       ...sessionData,
       order: {
-        ...sessionData.order,
+        items: updatedItems,
         recommended_carton: cartonIds,
       },
     };
