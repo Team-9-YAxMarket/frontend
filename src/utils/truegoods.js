@@ -19,7 +19,7 @@ export const trueGoods = {
           "barcode": "2134433212",
           "img": "https://static.mvideo.ru/media/Promotions/Promo_Page/2021/July/obzor-yandex-stantsii-lajt/obzor-yandex-stantsii-lajt-top1-m.png",
           "count": 1,
-          "prompt": ["Пузырчатая пленка", "Непрозрачный пакет", "Нужно сканировать IMEI"],
+          "prompt": ["пузырчатая пленка", "непрозрачный пакет", "нужно сканировать IMEI"],
           "box_id": "box_id_2"
         },
         {
@@ -28,7 +28,7 @@ export const trueGoods = {
           "barcode": "0909092202",
           "img": "https://ipixel.ru/upload/iblock/a94/ua1sef2ps2eb3j790i2qxo655d2q1u8g.jpg",
           "count": 1,
-          "prompt": ["Нужно сканировать IMEI"],
+          "prompt": ["нужно сканировать IMEI"],
           "box_id": "box_id_2"
         },
         {
@@ -37,7 +37,7 @@ export const trueGoods = {
           "barcode": "0123333333",
           "img": "https://evropharm.ru/Storage/gelj-smazka-contex-romantic-100ml-aromat.jpg",
           "count": 1,
-          "prompt": ["Непрозрачный пакет"],
+          "prompt": ["непрозрачный пакет"],
           "box_id": "box_id_2"
         },
         {
@@ -46,7 +46,7 @@ export const trueGoods = {
           "barcode": "01221212124",
           "img": "https://fissman.ru/upload/resize_cache/webp/upload/iblock/1f7/azd2ffb6amk19it16ozmr3vldco8fdqu/FarforovayatarelkaTOLEDO21sm.webp",
           "count": 4,
-          "prompt": ["Пузырчатая пленка", "Стретч-пленка"],
+          "prompt": ["пузырчатая пленка", "стретч-пленка"],
           "box_id": null
         }
       ]

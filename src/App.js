@@ -15,48 +15,46 @@ import {
 } from './pages';
 import { trueGoods } from './utils/truegoods';
 
-export const AppContext = createContext()
+export const AppContext = createContext();
 
 function App() {
-  
   const [isSuccessSession, setIsSuccessSession] = useState(false);
-  
+
   const [selectedPackage, setSelectedPackage] = useState([]);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const [showToster, setShowToster] = useState(false);
   const [tosterMessage, setTosterMessage] = useState('');
-  
+
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
-  
+
   const [sessionData, setSessionData] = useState({
     userId: trueGoods.user_id,
     order: trueGoods.order,
   });
-  console.log('sessionData',sessionData)
-  console.log('Упаковщик выбрал упаковку:', selectedPackage)
+  console.log('sessionData', sessionData);
+  console.log('Упаковщик выбрал упаковку:', selectedPackage);
   const cartonIds = selectedPackage.map((item) => item.carton_id);
-  console.log('Массив упаковок для бека:', cartonIds)
+  console.log('Массив упаковок для бека:', cartonIds);
 
   const fetchDataFromServer = (endpoint) => {
-   
     fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
-        console.log('Данные успешно получены:', data)
+        console.log('Данные успешно получены:', data);
         setSessionData(data);
       })
       .catch((error) => {
-        console.log('Ошибка получения данных с сервера', error)
+        console.log('Ошибка получения данных с сервера', error);
       });
   };
 
   // Функция обновления данных
   const updateSessionData = (updatedData) => {
-    setSessionData(updatedData)
-  }
+    setSessionData(updatedData);
+  };
 
   const updateProductStatus = (productId, status) => {
     const updatedItems = sessionData.order.items.map((item) => {
@@ -83,17 +81,14 @@ function App() {
     });
   };
 
-  
-  
-
   const sendDataToServer = (endpoint) => {
     const cartonIds = selectedPackage.map((item) => item.carton_id);
-   
+
     const updatedItems = sessionData.order.items.map((item) => ({
       id: item.id,
       status: item.status,
     }));
-    console.log(updatedItems)
+    console.log(updatedItems);
 
     const updatedSessionData = {
       ...sessionData,
@@ -112,10 +107,10 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Данные успешно отправлены', data)
+        console.log('Данные успешно отправлены', data);
       })
       .catch((error) => {
-        console.log('Ошибка выполнения запроса', error)
+        console.log('Ошибка выполнения запроса', error);
       });
   };
 
@@ -139,7 +134,7 @@ function App() {
   useEffect(() => {
     if (sessionData) {
       const sessionDataCopy = JSON.parse(JSON.stringify(sessionData));
-      localStorage.setItem('sessionData', JSON.stringify(sessionDataCopy))
+      localStorage.setItem('sessionData', JSON.stringify(sessionDataCopy));
     }
   }, [sessionData]);
 
@@ -156,7 +151,6 @@ function App() {
     }
   }, [selectedPackage]);
 
-
   const toggleModalWindow = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -164,55 +158,69 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.page}>
-        <AppContext.Provider value={{ sessionData, updateProductStatus, updateSessionData, sendDataToServer }}>
-        {isModalOpen && (
-          <ModalWindow
-            onClose={toggleModalWindow}
-            selectedPackage={selectedPackage}
-            setSelectedPackage={setSelectedPackage}
-            setIsPackageSelected={setIsPackageSelected}
-            setShowToster={setShowToster}
-            setTosterMessage={setTosterMessage}
-          />
-        )}
-        <Header />
-        <Routes>
-          <Route path="/" element={<ScanTableBarcodePage />} />
-          <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
-          <Route path="/scancell" element={<ScanCellPage products={sessionData.order} />} />
-          <Route
-            path="/productlist"
-            element={
-              <ProductListPage
-                selectedPackage={selectedPackage}
-                setSelectedPackage={setSelectedPackage}
-                setIsSuccessSession={setIsSuccessSession}
-                isModalOpen={toggleModalWindow}
-                showToster={showToster}
-                setShowToster={setShowToster}
-                tosterMessage={tosterMessage}
-                setTosterMessage={setTosterMessage}
-                isPackageSelected={isPackageSelected}
-                setIsPackageSelected={setIsPackageSelected}
-              />
-            }
-          />
-          <Route
-            path="/hasproblems"
-            element={<HasProblemsPage setPageTitle={setPageTitle} />}
-          />
-          <Route
-            path="/notenoughgoods"
-            element={
-              <NotEnoughGoodsPage pageTitle={pageTitle} products={sessionData.order}/>
-            }
-          />
-          <Route
-            path="/finishsession"
-            element={<FinishSession isSuccessSession={isSuccessSession} />}
-          />
-          <Route path="/putgoodsinbox" element={<PutGoodsInBox />} />
-        </Routes>
+        <AppContext.Provider
+          value={{
+            sessionData,
+            updateProductStatus,
+            updateSessionData,
+            fetchDataFromServer,
+            sendDataToServer,
+          }}
+        >
+          {isModalOpen && (
+            <ModalWindow
+              onClose={toggleModalWindow}
+              selectedPackage={selectedPackage}
+              setSelectedPackage={setSelectedPackage}
+              setIsPackageSelected={setIsPackageSelected}
+              setShowToster={setShowToster}
+              setTosterMessage={setTosterMessage}
+            />
+          )}
+          <Header />
+          <Routes>
+            <Route path="/" element={<ScanTableBarcodePage />} />
+            <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
+            <Route
+              path="/scancell"
+              element={<ScanCellPage products={sessionData.order} />}
+            />
+            <Route
+              path="/productlist"
+              element={
+                <ProductListPage
+                  selectedPackage={selectedPackage}
+                  setSelectedPackage={setSelectedPackage}
+                  setIsSuccessSession={setIsSuccessSession}
+                  isModalOpen={toggleModalWindow}
+                  showToster={showToster}
+                  setShowToster={setShowToster}
+                  tosterMessage={tosterMessage}
+                  setTosterMessage={setTosterMessage}
+                  isPackageSelected={isPackageSelected}
+                  setIsPackageSelected={setIsPackageSelected}
+                />
+              }
+            />
+            <Route
+              path="/hasproblems"
+              element={<HasProblemsPage setPageTitle={setPageTitle} />}
+            />
+            <Route
+              path="/notenoughgoods"
+              element={
+                <NotEnoughGoodsPage
+                  pageTitle={pageTitle}
+                  products={sessionData.order}
+                />
+              }
+            />
+            <Route
+              path="/finishsession"
+              element={<FinishSession isSuccessSession={isSuccessSession} />}
+            />
+            <Route path="/putgoodsinbox" element={<PutGoodsInBox />} />
+          </Routes>
         </AppContext.Provider>
       </div>
     </div>
