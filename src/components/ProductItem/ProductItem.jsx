@@ -14,7 +14,7 @@ function ProductItem(props) {
     }, [ props.selectedCount, props.count ])
 
     const handleProductItemClick = () => {
-        if (selectedCount < props.count) {
+        if (selectedCount < props.count && props.count === 1) {
             setSelectedCount((prev) => prev + 1);
             props.onItemClick();
         }
@@ -35,15 +35,15 @@ function ProductItem(props) {
 
     const backgroundStyleByTag = (tag) => {
         const bgStyleMap = {
-            'Нужно сканировать IMEI': '#FFECCC',
-            'Нужно сканировать марку': '#FFECCC',
-            'Упаковать отдельно в NONPACK': '#FFD9DB',
+            'нужно сканировать IMEI': '#FFECCC',
+            'нужно сканировать марку': '#FFECCC',
+            'упаковать отдельно в NONPACK': '#FFD9DB',
             'Непрозрачный пакет': '#E6E6E6',
         };
 
         const iconMap = {
-            'Нужно сканировать IMEI': './images/IMEI_icon.svg',
-            'Нужно сканировать марку': './images/mark_scan_icon.svg',
+            'нужно сканировать IMEI': './images/IMEI_icon.svg',
+            'нужно сканировать марку': './images/mark_scan_icon.svg',
         }
 
         let bgStyle = '#E0EEFF';
@@ -74,7 +74,6 @@ function ProductItem(props) {
         }
     };
     
-
     return (
         <li className={styles.productListItem}>
             <div className={styles.productItem}>
@@ -88,15 +87,14 @@ function ProductItem(props) {
                             <ul className={styles.tagContainer}>
                                 {props.tags.map((tag, index) => {
                                     const style = backgroundStyleByTag(tag);
-                                    
-
+                                    const formattedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
                                     return <li
                                         key={index}
                                         className={styles.tag}
                                         style={{backgroundColor: style.bgColor}}
                                     >
                                         {style.icon && <img className={styles.tagIcon} src={style.icon} alt={tag}/>}
-                                        {tag}
+                                        {formattedTag}
                                     </li>
                                 })}
                             </ul>

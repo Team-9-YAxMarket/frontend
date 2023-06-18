@@ -6,13 +6,19 @@ import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import Footer from '../../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import ProblemProductList from '../../components/ProblemProductList/ProblemProductList';
+import BarcodeModalWindow from '../../components/BarcodeModalWindow/BarcodeModalWindow';
 
 const NotEnoughGoodsPage = ({ pageTitle, products }) => {
   const { updateProductStatus } = useContext(AppContext);
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [scannedItems, setScannedItems] = useState(0);
   const navigate = useNavigate();
   const defective = pageTitle.includes('брак');
   const disabledButton = scannedItems === 0
+
+  function toggleModal() {
+    setIsModalOpen(!isModalOpen)
+  }
 
 
   const dynamicButtonText = () => {
@@ -48,7 +54,9 @@ const NotEnoughGoodsPage = ({ pageTitle, products }) => {
           onClick={handleEndSession}
           disabled={disabledButton}
       />
-      <Footer isErrorCase={true} isBackButton={true} />
+
+      {isModalOpen && <BarcodeModalWindow onClose={toggleModal}/>}
+      <Footer isErrorCase={true} isBackButton={true} isKeyboard={defective} isModalOpen={toggleModal}/>
     </div>
   );
 };

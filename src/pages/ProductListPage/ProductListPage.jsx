@@ -69,18 +69,16 @@ const ProductListPage = ({
 
   const handleProductItemClick = (productId) => {
     const m = selectedItemsCounts;
-
     updateProductStatus(productId, 'scanned')
-
-    if (m.hasOwnProperty(productId)) {
-      m[productId]++;
-    } else {
-      setScannedItems(scannedItems + 1);
-      m[productId] = 1;
-    }
-
+     if (m.hasOwnProperty(productId)) {
+       m[productId]++;
+     } else {
+       m[productId] = 1;
+      }
+    setScannedItems(scannedItems + 1);
     setSelectedItemsCounts(m);
   };
+  //console.log(Object.values(selectedItemsCounts))
 
   const handleFinishPackingButtonClick = () => {
     if (isPackageSelected) {
@@ -158,7 +156,6 @@ const ProductListPage = ({
         isBackButton={true}
         isKeyboard={isAllScanned}
         isModalOpen={isModalOpen}
-        //isAllScanned={isAllScanned}
       />
     </div>
   );
