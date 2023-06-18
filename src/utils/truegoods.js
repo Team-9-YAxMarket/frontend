@@ -7,9 +7,9 @@ export const trueGoods = {
       "recommended_carton": [
         {
           "carton_id": "carton_id_2",
-          "carton_type": "ymf",
+          "carton_type": "myd",
           "barcode": "000987654321",
-          "box_id": "box_id_2"
+          "box_id": "box_id_3"
         }
       ],
       "items": [
@@ -20,7 +20,7 @@ export const trueGoods = {
           "img": "https://static.mvideo.ru/media/Promotions/Promo_Page/2021/July/obzor-yandex-stantsii-lajt/obzor-yandex-stantsii-lajt-top1-m.png",
           "count": 1,
           "prompt": ["пузырчатая пленка", "непрозрачный пакет", "нужно сканировать IMEI"],
-          "box_id": "box_id_2"
+          "box_id": "box_id_3"
         },
         {
           "id": "unique_sku_4_id",
@@ -29,7 +29,7 @@ export const trueGoods = {
           "img": "https://ipixel.ru/upload/iblock/a94/ua1sef2ps2eb3j790i2qxo655d2q1u8g.jpg",
           "count": 1,
           "prompt": ["нужно сканировать IMEI"],
-          "box_id": "box_id_2"
+          "box_id": "box_id_3"
         },
         {
           "id": "unique_sku_5_id",
@@ -38,7 +38,7 @@ export const trueGoods = {
           "img": "https://evropharm.ru/Storage/gelj-smazka-contex-romantic-100ml-aromat.jpg",
           "count": 1,
           "prompt": ["непрозрачный пакет"],
-          "box_id": "box_id_2"
+          "box_id": "box_id_3"
         },
         {
           "id": "unique_sku_6_id",
