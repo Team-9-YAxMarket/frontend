@@ -3,7 +3,15 @@ import { useState, useEffect } from 'react';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import { itemsList } from '../../utils/constants';
 
-const ModalWindow = ({ title, onClose, setSelectedPackage, selectedPackage }) => {
+const ModalWindow = ({
+  title,
+  onClose,
+  setSelectedPackage,
+  selectedPackage,
+  setIsPackageSelected,
+  setShowToster,
+  setTosterMessage,
+}) => {
   const selectPackage = 'Выберите упаковку';
   const [value, setValue] = useState('');
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -19,7 +27,7 @@ const ModalWindow = ({ title, onClose, setSelectedPackage, selectedPackage }) =>
     setValue(inputValue);
     const selectedItem = itemsList.find((item) => item.barcode === inputValue);
     if (selectedItem) {
-      setSelectedItemId(selectedItem.id);
+      setSelectedItemId(selectedItem.carton_id);
       setIsInvalidBarcode(false);
     } else {
       setSelectedItemId(null);
@@ -34,14 +42,30 @@ const ModalWindow = ({ title, onClose, setSelectedPackage, selectedPackage }) =>
   };
 
   const handleSelectPackage = () => {
-    const selectedItem = itemsList.find((item) => item.carton_id === selectedItemId);
-    if (selectedItem && !selectedPackage.find((item) => item.carton_id === selectedItemId)) {
-      setSelectedPackage((prevSelectedPackages) => [...prevSelectedPackages, selectedItem]);
+    const selectedItem = itemsList.find(
+      (item) => item.carton_id === selectedItemId
+    );
+    if (
+      selectedItem &&
+      !selectedPackage.find((item) => item.carton_id === selectedItemId)
+      ) {
+      setSelectedPackage((prevSelectedPackages) => [
+        ...prevSelectedPackages,
+        selectedItem,
+      ]);
+      setIsPackageSelected(true);
+      setShowToster(true);
+      setTosterMessage('Упаковка добавлена')
+      setTimeout(() => {
+        setShowToster(false);
+      }, 1000);
     }
   };
 
+ 
+
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     handleSelectPackage();
     onClose();
   };
@@ -67,9 +91,12 @@ const ModalWindow = ({ title, onClose, setSelectedPackage, selectedPackage }) =>
             onChange={handleChange}
             className={styles.modalInput}
             placeholder="Штрихкод"
+           
           />
           {isInvalidBarcode && (
-            <p className={styles.errorText}>Штрихкод не соответствует ни одной упаковке</p>
+            <p className={styles.errorText}>
+              Штрихкод не соответствует ни одной упаковке
+            </p>
           )}
         </fieldset>
 
@@ -80,7 +107,9 @@ const ModalWindow = ({ title, onClose, setSelectedPackage, selectedPackage }) =>
                 <button
                   type="button"
                   className={`${styles.modalListButton} ${
-                    item.carton_id === selectedItemId ? styles.modalListButtonActive : ''
+                    item.carton_id === selectedItemId
+                      ? styles.modalListButtonActive
+                      : ''
                   }`}
                   onClick={() => handleClick(item.carton_id)}
                 >

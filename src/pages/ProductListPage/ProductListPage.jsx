@@ -16,15 +16,17 @@ const ProductListPage = ({
   setIsSuccessSession,
   isModalOpen,
   showToster,
+  tosterMessage,
+  setTosterMessage,
   setShowToster,
   setSelectedPackage,
+  setIsPackageSelected,
+  isPackageSelected
 }) => {
   const { sessionData, updateProductStatus } = useContext(AppContext);
   const navigate = useNavigate();
   const [isBarcodeMismatchPopupOpen, setIsBarcodeMismatchPopupOpen] = useState(false);
   const [scannedItems, setScannedItems] = useState(0);
-  const [isPackageSelected, setIsPackageSelected] = useState(false);
-  const [tosterMessage, setTosterMessage] = useState('');
   const [isBarcodeModalOpen, setIsBarcodeModalOpen] = useState(false);
   const [barcodeItemId, setBarcodeItemId] = useState(false);
   const [selectedItemsCounts, setSelectedItemsCounts] = useState({});
@@ -67,6 +69,7 @@ const ProductListPage = ({
 
   const handleProductItemClick = (productId) => {
     updateProductStatus(productId, 'scanned')
+    
     setScannedItems(scannedItems + 1);
 
     const m = selectedItemsCounts;
@@ -153,9 +156,9 @@ const ProductListPage = ({
       <Footer
         isErrorCase={false}
         isBackButton={true}
-        isKeyboard={true}
+        isKeyboard={isAllScanned}
         isModalOpen={isModalOpen}
-        isAllScanned={isAllScanned}
+        //isAllScanned={isAllScanned}
       />
     </div>
   );
