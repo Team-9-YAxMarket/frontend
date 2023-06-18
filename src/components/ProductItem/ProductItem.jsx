@@ -42,8 +42,8 @@ function ProductItem(props) {
         };
 
         const iconMap = {
-            'Нужно сканировать IMEI': '/images/IMEI_icon.svg',
-            'Нужно сканировать марку': '/images/mark_scan_icon.svg',
+            'Нужно сканировать IMEI': './images/IMEI_icon.svg',
+            'Нужно сканировать марку': './images/mark_scan_icon.svg',
         }
 
         let bgStyle = '#E0EEFF';

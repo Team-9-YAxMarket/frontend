@@ -28,8 +28,6 @@ const ProductListPage = ({
   const [isBarcodeModalOpen, setIsBarcodeModalOpen] = useState(false);
   const [barcodeItemId, setBarcodeItemId] = useState(false);
   const [selectedItemsCounts, setSelectedItemsCounts] = useState({});
-
-
   const { order } = sessionData
   // Общее количество товаров
   const totalItems = order.items.reduce(
@@ -37,7 +35,6 @@ const ProductListPage = ({
     0
   );
   const isAllScanned = scannedItems === totalItems
-  
  
   const onPackageClick = (carton) => {
     if (isAllScanned) {
@@ -69,9 +66,17 @@ const ProductListPage = ({
   }
 
   const handleProductItemClick = (productId) => {
-     updateProductStatus(productId, 'scanned')
+    updateProductStatus(productId, 'scanned')
     setScannedItems(scannedItems + 1);
-    
+
+    const m = selectedItemsCounts;
+    if (m.hasOwnProperty(productId)) {
+      m[productId]++;
+    } else {
+      m[productId] = 1;
+    }
+
+    setSelectedItemsCounts(m);
   };
 
   const handleFinishPackingButtonClick = () => {
@@ -134,6 +139,8 @@ const ProductListPage = ({
           products={order}
           onItemClick={handleProductItemClick}
           onPackageClick={onPackageClick}
+          onBarcodeClick={handleProductItemBarcodeClick}
+          selectedItemsCounts={selectedItemsCounts}
         />
         {selectedPackage.length > 0 && <PackageList cartonList={selectedPackage} onDelete={handleDeleteClick}/>}
       </div>
