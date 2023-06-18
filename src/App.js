@@ -135,7 +135,7 @@ const sendDataToServer = (endpoint) => {
     } else {
       // Если данных в localStorage нет, устанавливаем начальное значение из trueGoods
       setSessionData({
-        userId: trueGoods.user.id,
+        userId: trueGoods.user,
         order: trueGoods.order,
       });
     }
