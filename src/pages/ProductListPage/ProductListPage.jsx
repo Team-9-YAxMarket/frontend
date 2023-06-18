@@ -69,14 +69,24 @@ const ProductListPage = ({
 
   const handleProductItemClick = (productId) => {
     const m = selectedItemsCounts;
-    updateProductStatus(productId, 'scanned')
+    updateProductStatus(productId, 'scanned');
      if (m.hasOwnProperty(productId)) {
        m[productId]++;
      } else {
        m[productId] = 1;
-      }
+     }
     setScannedItems(scannedItems + 1);
     setSelectedItemsCounts(m);
+  };
+
+  const handleBarcodeScan = (productId) => {
+    const m = selectedItemsCounts;
+    if (!m.hasOwnProperty(productId)) {
+      m[productId] = 1;
+      setScannedItems(scannedItems + 1);
+      updateProductStatus(productId, 'scanned');
+      setSelectedItemsCounts(m);
+    }
   };
   //console.log(Object.values(selectedItemsCounts))
 
@@ -115,7 +125,7 @@ const ProductListPage = ({
       {isBarcodeModalOpen && (
           <BarcodeModalWindow
               onClose={toggleBarcodeModalWindow}
-              onSubmit={handleProductItemClick}
+              onSubmit={handleBarcodeScan}
               itemId={barcodeItemId}
           />
       )}
