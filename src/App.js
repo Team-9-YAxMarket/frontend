@@ -51,6 +51,8 @@ function App() {
       });
   };
 
+  fetchDataFromServer('http://127.0.0.1/api/v1/session');
+
   // Функция обновления данных
   const updateSessionData = (updatedData) => {
     setSessionData(updatedData);
