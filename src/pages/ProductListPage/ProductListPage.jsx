@@ -68,14 +68,14 @@ const ProductListPage = ({
   }
 
   const handleProductItemClick = (productId) => {
-    updateProductStatus(productId, 'scanned')
-    
-    setScannedItems(scannedItems + 1);
-
     const m = selectedItemsCounts;
+
+    updateProductStatus(productId, 'scanned')
+
     if (m.hasOwnProperty(productId)) {
       m[productId]++;
     } else {
+      setScannedItems(scannedItems + 1);
       m[productId] = 1;
     }
 
