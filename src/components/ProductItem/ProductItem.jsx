@@ -8,13 +8,13 @@ function ProductItem(props) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
-        if (props.selectedCount) {
+        if (props.selectedCount && props.count >= props.selectedCount) {
             setSelectedCount(props.selectedCount);
         }
-    }, [props.selectedCount])
+    }, [ props.selectedCount, props.count ])
 
     const handleProductItemClick = () => {
-        if ( selectedCount < props.count) {
+        if (selectedCount < props.count) {
             setSelectedCount((prev) => prev + 1);
             props.onItemClick();
         }
