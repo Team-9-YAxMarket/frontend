@@ -8,7 +8,6 @@ const Footer = ({
   isErrorCase,
   isModalOpen,
   onKeyboardButtonClick,
-  isAllScanned
 }) => {
   return (
     <footer

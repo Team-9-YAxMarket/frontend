@@ -158,7 +158,6 @@ const ProductListPage = ({
         isBackButton={true}
         isKeyboard={isAllScanned}
         isModalOpen={isModalOpen}
-        //isAllScanned={isAllScanned}
       />
     </div>
   );

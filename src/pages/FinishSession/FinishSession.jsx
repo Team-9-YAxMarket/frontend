@@ -1,6 +1,4 @@
 import styles from './FinishSession.module.css';
-import Header from '../../components/Header/Header';
-
 import PageMainText from '../../components/PageMainText/PageMainText';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +11,6 @@ const FinishSession = ({ isSuccessSession }) => {
     }
   return (
     <>
-      <Header />
       <div className={styles.pageWrapper}>
           <div className={styles.mainContainer}>
           {isSuccessSession ? (

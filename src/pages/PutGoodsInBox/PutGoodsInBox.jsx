@@ -19,7 +19,7 @@ const PutGoodsInBox = () => {
     <PageMainText title='Положите бракованные товары в тару'/>
     <PrimaryButton variant='yellow' right='24px' title='Закрыть коробку' onClick={handleEndSession}/>
     </div>
-    <Footer isErrorCase={true} isBackButton={true} isKeyboard={true}/>
+    <Footer isErrorCase={true} isBackButton={true} isKeyboard={false}/>
     </>
   )
 }

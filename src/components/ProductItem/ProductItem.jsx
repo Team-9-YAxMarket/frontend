@@ -14,7 +14,7 @@ function ProductItem(props) {
     }, [props.selectedCount])
 
     const handleProductItemClick = () => {
-        if (props.count === 1) {
+        if ( selectedCount < props.count) {
             setSelectedCount((prev) => prev + 1);
             props.onItemClick();
         }

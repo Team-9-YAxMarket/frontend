@@ -45,7 +45,7 @@ export const trueGoods = {
           "sku": "Тарелка. Императорский фарфоровый завод. Форма 'Стандартная - 2', рисунок 'Скарлетт 2'. Костяной фарфор . 270 мм.",
           "barcode": "01221212124",
           "img": "https://fissman.ru/upload/resize_cache/webp/upload/iblock/1f7/azd2ffb6amk19it16ozmr3vldco8fdqu/FarforovayatarelkaTOLEDO21sm.webp",
-          "count": 1,
+          "count": 4,
           "prompt": ["Пузырчатая пленка", "Стретч-пленка"],
           "box_id": null
         }

@@ -18,20 +18,25 @@ import { trueGoods } from './utils/truegoods';
 export const AppContext = createContext()
 
 function App() {
+  
   const [isSuccessSession, setIsSuccessSession] = useState(false);
+  
   const [selectedPackage, setSelectedPackage] = useState([]);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const [showToster, setShowToster] = useState(false);
   const [tosterMessage, setTosterMessage] = useState('');
+  
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
+  
   const [sessionData, setSessionData] = useState({
     userId: trueGoods.user_id,
     order: trueGoods.order,
   });
   console.log('sessionData',sessionData)
   console.log('Упаковщик выбрал упаковку:', selectedPackage)
-
   const cartonIds = selectedPackage.map((item) => item.carton_id);
   console.log('Массив упаковок для бека:', cartonIds)
 
@@ -199,7 +204,7 @@ function App() {
           <Route
             path="/notenoughgoods"
             element={
-              <NotEnoughGoodsPage pageTitle={pageTitle} products={sessionData.order} />
+              <NotEnoughGoodsPage pageTitle={pageTitle} products={sessionData.order}/>
             }
           />
           <Route
