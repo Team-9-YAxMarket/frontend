@@ -47,8 +47,8 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
                   }
 
                   return <ProductItem
-                      key={item.id}
                       id={item.id}
+                      key={item.id}
                       title={item.sku}
                       count={item.count}
                       img={item.img}
@@ -78,6 +78,7 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
               }
 
               return <ProductItem
+                  id={item.id}
                   key={item.id}
                   title={item.sku}
                   count={item.count}

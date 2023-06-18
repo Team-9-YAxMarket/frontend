@@ -122,6 +122,7 @@ function ProductItem(props) {
           <ul className={styles.expandedList}>
             {[...Array(props.count)].map((_, index) => (
               <ProductExpandedListItem
+                id={props.id}
                 key={index}
                 index={index}
                 item={props.barcode}
