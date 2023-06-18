@@ -20,8 +20,10 @@ export const AppContext = createContext()
 function App() {
   const [isSuccessSession, setIsSuccessSession] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState([]);
+  const [isPackageSelected, setIsPackageSelected] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showToster, setShowToster] = useState(false);
+  const [tosterMessage, setTosterMessage] = useState('');
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
   const [sessionData, setSessionData] = useState({
     userId: trueGoods.user_id,
@@ -75,15 +77,23 @@ function App() {
       order: updatedOrder,
     });
   };
+
+  
   
 
   const sendDataToServer = (endpoint) => {
     const cartonIds = selectedPackage.map((item) => item.carton_id);
+   
+    const updatedItems = sessionData.order.items.map((item) => ({
+      id: item.id,
+      status: item.status,
+    }));
+    console.log(updatedItems)
 
     const updatedSessionData = {
       ...sessionData,
       order: {
-        ...sessionData.order,
+        items: updatedItems,
         recommended_carton: cartonIds,
       },
     };
@@ -155,7 +165,9 @@ function App() {
             onClose={toggleModalWindow}
             selectedPackage={selectedPackage}
             setSelectedPackage={setSelectedPackage}
+            setIsPackageSelected={setIsPackageSelected}
             setShowToster={setShowToster}
+            setTosterMessage={setTosterMessage}
           />
         )}
         <Header />
@@ -173,6 +185,10 @@ function App() {
                 isModalOpen={toggleModalWindow}
                 showToster={showToster}
                 setShowToster={setShowToster}
+                tosterMessage={tosterMessage}
+                setTosterMessage={setTosterMessage}
+                isPackageSelected={isPackageSelected}
+                setIsPackageSelected={setIsPackageSelected}
               />
             }
           />

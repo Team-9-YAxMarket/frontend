@@ -67,7 +67,7 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
 
       {defaultItems.length > 0 && (
         <div className={styles.listWrapper}>
-          <span className={styles.package} style={{ backgroundColor: '#676764' }} onClick={onPackageClick}>
+          <span className={styles.package} style={{ backgroundColor: '#676764' }}>
             Упаковка на выбор
           </span>
           <ul className={styles.list} style={unsortedListStyle}>

@@ -21,7 +21,7 @@ const Footer = ({
         className={styles.keyboardButtonContainer}
         onClick={onKeyboardButtonClick}
       >
-        {isKeyboard && isAllScanned && (
+        {isKeyboard && (
           <>
             <figure
               className={`${styles.keyboardImage} ${
