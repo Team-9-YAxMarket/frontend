@@ -8,7 +8,15 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
   const location = useLocation();
   const noBorderLocation = location.pathname === '/notenaughgoods';
   const cartons = products?.recommended_carton
-  const cartonColors = cartons?.reduce((colors, carton) => {
+  const transformedCartons = cartons?.map((item) => {
+    return {
+      ...item,
+      id: item.carton_id, // Замена свойства "carton_id" на "id"
+    };
+  });
+  console.log(transformedCartons)
+  console.log(cartons)
+  const cartonColors = transformedCartons?.reduce((colors, carton) => {
     if (!colors[carton.box_id]) {
       colors[carton.box_id] = getBackgroundColor(carton.carton_type);
     }
@@ -21,7 +29,7 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
 
   return (
     <div className={`${styles.listContainer}`}>
-      {cartons?.map((carton) => {
+      {transformedCartons?.map((carton) => {
         const boxId = carton.box_id;
         const cartonItems = products?.items?.filter((item) => item.box_id === boxId);
         console.log('Товары с рекомендованной упаковкой', cartonItems)

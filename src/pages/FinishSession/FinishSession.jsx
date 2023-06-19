@@ -2,8 +2,7 @@ import styles from './FinishSession.module.css';
 import PageMainText from '../../components/PageMainText/PageMainText';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 
-
-const FinishSession = ({ isSuccessSession, handleEndSession }) => {
+const FinishSession = ({ isSuccessSession, handleEndSession, loading }) => {
  
   return (
     <>
@@ -16,7 +15,7 @@ const FinishSession = ({ isSuccessSession, handleEndSession }) => {
               <p className={styles.subtext}>Отличная работа!</p>
               <PrimaryButton
                 variant="yellow"
-                title="Готово"
+                title={loading ? 'Отправляем' : 'Готово'}
                 right="24px"
                 onClick={handleEndSession}
               />
@@ -30,7 +29,7 @@ const FinishSession = ({ isSuccessSession, handleEndSession }) => {
               </p>
               <PrimaryButton
                 variant="yellow"
-                title="Готово"
+                title={loading ? 'Отправляем' : 'Готово'}
                 right="24px"
                 onClick={handleEndSession}
               />

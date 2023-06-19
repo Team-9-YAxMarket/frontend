@@ -6,6 +6,7 @@ import { useLocalStorage } from '../src/hooks/useLocalStorage'
 import Header from './components/Header/Header';
 import ModalWindow from './components/ModalWindow/ModalWindow';
 import Toster from './components/Toster/Toster';
+import { fetchCarton, fetchDataFromServer, sendDataToServer } from './utils/api';
 
 import {
   HasProblemsPage,
@@ -22,7 +23,6 @@ export const AppContext = createContext();
 
 function App() {
   const navigate = useNavigate();
-  const BASE_URL = 'http://ivr.sytes.net:9009/api/v1/session';
   const userId = 'c76a86b5-d8ed-4034-aaba-5fade610ec41';
   const [isSuccessSession, setIsSuccessSession] = useState(false);
   
@@ -31,56 +31,48 @@ function App() {
   const [isPackageSelected, setIsPackageSelected] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const [showToster, setShowToster] = useState(false);
   const [tosterMessage, setTosterMessage] = useState('');
 
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
   const [cartons, setCartons] = useState([])
-  const [sessionData, setSessionData] = useState({});
   const [getLocalSessionData, setLocalSessionData] = useLocalStorage(
     'sessionData',
     {}
-  );
+    );
+  const [sessionData, setSessionData] = useState(getLocalSessionData());
   console.log('sessionData', sessionData);
   console.log('Упаковщик выбрал упаковку:', selectedPackage);
   const cartonIds = selectedPackage.map((item) => item.id);
   console.log('Массив упаковок для бека:', cartonIds);
 
-  // useEffect(() => {
-  //   // Обновляем данные из локального хранилища после монтирования компонента
-  //   setSessionData(getLocalSessionData);
-  // }, [getLocalSessionData]);
 
+  // Заготовка для хранения сессии в localStorage чтобы не терять данные сессии при перезагрузке страницы
   useEffect(() => {
     setLocalSessionData(sessionData);
   }, [sessionData, setLocalSessionData]);
 
-  const fetchDataFromServer = (endpoint, userId) => {
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: userId,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Ошибка получения данных с сервера');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Данные успешно получены:', data);
-        fetchCarton()
-        setSessionData(data);
-        setLocalSessionData(data)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  
+  
+  async function handleEndSession() {
+    setLoading(true)
+    await sendDataToServer(sessionData, setSessionData, selectedPackage);
+    setLoading(false)
+    navigate('/');
+  };
+
+  async function handleStartSession()  {
+    setLoading(true)
+    await fetchDataFromServer(userId, setSessionData)
+    await fetchCarton(setCartons)
+    setLoading(false)
+    navigate('/scanprinter')
+  };
+
+  
+  const toggleModalWindow = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   // Функция обновления данных
@@ -113,73 +105,6 @@ function App() {
     });
   };
 
-  const fetchCarton = () => {
-    fetch('http://ivr.sytes.net:9009/api/v1/carton')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        setCartons(data)
-        // Здесь вы можете обработать полученные данные
-      })
-      .catch(error => {
-        console.log(error);
-        // Обработка ошибки запроса
-      });
-  };
-  console.log(cartons)
-
-  const sendDataToServer = (endpoint) => {
-    const cartonIds = selectedPackage.map((item) => item.carton_id);
-    const updatedItems = sessionData.order.items.map((item) => ({
-      id: item.id,
-      status: item.status,
-    }));
-    console.log(updatedItems);
-    const requestBody = {
-      ...sessionData,
-      order: {
-        items: updatedItems,
-        selected_carton: cartonIds,
-      },
-    };
-  
-    setSessionData(sessionData)
-    return fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestBody),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Ошибка выполнения запроса');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Данные успешно отправлены', data);
-      })
-      .catch((error) => {
-        console.log(error);
-        // Обработка ошибки выполнения запроса
-      });
-  };
-  
-  async function handleEndSession() {
-    await sendDataToServer(BASE_URL);
-    navigate('/');
-  };
-
-  async function handleStartSession()  {
-    await fetchDataFromServer(BASE_URL, userId)
-    navigate('/scanprinter')
-  };
-
-  
-  const toggleModalWindow = () => {
-    setIsModalOpen(!isModalOpen);
-  };
 
   return (
     <div className={styles.wrapper}>
@@ -189,8 +114,6 @@ function App() {
             sessionData,
             updateProductStatus,
             updateSessionData,
-            fetchDataFromServer,
-            sendDataToServer,
           }}
         >
           {showToster && <Toster tosterMessage={tosterMessage}/>}
@@ -210,7 +133,7 @@ function App() {
             <Route
               path="/"
               element={
-                <ScanTableBarcodePage handleStartSession={handleStartSession} />
+                <ScanTableBarcodePage handleStartSession={handleStartSession} loading={loading}/>
               }
             />
             <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
@@ -252,6 +175,7 @@ function App() {
               path="/finishsession"
               element={
                 <FinishSession
+                  loading={loading}
                   isSuccessSession={isSuccessSession}
                   handleEndSession={handleEndSession}
                 />
