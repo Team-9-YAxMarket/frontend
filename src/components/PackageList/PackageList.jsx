@@ -8,14 +8,14 @@ const PackageList = ({ cartonList, onDelete }) => {
       <ul className={styles.packageList}>
         {cartonList.map((carton) => (
           <li
-            key={carton.carton_id}
+            key={carton.id}
             className={styles.packageItem}
             style={{ backgroundColor: getBackgroundColor(carton.carton_type) }}
           >
             <p>{carton.carton_type.toUpperCase()}</p>
             <figure
               className={styles.figure}
-              onClick={() => onDelete(carton.carton_id)}
+              onClick={() => onDelete(carton.id)}
             ></figure>
           </li>
         ))}

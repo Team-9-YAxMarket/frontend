@@ -24,7 +24,8 @@ const Header = ({ userProgress = 71, userId}) => {
             className={styles.workerProgress}
             style={{ backgroundColor: workerProgressStyle }}
           >
-            {userProgress}%
+            <figure className={styles.rocketFigure}/>
+            <span>{userProgress}%</span>
           </div>
         </div>
       </div>

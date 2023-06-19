@@ -1,10 +1,11 @@
 import styles from './ModalWindow.module.css';
 import { useState, useEffect } from 'react';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import { itemsList } from '../../utils/constants';
+//import { itemsList } from '../../utils/constants';
 
 const ModalWindow = ({
   title,
+  cartons,
   onClose,
   setSelectedPackage,
   selectedPackage,
@@ -18,16 +19,16 @@ const ModalWindow = ({
   const [isInvalidBarcode, setIsInvalidBarcode] = useState(false);
 
   useEffect(() => {
-    const selectedItem = itemsList.find((item) => item.barcode === value);
+    const selectedItem = cartons?.find((item) => item.barcode === value);
     setIsInvalidBarcode(value.length > 0 && !selectedItem);
   }, [value]);
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
     setValue(inputValue);
-    const selectedItem = itemsList.find((item) => item.barcode === inputValue);
+    const selectedItem = cartons?.find((item) => item.barcode === inputValue);
     if (selectedItem) {
-      setSelectedItemId(selectedItem.carton_id);
+      setSelectedItemId(selectedItem.id);
       setIsInvalidBarcode(false);
     } else {
       setSelectedItemId(null);
@@ -37,17 +38,17 @@ const ModalWindow = ({
 
   const handleClick = (itemId) => {
     setSelectedItemId(itemId);
-    const selectedItem = itemsList.find((item) => item.carton_id === itemId);
+    const selectedItem = cartons?.find((item) => item.id === itemId);
     setValue(selectedItem.barcode);
   };
 
   const handleSelectPackage = () => {
-    const selectedItem = itemsList.find(
-      (item) => item.carton_id === selectedItemId
+    const selectedItem = cartons?.find(
+      (item) => item.id === selectedItemId
     );
     if (
       selectedItem &&
-      !selectedPackage.find((item) => item.carton_id === selectedItemId)
+      !selectedPackage.find((item) => item.id === selectedItemId)
       ) {
       setSelectedPackage((prevSelectedPackages) => [
         ...prevSelectedPackages,
@@ -102,16 +103,16 @@ const ModalWindow = ({
 
         {!title && (
           <ul className={styles.modalList}>
-            {itemsList.map((item) => (
-              <li key={item.carton_id}>
+            {cartons?.map((item) => (
+              <li key={item.id}>
                 <button
                   type="button"
                   className={`${styles.modalListButton} ${
-                    item.carton_id === selectedItemId
+                    item.id === selectedItemId
                       ? styles.modalListButtonActive
                       : ''
                   }`}
-                  onClick={() => handleClick(item.carton_id)}
+                  onClick={() => handleClick(item.id)}
                 >
                   {item.carton_type}
                 </button>
