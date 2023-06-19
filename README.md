@@ -1,8 +1,9 @@
 # Yandex Hackathon Team 9
 
-### Фронтенд-разработчики
+## Фронтенд-разработчики
 Архипова Мария, Федоров Роман
 
+### [Ссылка на сайт](http://ivr.sytes.net:9009/)
 ### [Ссылка на GitHub Pages](https://team-9-yaxmarket.github.io/frontend/)
 
 ## Инструкция по сборке
