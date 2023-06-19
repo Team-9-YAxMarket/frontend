@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from './ProductList.module.css';
 import ProductItem from '../ProductItem/ProductItem';
 import { useLocation } from 'react-router-dom';

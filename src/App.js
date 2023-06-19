@@ -36,7 +36,7 @@ function App() {
   const [tosterMessage, setTosterMessage] = useState('');
 
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
-
+  const [cartons, setCartons] = useState([])
   const [sessionData, setSessionData] = useState({});
   const [getLocalSessionData, setLocalSessionData] = useLocalStorage(
     'sessionData',
@@ -44,7 +44,7 @@ function App() {
   );
   console.log('sessionData', sessionData);
   console.log('Упаковщик выбрал упаковку:', selectedPackage);
-  const cartonIds = selectedPackage.map((item) => item.carton_id);
+  const cartonIds = selectedPackage.map((item) => item.id);
   console.log('Массив упаковок для бека:', cartonIds);
 
   // useEffect(() => {
@@ -74,6 +74,7 @@ function App() {
       })
       .then((data) => {
         console.log('Данные успешно получены:', data);
+        fetchCarton()
         setSessionData(data);
         setLocalSessionData(data)
       })
@@ -111,6 +112,21 @@ function App() {
       order: updatedOrder,
     });
   };
+
+  const fetchCarton = () => {
+    fetch('http://ivr.sytes.net:9009/api/v1/carton')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        setCartons(data)
+        // Здесь вы можете обработать полученные данные
+      })
+      .catch(error => {
+        console.log(error);
+        // Обработка ошибки запроса
+      });
+  };
+  console.log(cartons)
 
   const sendDataToServer = (endpoint) => {
     const cartonIds = selectedPackage.map((item) => item.carton_id);
@@ -181,6 +197,7 @@ function App() {
           {isModalOpen && (
             <ModalWindow
               onClose={toggleModalWindow}
+              cartons={cartons}
               selectedPackage={selectedPackage}
               setSelectedPackage={setSelectedPackage}
               setIsPackageSelected={setIsPackageSelected}
