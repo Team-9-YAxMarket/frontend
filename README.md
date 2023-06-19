@@ -1,6 +1,11 @@
 # Yandex Hackathon Team 9
 
+### Фронтенд-разработчики
+Архипова Мария, Федоров Роман
 
+### [Ссылка на GitHub Pages](ссылка)
+
+## Инструкция по сборке
 - Тестирование с использованием Jest и React Testing Library.  
 - Проверка кода с помощью ESLint.  
 - Форматирование кода с помощью Prettier.  
@@ -31,3 +36,13 @@
 9. **npm run commit:** запускает интерактивный процесс создания коммита с использованием Commitizen.
 10. **npm run predeploy:** выполняет сборку перед развертыванием.
 11. **npm run deploy:** разворачивает приложение с помощью GitHub Pages.
+
+## Стек технологий
+- HTML, CSS
+- JavaScript
+- React
+- React-Router-Dom 6
+
+
+## Cсылки на сторонние библиотеки
+- [Framer Motion](https://www.npmjs.com/package/framer-motion) — для создания анимации компонента Toster
