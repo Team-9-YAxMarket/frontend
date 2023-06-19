@@ -24,6 +24,7 @@ export const AppContext = createContext();
 function App() {
   const navigate = useNavigate();
   const userId = 'c76a86b5-d8ed-4034-aaba-5fade610ec41';
+  const [userProgress, setUserProgress] = useState(0)
   const [isSuccessSession, setIsSuccessSession] = useState(false);
   
   const [selectedPackage, setSelectedPackage] = useState([]);
@@ -61,6 +62,7 @@ function App() {
     setLoading(false)
     setSelectedPackage([]);
     navigate('/');
+    setUserProgress((prev) => prev + 11)
   };
 
   async function handleStartSession()  {
@@ -131,7 +133,7 @@ function App() {
               setTosterMessage={setTosterMessage}
             />
           )}
-          <Header userId={sessionData.user_id}/>
+          <Header userId={sessionData.user_id} userProgress={userProgress}/>
           <Routes>
             <Route
               path="/"

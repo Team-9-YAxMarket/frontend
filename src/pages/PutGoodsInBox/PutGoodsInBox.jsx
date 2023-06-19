@@ -5,15 +5,11 @@ import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
 
 
 const PutGoodsInBox = ({ handleEndSession }) => {
-  
-
- 
-
   return (
     <>
       <div className={styles.pageWrapper}>
         <div className={styles.pageImage}></div>
-        <PageMainText title="Положите бракованные товары в тару" />
+        <PageMainText title="Положите бракованные товары в тару" size='56px'/>
         <PrimaryButton
           variant="yellow"
           right="24px"
