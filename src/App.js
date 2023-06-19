@@ -68,7 +68,8 @@ function App() {
     await fetchDataFromServer(userId, setSessionData)
     await fetchCarton(setCartons)
     setLoading(false)
-    setSelectedPackage([]); 
+    setSelectedPackage([]);
+    setIsSuccessSession(false)
     navigate('/scanprinter')
   };
 
