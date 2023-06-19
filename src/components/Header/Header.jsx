@@ -2,13 +2,9 @@ import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/service_block-icon.png';
 import { setEfficiencyStatus } from '../../utils/functions';
-import { AppContext } from '../../App';
-import { useContext } from 'react';
 
-const Header = ({ userProgress = 71 }) => {
+const Header = ({ userProgress = 71, userId}) => {
 
-  const { sessionData } = useContext(AppContext);
-  const userId = sessionData.userId
   const title = 'Упаковка';
   const workerProgressStyle = setEfficiencyStatus(userProgress);
 

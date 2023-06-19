@@ -10,7 +10,7 @@ function BarcodeMismatchCheckbox({ products, isCheckedProduct, setIsCheckedProdu
     return (
         <div className={styles.checkbox}>
             {
-                products.items.map((product) => {
+                products?.items?.map((product) => {
                     return <BarcodeMismatchCheckboxItem
                         key={product.id}
                         title={product.sku}
