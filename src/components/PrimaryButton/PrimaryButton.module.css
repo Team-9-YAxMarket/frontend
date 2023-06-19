@@ -1,0 +1,53 @@
+.primaryButton {
+  width: 296px;
+  height: 662px;
+  border-radius: 24px;
+  border: none;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 56px;
+  text-align: center;
+  color: #212121;
+  cursor: pointer;
+  background: #f3f0e9;
+  position: fixed;
+  top: 195px;
+  z-index: 2;
+}
+
+.primaryButton:active {
+  background: #dedede;
+}
+
+.primaryButton:disabled {
+  background: #f0f0f0;
+  color: #b1b1b1;
+  cursor: auto;
+}
+
+.primaryButtonYellow {
+  width: 296px;
+  height: 662px;
+  border-radius: 24px;
+  border: none;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 56px;
+  text-align: center;
+  color: #212121;
+  cursor: pointer;
+  background: #fed42b;
+  position: fixed;
+  top: 195px;
+  z-index: 2;
+}
+
+.primaryButtonYellow:active {
+  background: #f5c400;
+}
+
+.primaryButtonYellow:disabled {
+  background: #f0f0f0;
+  color: #b1b1b1;
+  cursor: auto;
+}

@@ -1,0 +1,68 @@
+.checkboxItem {
+    margin: 0;
+    padding: 24px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid #E8E8E8;
+    border-radius: 24px;
+    display: grid;
+    grid-template-columns: 118px 1fr 48px;
+    column-gap: 24px;
+    justify-items: start;
+    align-items: center;
+    justify-content: stretch;
+    align-content: start;
+    position: relative;
+}
+
+.checked {
+    border: 4px solid #FED42B;
+}
+
+.image {
+    width: 118px;
+    height: 118px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    line-height: 22px;
+    font-weight: 400;
+    text-align: left;
+    color: #000000;
+}
+
+.input {
+    position: absolute;
+    top: 59px;
+    right: 48px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 59px;
+    right: 48px;
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 2px solid #C6C6C6;
+    cursor: pointer;
+}
+
+.input:checked ~ .checkmark {
+    background-color: #FED42B;
+    border: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="black"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}

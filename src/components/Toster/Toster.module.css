@@ -1,0 +1,24 @@
+.toster {
+  width: 1096px;
+  height: 104px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 68px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  position: absolute;
+  top: 45px;
+  z-index: 1000;
+}
+
+.error {
+  background-color: #ff2f2f;
+}
+
+.correct {
+  background-color: #2aad2a;
+}

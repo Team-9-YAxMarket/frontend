@@ -1,0 +1,7 @@
+.checkbox {
+    margin: 0 0 150px;
+    width: 1120px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}

@@ -1,0 +1,39 @@
+.list {
+  margin: 20px auto 50px;
+  padding: 0;
+  width: 1184px;
+  border-radius: 24px;
+  overflow: hidden;
+  list-style: none;
+  box-sizing: border-box;
+
+}
+.noBorder {
+  border: none;
+}
+
+.listWrapper {
+  position: relative;
+}
+
+.listContainer {
+  margin: 56px auto 0;
+  max-width: 1184px;
+}
+
+.package {
+  padding: 12px 24px;
+ position: absolute;
+  top: -23px;
+  left: 32px;
+  box-sizing: border-box;
+  width: fit-content;
+  height: 48px;
+  border-radius: 50px;
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+}

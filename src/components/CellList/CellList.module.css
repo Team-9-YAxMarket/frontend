@@ -1,0 +1,20 @@
+.cellList {
+  display: flex;
+  gap: 12px;
+  list-style-type: none;
+}
+
+.cellItem {
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 75px;
+  padding: 14px 48px;
+  background-color: #f3f0e9;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.cellItemActive {
+  color: #fff;
+  background-color: #2aad2e;
+}

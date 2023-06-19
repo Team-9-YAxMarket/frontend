@@ -1,0 +1,56 @@
+.footer {
+  height: 112px;
+  box-shadow: 0px 5px 46px rgba(0, 0, 0, 0.12), 0px 7px 15px rgba(0, 0, 0, 0.12);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+ justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: #ffffff;
+}
+
+.footerError {
+  background-color: #ffa200;
+  color: #fff;
+}
+
+.empty {
+  width: 300px;
+}
+
+
+.keyboardButtonContainer {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+ width: 100%;
+ justify-content: center;
+}
+
+.keyboardImage {
+  width: 36px;
+  height: 30px;
+  background: url(../../images/keyboard-icon.svg) no-repeat center;
+}
+
+.keyboardImageWhite {
+  background: url(../../images/keyboard-icon_white.svg) no-repeat center;
+}
+
+.keyboardButton {
+  border: none;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 31px;
+  cursor: pointer;
+}
+
+.keyboardButtonWhite {
+  color: #fff;
+}

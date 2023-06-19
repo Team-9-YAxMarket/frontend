@@ -1,0 +1,23 @@
+.pageWrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    
+}
+
+.listWrapper {
+    padding-bottom: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    position: absolute;
+    top: 168px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    overflow-x: hidden;
+}
