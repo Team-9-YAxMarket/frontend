@@ -35,15 +35,15 @@ function ProductItem(props) {
 
     const backgroundStyleByTag = (tag) => {
         const bgStyleMap = {
-            'нужно сканировать IMEI': '#FFECCC',
-            'нужно сканировать марку': '#FFECCC',
-            'упаковать отдельно в NONPACK': '#FFD9DB',
+            'Нужно сканировать IMEI': '#FFECCC',
+            'Нужно сканировать марку': '#FFECCC',
+            'Упаковать отдельно в NONPACK': '#FFD9DB',
             'Непрозрачный пакет': '#E6E6E6',
         };
 
         const iconMap = {
-            'нужно сканировать IMEI': './images/IMEI_icon.svg',
-            'нужно сканировать марку': './images/mark_scan_icon.svg',
+            'Нужно сканировать IMEI': './images/IMEI_icon.svg',
+            'Нужно сканировать марку': './images/mark_scan_icon.svg',
         }
 
         let bgStyle = '#E0EEFF';
