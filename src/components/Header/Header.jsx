@@ -1,6 +1,6 @@
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
-import logo from '../../images/service_block-icon.png';
+import logo from '../../images/service_block-icon.svg';
 import { setEfficiencyStatus } from '../../utils/functions';
 
 const Header = ({ userProgress = 71, userId}) => {

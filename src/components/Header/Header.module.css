@@ -27,10 +27,15 @@
   width: fit-content;
   height: fit-content;
 }
+
 .title {
   font-weight: 500;
   font-size: 28px;
   line-height: 34px;
+  position: absolute;
+  top: 50%;
+  right: 44%;
+  transform: translate(-44%, -50%);
 }
 
 .workerContainer {
