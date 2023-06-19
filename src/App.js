@@ -26,7 +26,6 @@ function App() {
   const userId = 'c76a86b5-d8ed-4034-aaba-5fade610ec41';
   const [isSuccessSession, setIsSuccessSession] = useState(false);
   
-
   const [selectedPackage, setSelectedPackage] = useState([]);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
 
@@ -57,8 +56,10 @@ function App() {
   
   async function handleEndSession() {
     setLoading(true)
-    await sendDataToServer(sessionData, setSessionData, selectedPackage);
+    const sessionId = sessionData.session_id;
+    await sendDataToServer(sessionData, setSessionData, selectedPackage, sessionId,);
     setLoading(false)
+    setSelectedPackage([]);
     navigate('/');
   };
 
@@ -67,6 +68,7 @@ function App() {
     await fetchDataFromServer(userId, setSessionData)
     await fetchCarton(setCartons)
     setLoading(false)
+    setSelectedPackage([]); 
     navigate('/scanprinter')
   };
 

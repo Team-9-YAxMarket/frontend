@@ -38,22 +38,31 @@ export const fetchDataFromServer = (userId, setSessionData) => {
       });
   };
   
-  export const sendDataToServer = (sessionData, setSessionData, selectedPackage) => {
+  export const sendDataToServer = (sessionData, setSessionData, selectedPackage, sessionId) => {
     const cartonIds = selectedPackage.map((item) => item.id);
     const updatedItems = sessionData.order.items.map((item) => ({
       id: item.id,
       status: item.status,
     }));
+
+    // Проверяем, все ли элементы имеют статус "scanned"
+  const allItemsScanned = updatedItems.every((item) => item.status === 'scanned');
+
+  // Устанавливаем значение статуса в зависимости от результата проверки
+  const sessionStatus = allItemsScanned ? 'closed_success' : 'closed_problem';
+
     const requestBody = {
       ...sessionData,
       order: {
-        items: updatedItems,
-        selected_carton: cartonIds,
+          items: updatedItems,
+          order_id: sessionData.order.order_id,
+          selected_carton: cartonIds,
       },
+      status: sessionStatus
     };
   
-    return fetch(`${BASE_URL}/session`, {
-      method: 'POST',
+    return fetch(`${BASE_URL}/session/${sessionId}`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
