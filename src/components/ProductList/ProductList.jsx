@@ -8,23 +8,23 @@ import { getBackgroundColor } from '../../utils/functions';
 function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, selectedItemsCounts }) {
   const location = useLocation();
   const noBorderLocation = location.pathname === '/notenaughgoods';
-  const cartons = products.recommended_carton
-  const cartonColors = cartons.reduce((colors, carton) => {
+  const cartons = products?.recommended_carton
+  const cartonColors = cartons?.reduce((colors, carton) => {
     if (!colors[carton.box_id]) {
       colors[carton.box_id] = getBackgroundColor(carton.carton_type);
     }
     return colors;
   }, {});
 
-  const defaultItems = products.items.filter((item) => item.box_id === null);
+  const defaultItems = products?.items?.filter((item) => item.box_id === null);
   console.log('Товары без рекомендованной упаковки', defaultItems)
-  const unsortedListStyle = defaultItems.length > 0 ? { border: '4px solid gray' } : {};
+  const unsortedListStyle = defaultItems?.length > 0 ? { border: '4px solid gray' } : {};
 
   return (
     <div className={`${styles.listContainer}`}>
-      {cartons.map((carton) => {
+      {cartons?.map((carton) => {
         const boxId = carton.box_id;
-        const cartonItems = products.items.filter((item) => item.box_id === boxId);
+        const cartonItems = products?.items?.filter((item) => item.box_id === boxId);
         console.log('Товары с рекомендованной упаковкой', cartonItems)
 
         const sortedListStyle = noBorderLocation ? { border: 'none' } : { border: `4px solid ${cartonColors[boxId]}` };
@@ -36,9 +36,9 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
               style={{ backgroundColor: `${getBackgroundColor(carton.carton_type)}`}}
               onClick={() => onPackageClick(carton)}
             >
-              {carton.carton_type.toUpperCase()}
+              {carton?.carton_type?.toUpperCase()}
             </span>
-            {cartonItems.length > 0 && (
+            {cartonItems?.length > 0 && (
               <ul className={styles.list} style={sortedListStyle}>
                 {cartonItems.map((item) => {
                   let selectedCount = 0;
@@ -65,13 +65,13 @@ function ProductList({ products, onItemClick, onPackageClick, onBarcodeClick, se
         );
       })}
 
-      {defaultItems.length > 0 && (
+      {defaultItems?.length > 0 && (
         <div className={styles.listWrapper}>
           <span className={styles.package} style={{ backgroundColor: '#676764' }}>
             Упаковка на выбор
           </span>
           <ul className={styles.list} style={unsortedListStyle}>
-            {defaultItems.map((item) => {
+            {defaultItems?.map((item) => {
               let selectedCount = 0;
               if (selectedItemsCounts.hasOwnProperty(item.id)) {
                 selectedCount = selectedItemsCounts[item.id];

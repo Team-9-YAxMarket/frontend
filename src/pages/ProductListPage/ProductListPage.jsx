@@ -33,7 +33,7 @@ const ProductListPage = ({
   const [selectedItemsCounts, setSelectedItemsCounts] = useState({});
   const { order } = sessionData;
   // Общее количество товаров
-  const totalItems = order.items.reduce((total, item) => total + item.count, 0);
+  const totalItems = order?.items?.reduce((total, item) => total + item.count, 0);
   const isAllScanned = scannedItems === totalItems;
 
   const onPackageClick = (carton) => {

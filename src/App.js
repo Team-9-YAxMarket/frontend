@@ -1,8 +1,12 @@
 import styles from './App.module.css';
 import { Routes, Route } from 'react-router-dom';
 import React, { useState, useEffect, createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLocalStorage } from '../src/hooks/useLocalStorage'
 import Header from './components/Header/Header';
 import ModalWindow from './components/ModalWindow/ModalWindow';
+import Toster from './components/Toster/Toster';
+
 import {
   HasProblemsPage,
   NotEnoughGoodsPage,
@@ -13,12 +17,15 @@ import {
   ScanPrinterBarcodePage,
   ScanCellPage,
 } from './pages';
-import { trueGoods } from './utils/truegoods';
 
 export const AppContext = createContext();
 
 function App() {
+  const navigate = useNavigate();
+  const BASE_URL = 'http://ivr.sytes.net:9009/api/v1/session';
+  const userId = 'c76a86b5-d8ed-4034-aaba-5fade610ec41';
   const [isSuccessSession, setIsSuccessSession] = useState(false);
+  
 
   const [selectedPackage, setSelectedPackage] = useState([]);
   const [isPackageSelected, setIsPackageSelected] = useState(false);
@@ -30,17 +37,35 @@ function App() {
 
   const [pageTitle, setPageTitle] = useState('Выберите отсутствующий товар');
 
-  const [sessionData, setSessionData] = useState({
-    userId: trueGoods.user_id,
-    order: trueGoods.order,
-  });
+  const [sessionData, setSessionData] = useState({});
+  const [getLocalSessionData, setLocalSessionData] = useLocalStorage(
+    'sessionData',
+    {}
+  );
   console.log('sessionData', sessionData);
   console.log('Упаковщик выбрал упаковку:', selectedPackage);
   const cartonIds = selectedPackage.map((item) => item.carton_id);
   console.log('Массив упаковок для бека:', cartonIds);
 
-  const fetchDataFromServer = (endpoint) => {
-    fetch(endpoint)
+  // useEffect(() => {
+  //   // Обновляем данные из локального хранилища после монтирования компонента
+  //   setSessionData(getLocalSessionData);
+  // }, [getLocalSessionData]);
+
+  useEffect(() => {
+    setLocalSessionData(sessionData);
+  }, [sessionData, setLocalSessionData]);
+
+  const fetchDataFromServer = (endpoint, userId) => {
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: userId,
+      }),
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Ошибка получения данных с сервера');
@@ -50,14 +75,12 @@ function App() {
       .then((data) => {
         console.log('Данные успешно получены:', data);
         setSessionData(data);
+        setLocalSessionData(data)
       })
       .catch((error) => {
         console.log(error);
-        // Обработка ошибки получения данных с сервера
       });
   };
-
-  fetchDataFromServer('http://127.0.0.1/api/v1/session');
 
   // Функция обновления данных
   const updateSessionData = (updatedData) => {
@@ -89,81 +112,55 @@ function App() {
     });
   };
 
+  const sendDataToServer = (endpoint) => {
+    const cartonIds = selectedPackage.map((item) => item.carton_id);
+    const updatedItems = sessionData.order.items.map((item) => ({
+      id: item.id,
+      status: item.status,
+    }));
+    console.log(updatedItems);
+    const requestBody = {
+      ...sessionData,
+      order: {
+        items: updatedItems,
+        selected_carton: cartonIds,
+      },
+    };
   
-const sendDataToServer = (endpoint) => {
-  const cartonIds = selectedPackage.map((item) => item.carton_id);
-  const updatedItems = sessionData.order.items.map((item) => ({
-    id: item.id,
-    status: item.status,
-  }));
-  console.log(updatedItems);
-  const updatedSessionData = {
-    ...sessionData,
-    order: {
-      items: updatedItems,
-      recommended_carton: cartonIds,
-    },
+    setSessionData(sessionData)
+    return fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Ошибка выполнения запроса');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Данные успешно отправлены', data);
+      })
+      .catch((error) => {
+        console.log(error);
+        // Обработка ошибки выполнения запроса
+      });
+  };
+  
+  async function handleEndSession() {
+    await sendDataToServer(BASE_URL);
+    navigate('/');
   };
 
-  fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updatedSessionData),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Ошибка выполнения запроса');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log('Данные успешно отправлены', data);
-    })
-    .catch((error) => {
-      console.log(error);
-      // Обработка ошибки выполнения запроса
-    });
-};
+  async function handleStartSession()  {
+    await fetchDataFromServer(BASE_URL, userId)
+    navigate('/scanprinter')
+  };
 
-  // Загрузка данных из localStorage при запуске приложения
-  useEffect(() => {
-    const savedSessionData = localStorage.getItem('sessionData');
-    if (savedSessionData) {
-      setSessionData(JSON.parse(savedSessionData));
-    } else {
-      // Если данных в localStorage нет, устанавливаем начальное значение из trueGoods
-      setSessionData({
-        userId: trueGoods.user,
-        order: trueGoods.order,
-      });
-    }
-  }, []);
-
-  // Обновление данных в localStorage при изменении sessionData
-  // создание глубокой копии обьекта без ссылки, чтобы хранить в сторадж
-  // всегда актуальную sessionData
-  useEffect(() => {
-    if (sessionData) {
-      const sessionDataCopy = JSON.parse(JSON.stringify(sessionData));
-      localStorage.setItem('sessionData', JSON.stringify(sessionDataCopy));
-    }
-  }, [sessionData]);
-
-  useEffect(() => {
-    if (selectedPackage) {
-      const updatedOrder = {
-        ...sessionData.order,
-        selected_carton: selectedPackage,
-      };
-      setSessionData({
-        ...sessionData,
-        order: updatedOrder,
-      });
-    }
-  }, [selectedPackage]);
-
+  
   const toggleModalWindow = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -180,6 +177,7 @@ const sendDataToServer = (endpoint) => {
             sendDataToServer,
           }}
         >
+          {showToster && <Toster tosterMessage={tosterMessage}/>}
           {isModalOpen && (
             <ModalWindow
               onClose={toggleModalWindow}
@@ -190,9 +188,14 @@ const sendDataToServer = (endpoint) => {
               setTosterMessage={setTosterMessage}
             />
           )}
-          <Header />
+          <Header userId={sessionData.user_id}/>
           <Routes>
-            <Route path="/" element={<ScanTableBarcodePage />} />
+            <Route
+              path="/"
+              element={
+                <ScanTableBarcodePage handleStartSession={handleStartSession} />
+              }
+            />
             <Route path="/scanprinter" element={<ScanPrinterBarcodePage />} />
             <Route
               path="/scancell"
@@ -230,9 +233,17 @@ const sendDataToServer = (endpoint) => {
             />
             <Route
               path="/finishsession"
-              element={<FinishSession isSuccessSession={isSuccessSession} />}
+              element={
+                <FinishSession
+                  isSuccessSession={isSuccessSession}
+                  handleEndSession={handleEndSession}
+                />
+              }
             />
-            <Route path="/putgoodsinbox" element={<PutGoodsInBox />} />
+            <Route
+              path="/putgoodsinbox"
+              element={<PutGoodsInBox handleEndSession={handleEndSession} />}
+            />
           </Routes>
         </AppContext.Provider>
       </div>
