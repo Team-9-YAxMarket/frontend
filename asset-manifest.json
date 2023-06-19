@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "./static/css/main.f99be1b1.css",
+    "main.js": "./static/js/main.637ea69f.js",
+    "static/media/YS Text-Medium.ttf": "./static/media/YS Text-Medium.83d7fce13c17636c832a.ttf",
+    "static/media/YS Text-Bold.ttf": "./static/media/YS Text-Bold.8250a613c94671a9b776.ttf",
+    "static/media/YS Text-Regular.ttf": "./static/media/YS Text-Regular.d30d692a0a77b7bc1037.ttf",
+    "static/media/empty-box-image.png": "./static/media/empty-box-image.1739b7205e8c4696931d.png",
+    "static/media/put-box-image.svg": "./static/media/put-box-image.4841cea97d1d80e1dbf8.svg",
+    "static/media/back-to-cell-image.svg": "./static/media/back-to-cell-image.e04d85fd1c8c4985611b.svg",
+    "static/media/service_block-icon.svg": "./static/media/service_block-icon.91d16bd13d949740881de66b21a922ea.svg",
+    "static/media/keyboard-icon_white.svg": "./static/media/keyboard-icon_white.191c6bbfdd8a2b4bbcd7.svg",
+    "static/media/keyboard-icon.svg": "./static/media/keyboard-icon.5090be1d8741c1df8568.svg",
+    "static/media/rocket-icon.svg": "./static/media/rocket-icon.6c7287c903526320a57e.svg",
+    "static/media/more_vertical-icon.svg": "./static/media/more_vertical-icon.3c3ff1e896a4194b6087.svg",
+    "index.html": "./index.html",
+    "static/media/close-icon.svg": "./static/media/close-icon.2cb65a54fd19c0777927.svg",
+    "static/media/burger-icon.svg": "./static/media/burger-icon.b983b1b8162a10b30e5b.svg",
+    "static/media/close-button.svg": "./static/media/close-button.5bfaa61d88191e92f2e2.svg",
+    "static/media/cross_white.svg": "./static/media/cross_white.ee646635d00b98d54e8f.svg",
+    "static/media/collapse_icon.svg": "./static/media/collapse_icon.02b1d8e0741f6b2d76fa.svg",
+    "static/media/expand_icon.svg": "./static/media/expand_icon.fd95a9c2ac3d1ab8ce78.svg",
+    "main.f99be1b1.css.map": "./static/css/main.f99be1b1.css.map",
+    "main.637ea69f.js.map": "./static/js/main.637ea69f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f99be1b1.css",
+    "static/js/main.637ea69f.js"
+  ]
+}
