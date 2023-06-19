@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ScanCellPage.module.css';
-import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import CellList from '../../components/CellList/CellList';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
@@ -29,7 +28,6 @@ const ScanCellPage = ({ products }) => {
     return (
         <div className={styles.pageWrapper}>
             <BarcodeMismatchPopup products={products}/>
-            <Header />
             <PrimaryButton
                 title='Есть проблема'
                 onClick={handleProblemsClick}
