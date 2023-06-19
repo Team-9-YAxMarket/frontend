@@ -3,7 +3,7 @@
 ### Фронтенд-разработчики
 Архипова Мария, Федоров Роман
 
-### [Ссылка на GitHub Pages](ссылка)
+### [Ссылка на GitHub Pages](https://team-9-yaxmarket.github.io/frontend/)
 
 ## Инструкция по сборке
 - Тестирование с использованием Jest и React Testing Library.  
