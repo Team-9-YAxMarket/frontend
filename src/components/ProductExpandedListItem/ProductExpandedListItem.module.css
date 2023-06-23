@@ -12,6 +12,13 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 1890px) {
+    .expandedListItem {
+        padding: 0 24px 0 138px;
+        grid-template-columns: 1fr 130px 130px;
+    }
+}
+
 .title {
     margin: 12px 0 0;
     padding: 0;
@@ -20,6 +27,13 @@
     font-weight: 400;
     text-align: left;
     color: #000000;
+}
+
+@media screen and (max-width: 1890px) {
+    .title {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 
 .counter {
@@ -37,6 +51,15 @@
     text-align: center;
 }
 
+@media screen and (max-width: 1890px) {
+    .counter {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px 18px;
+        height: 40px;
+    }
+}
+
 .expandedListBarcode {
     margin: 0;
     padding: 0;
@@ -45,4 +68,11 @@
     font-weight: 400;
     text-align: right;
     color: #245EEE;
+}
+
+@media screen and (max-width: 1890px) {
+    .expandedListBarcode {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }

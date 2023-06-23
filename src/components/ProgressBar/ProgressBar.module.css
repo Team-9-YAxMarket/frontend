@@ -5,10 +5,11 @@
   gap: 20px;
 }
 
-@media screen and (max-width: 1820px) {
+@media screen and (max-width: 1890px) {
   .progressBarContainer {
     width: 60vw;
     gap: 15px;
+    margin: 0 auto;
   }
 }
 
@@ -19,7 +20,7 @@
   color: #212121;
 }
 
-@media screen and (max-width: 1820px) {
+@media screen and (max-width: 1890px) {
   .progressBarSpan {
     font-size: 24px;
     line-height: 28px;
@@ -34,7 +35,7 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 1820px) {
+@media screen and (max-width: 1890px) {
   .progressBar {
     width: 100%;
   }

@@ -13,7 +13,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1820px) {
+@media screen and (max-width: 1890px) {
     .button {
         height: 80px;
         font-size: 28px;

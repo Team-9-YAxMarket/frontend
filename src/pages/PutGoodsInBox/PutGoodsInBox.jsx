@@ -9,7 +9,7 @@ const PutGoodsInBox = ({ handleEndSession }) => {
     <>
       <div className={styles.pageWrapper}>
         <div className={styles.pageImage}></div>
-        <PageMainText title="Положите бракованные товары в тару" size='56px'/>
+        <PageMainText title="Положите бракованные товары в тару"/>
         <PrimaryButton
           variant="yellow"
           right="24px"

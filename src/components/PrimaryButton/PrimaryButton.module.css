@@ -15,15 +15,22 @@
   z-index: 2;
 }
 
-@media screen and (max-width: 1820px) {
+@media screen and (max-width: 1890px) {
   .primaryButton {
+    top: 150px;
     width: 15vw;
-    height: 450px;
+    height: 550px;
     border-radius: 20px;
     font-size: 32px;
     line-height: 36px;
     padding: 20px;
     box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .primaryButton {
+    height: 450px;
   }
 }
 
@@ -54,15 +61,22 @@
   z-index: 2;
 }
 
-@media screen and (max-width: 1820px) {
+@media screen and (max-width: 1890px) {
   .primaryButtonYellow {
+    top: 150px;
     width: 15vw;
-    height: 450px;
+    height: 550px;
     border-radius: 20px;
     font-size: 32px;
     line-height: 36px;
     padding: 20px;
     box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .primaryButtonYellow {
+    height: 450px;
   }
 }
 

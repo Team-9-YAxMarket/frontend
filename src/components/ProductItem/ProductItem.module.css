@@ -28,11 +28,25 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 1890px) {
+    .productItemWrapper {
+        grid-template-columns: 90px 1fr 130px 130px;
+        padding: 24px;
+    }
+}
+
 .image {
     width: 118px;
     height: 118px;
     border-radius: 16px;
     object-fit: cover;
+}
+
+@media screen and (max-width: 1890px) {
+    .image {
+        width: 90px;
+        height: 90px;
+    }
 }
 
 .title {
@@ -43,6 +57,13 @@
     font-weight: 400;
     text-align: left;
     color: #000000;
+}
+
+@media screen and (max-width: 1890px) {
+    .title {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 
 .tag {
@@ -64,11 +85,28 @@
     align-items: center;
 }
 
+@media screen and (max-width: 1890px) {
+    .tag {
+        font-size: 14px;
+        line-height: 16px;
+        padding: 10px 12px;
+        height: 35px;
+        border-radius: 10px;
+    }
+}
+
 .tagIcon {
     width: 26px;
     height: 21px;
     padding: 0 11px 0 0;
     box-sizing: content-box;
+}
+
+@media screen and (max-width: 1890px) {
+    .tagIcon {
+        width: 22px;
+        height: 19px;
+    }
 }
 
 .titleContainer {
@@ -105,6 +143,15 @@
     text-align: center;
 }
 
+@media screen and (max-width: 1890px) {
+    .counter {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px 18px;
+        height: 40px;
+    }
+}
+
 .barcode {
     margin: 10px 0 0;
     padding: 0;
@@ -113,6 +160,13 @@
     font-weight: 400;
     text-align: right;
     color: #245EEE;
+}
+
+@media screen and (max-width: 1890px) {
+    .barcode {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 
 .expandedListButton {
@@ -127,6 +181,13 @@
     font-weight: 400;
     text-align: left;
     color: #245EEE;
+}
+
+@media screen and (max-width: 1890px) {
+    .expandedListButton {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 
 .expandedListButtonWrapper {
@@ -150,6 +211,14 @@
     border-style: none;
 }
 
+@media screen and (max-width: 1890px) {
+    .expandedListIcon {
+        width: 13px;
+        height: 9px;
+        background-size: 13px 9px;
+    }
+}
+
 .collapsedListIcon {
     padding: 0 0 0 12px;
     display: inline-block;
@@ -164,6 +233,14 @@
     border-style: none;
 }
 
+@media screen and (max-width: 1890px) {
+    .collapsedListIcon {
+        width: 13px;
+        height: 9px;
+        background-size: 13px 9px;
+    }
+}
+
 .expandedList {
     list-style: none;
     width: 1184px;
@@ -171,4 +248,10 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
+}
+
+@media screen and (max-width: 1890px) {
+    .expandedList {
+        width: 60vw;
+    }
 }

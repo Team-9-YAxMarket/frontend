@@ -15,6 +15,13 @@
     line-height: 34px;
 }
 
+@media screen and (max-width: 1890px) {
+  .packageText {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
 .packageList {
     display: flex;
     align-items: center;
@@ -33,6 +40,14 @@
     align-items: center;
     justify-content: space-between;
     gap: 10.5px;
+}
+
+@media screen and (max-width: 1890px) {
+  .packageItem {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 20px;
+  }
 }
 
 .figure {

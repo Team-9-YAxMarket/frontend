@@ -22,12 +22,26 @@
     position: relative;
 }
 
+@media screen and (max-width: 1890px) {
+    .modal {
+        width: 60vw;
+        padding: 60px 24px 60px;
+    }
+}
+
 .modalTitle {
     font-weight: 700;
     font-size: 56px;
     line-height: 68px;
     color: #212121;
     padding-bottom: 32px;
+}
+
+@media screen and (max-width: 1890px) {
+    .modalTitle {
+        font-size: 36px;
+        line-height: 42px;
+    }
 }
 
 .modalInput {
@@ -44,8 +58,24 @@
     margin-bottom: 64px;
 }
 
+@media screen and (max-width: 1890px) {
+    .modalInput {
+        height: 80px;
+        border-radius: 18px;
+        border: 3px solid #dedede;
+        font-size: 32px;
+        line-height: 36px;
+    }
+}
+
 .modalInput:focus {
     border: 5px solid #f5c400;
+}
+
+@media screen and (max-width: 1890px) {
+    .modalInput:focus {
+        border: 3px solid #f5c400;
+    }
 }
 
 .modalInput::placeholder {
@@ -66,6 +96,14 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 1890px) {
+    .modalCloseButton {
+        background-size: 22px 22px;
+        width: 60px;
+        height: 60px;
+    }
+}
+
 .modalFieldset {
     border: none;
     position: relative;
@@ -80,4 +118,11 @@
     font-size: 20px;
     text-align: center;
     transform: translateX(-50%);
+}
+
+@media screen and (max-width: 1890px) {
+    .errorText {
+        top: 100px;
+        font-size: 16px;
+    }
 }

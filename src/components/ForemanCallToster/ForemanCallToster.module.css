@@ -12,10 +12,23 @@
     top: 43px;
     z-index: 15;
   }
-  
-  .foremanTosterText {
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 37px;
-    text-align: center;
+
+@media screen and (max-width: 1890px) {
+  .foremanToster {
+    width: 60vw;
   }
+}
+  
+.foremanTosterText {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 37px;
+  text-align: center;
+}
+
+@media screen and (max-width: 1890px) {
+  .foremanTosterText {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}

@@ -1,6 +1,11 @@
 .pageWrapper {
    padding: 191px 0;
-   
+}
+
+@media screen and (max-width: 1890px) {
+    .pageWrapper {
+        padding: 110px 0 0 0;
+    }
 }
 
 .putCellImage {
@@ -9,6 +14,13 @@
     height: 404px;
     padding-bottom: 67.5px;
     justify-self: center;
+}
+
+@media screen and (max-width: 1890px) {
+    .putCellImage {
+        width: 60vw;
+        height: 400px;
+    }
 }
 
 .putBoxOnImage {
@@ -24,7 +36,12 @@
     flex-direction: column;
     align-items: center;
     gap: 48px;
-  
+}
+
+@media screen and (max-width: 1890px) {
+    .mainContainer {
+        gap: 10px;
+    }
 }
 
 .subtext {

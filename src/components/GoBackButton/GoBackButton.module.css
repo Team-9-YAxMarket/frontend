@@ -11,7 +11,7 @@
   justify-content: start;
 }
 
-@media screen and (max-width: 1820px) {
+@media screen and (max-width: 1890px) {
   .goBackButton {
     padding: 15px 90px;
     border-radius: 18px;

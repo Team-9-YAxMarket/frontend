@@ -8,6 +8,14 @@
   box-sizing: border-box;
 
 }
+
+@media screen and (max-width: 1890px) {
+  .list {
+    width: 60vw;
+    border-radius: 20px;
+  }
+}
+
 .noBorder {
   border: none;
 }
@@ -23,7 +31,7 @@
 
 .package {
   padding: 12px 24px;
- position: absolute;
+  position: absolute;
   top: -23px;
   left: 32px;
   box-sizing: border-box;
@@ -36,4 +44,14 @@
   text-align: center;
   color: #ffffff;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1890px) {
+  .package {
+    top: -18px;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 18px;
+    height: 40px;
+  }
 }

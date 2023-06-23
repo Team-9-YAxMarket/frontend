@@ -21,6 +21,12 @@
     overflow-x: hidden;
 }
 
+@media screen and (max-width: 1890px) {
+    .listWrapper {
+        padding-bottom: 100px;
+    }
+}
+
 .title {
     margin: 0 auto 20px;
     padding: 0;
@@ -31,7 +37,7 @@
     color: #212121;
 }
 
-@media screen and (max-width: 1820px) {
+@media screen and (max-width: 1890px) {
     .title {
         font-size: 42px;
         line-height: 48px;
