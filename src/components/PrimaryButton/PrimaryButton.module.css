@@ -15,6 +15,18 @@
   z-index: 2;
 }
 
+@media screen and (max-width: 1820px) {
+  .primaryButton {
+    width: 200px;
+    height: 450px;
+    border-radius: 15px;
+    font-size: 32px;
+    line-height: 36px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}
+
 .primaryButton:active {
   background: #dedede;
 }
@@ -40,6 +52,18 @@
   position: fixed;
   top: 195px;
   z-index: 2;
+}
+
+@media screen and (max-width: 1820px) {
+  .primaryButtonYellow {
+    width: 200px;
+    height: 450px;
+    border-radius: 15px;
+    font-size: 32px;
+    line-height: 36px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
 }
 
 .primaryButtonYellow:active {

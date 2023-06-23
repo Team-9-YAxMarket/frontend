@@ -11,6 +11,15 @@
   justify-content: start;
 }
 
+@media screen and (max-width: 1820px) {
+  .goBackButton {
+    padding: 15px 90px;
+    border-radius: 18px;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
 .goBackButton:hover {
   background-color: #f5c400;
 }

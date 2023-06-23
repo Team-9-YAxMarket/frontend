@@ -14,6 +14,13 @@
   background-color: #ffffff;
 }
 
+@media screen and (max-width: 1820px) {
+  .footer {
+    height: 90px;
+    padding: 15px;
+  }
+}
+
 .footerError {
   background-color: #ffa200;
   color: #fff;
@@ -28,14 +35,22 @@
   display: flex;
   align-items: center;
   gap: 18px;
- width: 100%;
- justify-content: center;
+  width: 100%;
+  justify-content: center;
 }
 
 .keyboardImage {
   width: 36px;
   height: 30px;
   background: url(../../images/keyboard-icon.svg) no-repeat center;
+}
+
+@media screen and (max-width: 1820px) {
+  .keyboardImage {
+    width: 28px;
+    height: 24px;
+    background-size: 28px 24px;
+  }
 }
 
 .keyboardImageWhite {
@@ -49,6 +64,13 @@
   font-size: 28px;
   line-height: 31px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1820px) {
+  .keyboardButton {
+    font-size: 24px;
+    line-height: 28px;
+  }
 }
 
 .keyboardButtonWhite {

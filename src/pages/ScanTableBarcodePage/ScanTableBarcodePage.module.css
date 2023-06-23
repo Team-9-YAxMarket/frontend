@@ -18,3 +18,11 @@
     width: 600px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1820px) {
+    .title {
+        font-size: 48px;
+        line-height: 56px;
+        max-width: 450px;
+    }
+}

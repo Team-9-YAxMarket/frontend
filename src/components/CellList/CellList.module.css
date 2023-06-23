@@ -14,6 +14,14 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 1820px) {
+  .cellItem {
+    font-size: 48px;
+    line-height: 56px;
+    padding: 12px 36px;
+  }
+}
+
 .cellItemActive {
   color: #fff;
   background-color: #2aad2e;
