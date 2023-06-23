@@ -7,3 +7,10 @@
     align-items: center;
     justify-content: flex-start;
 }
+
+@media screen and (max-width: 1820px) {
+    .buttonList {
+        width: 500px;
+        row-gap: 20px;
+    }
+}

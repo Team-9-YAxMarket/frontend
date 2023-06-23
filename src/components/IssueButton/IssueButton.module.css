@@ -13,6 +13,14 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 1820px) {
+    .button {
+        height: 80px;
+        font-size: 28px;
+        line-height: 32px;
+    }
+}
+
 .button:active {
     background-color: #DEDEDE;
 }
