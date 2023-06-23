@@ -1,10 +1,20 @@
 # Yandex Hackathon Team 9
 
+Проект в кросс-функциональном хакатоне, заказчиком которого являлся Яндекс Маркет
+
+### Цель проекта:
+Разработка веб-сервиса, позволяющего подбирать нужный размер упаковки, исходя из габаритов груза. Необходимо было создать ML библиотеку и API к ней и вывести эти данные в интерфейс
+
+### [Ссылка на GitHub Pages](https://team-9-yaxmarket.github.io/frontend/)
+
 ## Фронтенд-разработчики
 Архипова Мария, Федоров Роман
 
-### [Ссылка на сайт](http://ivr.sytes.net:9009/)
-### [Ссылка на GitHub Pages](https://team-9-yaxmarket.github.io/frontend/)
+## Стек технологий
+- HTML, CSS
+- JavaScript
+- React
+- React-Router-Dom 6
 
 ## Инструкция по сборке
 - Тестирование с использованием Jest и React Testing Library.  
@@ -37,13 +47,6 @@
 9. **npm run commit:** запускает интерактивный процесс создания коммита с использованием Commitizen.
 10. **npm run predeploy:** выполняет сборку перед развертыванием.
 11. **npm run deploy:** разворачивает приложение с помощью GitHub Pages.
-
-## Стек технологий
-- HTML, CSS
-- JavaScript
-- React
-- React-Router-Dom 6
-
 
 ## Cсылки на сторонние библиотеки
 - [Framer Motion](https://www.npmjs.com/package/framer-motion) — для создания анимации компонента Toster
